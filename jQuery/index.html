@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Form</title>
+</head>
+
+<body>
+  <div class="regForm">
+    <header>Mindfire Solutions Form</header>
+
+    <form id="regFormBody">
+      <div>
+        <!-- Personal Details Field -->
+        <fieldset id="personalDetails">
+          <span class="title">Personal Details</span>
+          <div>
+            <div class="fields">
+              <div class="labelInput">
+                <label for="txtFirstName">First Name<sup>*</sup></label>
+                <input class="inputBox" name="txtFirstName" type="text" display-all-data="formData"
+                  data-entry-label="First Name" placeholder="First Name" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+              <div class="labelInput">
+                <label for="txtMiddleName">Middle Name</label>
+                <input class="inputBox" name="txtMiddleName" display-all-data="formData" type="text"
+                  data-entry-label="Middle Name" placeholder="Middle Name" />
+              </div>
+              <div class="labelInput">
+                <label for="txtLastName">Last Name</label>
+                <input class="inputBox" display-all-data="formData" type="text" data-entry-label="Last Name"
+                  name="txtLastName" placeholder="Last name" />
+              </div>
+
+              <div class="labelInput">
+                <label for="txtFatherFirstName">Father's First Name<sup>*</sup></label>
+                <input class="inputBox" name="txtFatherFirstName" type="text" display-all-data="formData"
+                  data-entry-label=" Father First Name" placeholder="First Name" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+              <div class="labelInput">
+                <label for="txtFatherMiddleName">Father's Middle Name</label>
+                <input class="inputBox" name="txtFatherMiddleName" display-all-data="formData" type="text"
+                  data-entry-label="Middle Name" placeholder="Middle Name" />
+              </div>
+              <div class="labelInput">
+                <label for="txtFatherLastName">Father's Last Name</label>
+                <input class="inputBox" display-all-data="formData" type="text" data-entry-label="Last Name"
+                  name="txtFatherLastName" placeholder="Last name" />
+              </div>
+
+              <div class="labelInput">
+                <label for="txtMotherFirstName">Mother's First Name<sup>*</sup></label>
+                <input class="inputBox" name="txtMotherFirstName" type="text" display-all-data="formData"
+                  data-entry-label="Mother First Name" placeholder="First Name" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+              <div class="labelInput">
+                <label for="txtMotherMiddleName">Mother's Middle Name</label>
+                <input class="inputBox" name="txtMotherMiddleName" display-all-data="formData" type="text"
+                  data-entry-label="Middle Name" placeholder="Middle Name" />
+              </div>
+              <div class="labelInput">
+                <label for="txtMotherLastName">Mother's Last Name</label>
+                <input class="inputBox" display-all-data="formData" type="text" data-entry-label="Last Name"
+                  name="txtMotherLastName" placeholder="Last name" />
+              </div>
+
+              <div class="labelInput">
+                <label for="email">Email<sup>*</sup></label>
+                <input class="inputBox" display-all-data="formData" type="email" data-entry-label="Email" name="email"
+                  placeholder="Enter your email" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label for="dateofBirth">Date of Birth<sup>*</sup></label>
+                <input id="dateOfBirth" class="inputBox" display-all-data="formData" type="date" name="dateofBirth"
+                  data-entry-label="Date of Birth" placeholder="Enter birth date" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>Blood Group<sup>*</sup></label>
+                <select name="selectBloodGroup" display-all-data="formData" data-entry-label="Blood Group"
+                  oninput="validateInput(this)">
+                  <option>Blood Group</option>
+                  <option>A+</option>
+                  <option>B+</option>
+                  <option>AB+</option>
+                  <option>O+</option>
+                </select>
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="mobileNumber">
+                <label for="numMobileNo">Mobile No.<sup>*</sup></label>
+                <div class="mobileCodeNo">
+                  <select class="selectmobileCode" name="mobileCode" display-all-data="formData"
+                    data-entry-label="Country Code">
+                    <option>+91</option>
+                    <option>+1</option>
+                    <option>+44</option>
+                    <option>+975</option>
+                    <option>+39</option>
+                  </select>
+                  <input class="numMobileNo" display-all-data="formData" type="number" name="numMobileNo"
+                    data-entry-label="Mobile No" placeholder="Enter your number" oninput="validateInput(this)" />
+                  <div class="errorDisplay"></div>
+                </div>
+              </div>
+              <div class="idTypeNumber">
+                <label for="idNumber">ID<sup>*</sup></label>
+                <div class="idTypeNo">
+                  <select class="selectIdType" name="idType" display-all-data="formData" data-entry-label="ID Type">
+                    <option>ID type</option>
+                  </select>
+                  <input id="selectidNumber" class="selectidNumber" display-all-data="formData" name="idNumber"
+                    data-entry-label="ID No" type="number" placeholder="Select ID Type First"
+                    oninput="validateInput(this)" />
+                  <div class="errorDisplay"></div>
+                </div>
+              </div>
+
+              <div class="aboutMe">
+                <label for="textAboutMe">About Me</label>
+                <textarea name="textAboutMe" display-all-data="formData" cols="70" data-entry-label="About" rows="10"
+                  placeholder="Write sommething about yourself"></textarea>
+              </div>
+
+              <div class="gender">
+                <label for="gender">Gender</label>
+                <div id="radioGender">
+                  <input type="radio" id="male" display-all-data="formData" name="gender" class="radio"
+                    data-entry-label="Gender" value="Male" />
+                  <label for="male">Male</label>
+
+                  <input type="radio" id="female" display-all-data="formData" name="gender" class="radio" value="Female"
+                    data-entry-label="Gender" />
+                  <label for="female">Female</label>
+
+                  <input type="radio" id="others" display-all-data="formData" name="gender" class="radio" value="Others"
+                    data-entry-label="Gender" />
+                  <label for="others">Others</label>
+                </div>
+              </div>
+              <div class="hobbies">
+                <label for="hobbies">Hobbies</label>
+                <div id="checkHobbies">
+                  <input type="checkbox" id="reading" value="Reading" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="reading">Reading</label>
+
+                  <input type="checkbox" id="singing" value="Singing" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="singing">Singing</label>
+
+                  <input type="checkbox" id="dancing" value="Dancing" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="dancing">Dancing</label>
+
+                  <input type="checkbox" id="travelling" value="Traveling" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="traveling">Traveling</label>
+
+                  <input type="checkbox" id="gaming" value="Gaming" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="gaming">Gaming</label>
+
+                  <input type="checkbox" id="coding" value="Coding" name="hobbies" display-all-data="formData"
+                    data-entry-label="Hobbies" />
+                  <label for="coding">Coding</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Address Details Field -->
+        <fieldset id="addressDetails">
+          <span class="title">Address Details</span>
+          <h3>Current Address</h3>
+          <div>
+            <div class="fields">
+              <div class="labelInput">
+                <label>House/Flat No.<sup>*</sup></label>
+                <input class="inputBox" type="text" placeholder="Door No" data-entry-label="Door No"
+                  presentAddress="presentAddrHouseNo" display-all-data="formData" name="presentAddressHouse"
+                  data-entry-catg="presentAddress" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+              <div class="labelInput">
+                <label>Street</label>
+                <input class="inputBox" type="text" data-entry-label="Street" placeholder="Enter Street Name"
+                  name="presentAddressStreet" data-entry-catg="presentAddress" />
+              </div>
+
+              <div class="labelInput">
+                <label>City<sup>*</sup></label>
+                <input class="inputBox" type="text" placeholder="Enter city" data-entry-label="City"
+                  display-all-data="formData" data-entry-catg="presentAddress" name="presentAddressCity"
+                  oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>Pincode<sup>*</sup></label>
+                <input class="inputBox" display-all-data="formData" type="number" data-entry-label="Pincode"
+                  placeholder="Enter area code" name="presentAddressPincode" data-entry-catg="presentAddress"
+                  oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>Country<sup>*</sup></label>
+                <select id="selectPresentCountry" data-entry-catg="presentAddress" display-all-data="formData"
+                  name="presentAddressCountry" data-entry-label="Country">
+                  <option>Select Country</option>
+                </select>
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>State<sup>*</sup></label>
+                <select id="selectPresentState" data-entry-catg="presentAddress" display-all-data="formData"
+                  name="presentAddressState" data-entry-label="State">
+                  <option>Select State</option>
+                </select>
+                <div class="errorDisplay"></div>
+              </div>
+            </div>
+          </div>
+          <h3>Permanent Address</h3>
+          <input type="checkbox" name="sameAsPresent" id="sameAsPresent" />
+          <label for="sameAsPresent" class="sameAsPresentAdd">Same as current address</label>
+          <div>
+            <div class="fields">
+              <div class="labelInput">
+                <label>House/Flat No.<sup>*</sup></label>
+                <input class="inputBox" name="permanentAddressHouseNo" type="text" data-entry-label="House No"
+                  display-all-data="formData" placeholder="Door No" data-entry-catg="permanentAddress"
+                  data-permanent-address="false" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+              <div class="labelInput">
+                <label>Street</label>
+                <input class="inputBox" name="permanentAddressStreet" type="text" data-entry-label="Street"
+                  placeholder="Street Name" display-all-data="formData" data-permanent-address="false"
+                  data-entry-catg="permanentAddress" />
+              </div>
+
+              <div class="labelInput">
+                <label>City<sup>*</sup></label>
+                <input class="inputBox" name="permanentAddressCity" display-all-data="formData" data-entry-label="City"
+                  type="text" placeholder="Enter your city" data-entry-catg="permanentAddress"
+                  data-permanent-address="false" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>Pincode<sup>*</sup></label>
+                <input class="inputBox" name="permanentAddressPincode" display-all-data="formData" type="number"
+                  data-entry-label="Pincode" placeholder="Enter area code" data-permanent-address="false"
+                  data-entry-catg="permanentAddress" oninput="validateInput(this)" />
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label>Country<sup>*</sup></label>
+                <select id="selectPermanentCountry" data-entry-catg="permanentAddress" display-all-data="formData"
+                  name="permanentAddressCountry" data-entry-label="Country" data-permanent-address="false">
+                  <option>Select Country</option>
+                </select>
+                <div class="errorDisplay"></div>
+              </div>
+
+              <div class="labelInput">
+                <label data-entry-label="data">State<sup>*</sup></label>
+                <select id="selectPermanentState" data-entry-catg="permanentAddress" display-all-data="formData"
+                  name="permanentAddressState" data-entry-label="State" data-permanent-address="false">
+                  <option>Select State</option>
+                </select>
+                <div class="errorDisplay"></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Education Details Feild -->
+        <fieldset id="educationDetails">
+          <span class="title">Educational Details</span>
+          <h3>Class 10</h3>
+          <div class="fields">
+            <div class="labelInput">
+              <label>Board<sup>*</sup></label>
+              <select name="xboard" display-all-data="formData" data-entry-label="X Board">
+                <option>Select Board</option>
+              </select>
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label>Year<sup>*</sup></label>
+              <input class="inputBox" display-all-data="formData" type="number" data-entry-label="X Year"
+                placeholder="Enter Year" name="xYear" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label>Percentage/CGPA<sup>*</sup></label>
+              <input class="inputBox" display-all-data="formData" type="text" data-entry-label="X Percentage"
+                placeholder="Percentage" name="xPercentage" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+          </div>
+
+          <h3>Class 12</h3>
+          <div class="fields">
+            <div class="labelInput">
+              <label>Board<sup>*</sup></label>
+              <select name="xiiboard" display-all-data="formData" data-entry-label="XII Board">
+                <option>Select Board</option>
+              </select>
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label>Year<sup>*</sup></label>
+              <input class="inputBox" type="text" display-all-data="formData" data-entry-label="XII Year"
+                placeholder="Year of Passing" name="xiiYear" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label>Percentage/CGPA<sup>*</sup></label>
+              <input class="inputBox" type="text" display-all-data="formData" data-entry-label="XII Percentage"
+                placeholder="Percentage/CGPA" name="xiiPercentage" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+          </div>
+
+          <h3>Graduation</h3>
+          <div class="fields">
+            <div class="labelInput">
+              <label>Branch<sup>*</sup></label>
+              <select name="branch" display-all-data="formData" data-entry-label="Branch">
+                <option>Select Branch</option>
+              </select>
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label data-entry-label="data">Year<sup>*</sup></label>
+              <input class="inputBox" display-all-data="formData" type="text" name="gradYear"
+                placeholder="Year of Graduation" data-entry-label="Graduation Year" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label data-entry-label="data">Percentage/CGPA<sup>*</sup></label>
+              <input class="inputBox" type="text" name="gradPercentage" display-all-data="formData"
+                placeholder="% or CGPA" data-entry-label="CGPA" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Employment Details Field -->
+        <fieldset id="employmentDetails">
+          <span class="title">Employment Details</span>
+
+          <div class="fields">
+            <div class="labelInput">
+              <label data-entry-label="data">Company Name<sup>*</sup></label>
+              <input class="inputBox" display-all-data="formData" name="companyName"
+                data-entry-label="Company Name" type="text" placeholder="Name" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label data-entry-label="data">Role<sup>*</sup></label>
+              <input class="inputBox" display-all-data="formData" data-entry-label="Role" type="text" placeholder="Role"
+                id="txtrole" name="role" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+            <div class="labelInput">
+              <label>Designation<sup>*</sup></label>
+              <input class="inputBox" data-entry-label="Designation" display-all-data="formData" type="text"
+                placeholder="Designation" name="designation" id="designation" oninput="validateInput(this)" />
+              <div class="errorDisplay"></div>
+            </div>
+
+            <div class="skills">
+              <label>Skills</label>
+              <textarea name="skills" cols="70" rows="2" display-all-data="formData" placeholder="Add your Skills"
+                data-entry-label="Skills"></textarea>
+            </div>
+
+            <div class="labelInput">
+              <label>Documents</label>
+              <input type="file" display-all-data="formData" name="resume" id="resume" data-entry-label="Documents" />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="flexButton">
+          <button id="bttnSubmit">Submit</button>
+          <div id="displayModalBox">
+            <div class="displayData" id="displayData">
+              <div class="modalBoxButtons">
+                <button onclick="return clearLocalStorage()" class="bttnDeleteData">
+                  Delete
+                </button>
+                <button onclick="return closeDisplayModal()" class="bttnCloseModal">
+                  Close
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div id="displayModalError">
+            <div id="errorMessageContainer"></div>
+          </div>
+
+          <input class="bttnReset" type="reset" value="Reset" />
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

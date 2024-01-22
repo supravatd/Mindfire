@@ -1,0 +1,132 @@
+* {
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(184, 211, 211);
+}
+
+.container {
+  position: relative;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 50px 15px;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: bolder;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace
+}
+
+.allDetails {
+  margin-top: 16px;
+  min-height: 490px;
+  background-color: #fff;
+}
+
+.row{
+  margin-bottom: 10px;
+}
+
+fieldset {
+  padding: 10px 20px;
+  border: 2px solid rgb(110, 109, 109);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.reset{
+  margin-bottom: 0px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.title {
+  padding-bottom: 10px;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 6px 0;
+  color: #333;
+}
+
+sup {
+  color: red;
+  font-size: 13px;
+}
+
+h3 {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 6px 0;
+  color: #333;
+}
+
+.sameAsPresentAdd {
+  font-size: 15px;
+}
+
+.errorMessage {
+  display: none;
+  position: absolute;
+  background-color: #ffdddd;
+  color: #8b0000;
+  padding: 7px;
+  border: 1px solid #8b0000;
+  border-radius: 5px;
+  font-size: 11px;
+  z-index: 1;
+  margin-bottom: -10px;
+}
+
+.fieldsetContainer {
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #ecf0f1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.fieldsetContainer p {
+  margin: 1%;
+  white-space: nowrap;
+  font-size: 16px;
+  color: #202020;
+}
+
+.fieldsetContainer .label {
+  display: inline-block;
+  width: 40%;
+  font-weight: bold;
+  vertical-align: middle;
+  padding: 1%;
+  color: #000000;
+  text-align: right;
+}
+
+.fieldsetContainer .value {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+  color: #070707;
+  text-align: left;
+}

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="text-align: center;">
+    <h2>Candidate Form</h2>
+    <form><b>Personal Details</b>
+        <div>
+        <table class="center">
+            <tr>
+                <td class="label"> <b>Name</b><sup>*</sup></td>
+                <td class="details"><input type="text" placeholder="First Name" required></td>
+            </tr>
+            <tr>
+                <td>&nbsp</td>
+                <td class="details"><input type="text" placeholder="Last Name" required></td>
+            </tr>
+            <tr>
+                <td class="label"> <b>Email</b><sup>*</sup></td>
+                <td class="details"><input type="email" name="email" id="email" required></td>
+            </tr>
+            <tr>
+                <td class="label"><b>Gender:</td>
+                <td class="details">
+                    <label for="male">
+                        <input type="radio" name="Male" id="male">Male
+                    </label>
+                    <label for="female">
+                        <input type="radio" name="Female" id="female">Female
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><b>Phone:</b><sup>*</sup></td>
+                <td class="details">
+                    <select  required>
+                        <option>+91</option>
+                        <option>+1</option>
+                        <option>+44</option>
+                        <option>+975</option>
+                        <option>+39</option>
+                    </select>
+                    <input type="tel">
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <b>Date of Birth</b><sup>*</sup>
+                </td>
+                <td class="details">
+                    <input type="date"  required>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="label">
+                    <b>Hobbies</b>
+                </td>
+                <td class="details">
+                    <label>
+                        <input type="checkbox">Coding
+                    </label>
+                    <label>
+                        <input type="checkbox">Dancing
+                    </label>
+                    <label>
+                        <input type="checkbox">Playing
+                    </label>
+                </td>
+            </tr>
+            
+            <tr >
+                <td class="label"><b>About Me</b></td>
+                <td class="details">
+                    <textarea name="" id="" cols="30" rows="5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+            </tr>
+        </table>
+        </div>
+        <br>
+        <div>
+            <b>Address Details</b>
+            <table class="center">
+                <tr>
+                    <td>
+                        <b>Current Address</b><sup>*</sup>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Line 1"  required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <input type="text" placeholder="Line 2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <input type="text" placeholder="City" required>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Postal Code" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <select required>
+                            <option>Select Country</option>
+                            <option>India</option>
+                            <option>USA</option>
+                            <option>UK</option>
+                            <option>Italy</option>
+                            <option>France</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select required>
+                            <option>Select State</option>
+                            <option>West Bengal</option>
+                            <option>Odisha</option>
+                            <option>Karnataka</option>
+                            <option>Tamil Nadu</option>
+                            <option>Mumbai</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <label>
+                            <input type="checkbox">Same as Current address
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Permanent Address</b>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Line 1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <input type="text" placeholder="Line 2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <input type="text" placeholder="City" required>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Postal Code" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <select>
+                            <option>Select Country</option>
+                            <option>India</option>
+                            <option>USA</option>
+                            <option>UK</option>
+                            <option>Italy</option>
+                            <option>France</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select required>
+                            <option>Select State</option>
+                            <option>West Bengal</option>
+                            <option>Odisha</option>
+                            <option>Karnataka</option>
+                            <option>Tamil Nadu</option>
+                            <option>Mumbai</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <b>Educational Details</b>
+            <table class="center">
+                <tr>
+                    <td class="label"><b>Class 10:</b><sup>*</sup></td>
+                    <td>
+                        <select required>
+                            <option>Select Board</option>
+                            <option>CISCE</option>
+                            <option>CBSE</option>
+                            <option>State Board</option>
+                        </select>
+                    </td>
+                    <td required>
+                        <input type="number" name="marks" placeholder="Percentage/CGPA" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Class 12:</b><sup>*</sup></td>
+                    <td>
+                        <select required>
+                            <option>Board</option>
+                            <option>CISCE</option>
+                            <option>CBSE</option>
+                            <option>State Board</option>
+                        </select>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <select>
+                            <option>Stream</option>
+                            <option>Science</option>
+                            <option>Commerce</option>
+                            <option>Arts</option>
+                        </select>
+                        <td>
+                            <input type="number" name="marks" placeholder="Percentage/CGPA" required>
+                        </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Graduation:</b><sup>*</sup></td>
+                    <td>
+                        <select required>
+                            <option>Select Stream</option>
+                            <option>B.Tech</option>
+                            <option>B.Sc</option>
+                            <option>BCA</option>
+                        </select>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td>
+                        <select required>
+                            <option>Select Branch</option>
+                            <option>B.Tech</option>
+                            <option>B.Sc</option>
+                            <option>BCA</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" name="marks" placeholder="Percentage/CGPA">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div> <b>Employment Details</b>
+            <table class="center">
+                <tr>
+                    <td class="label"><b>Company Name</b><sup>*</sup></td>
+                    <td class="details">
+                        <input type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Role</b><sup>*</sup></td>
+                    <td class="details">
+                        <input type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Designation</b><sup>*</sup></td>
+                    <td class="details">
+                        <input type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Skills</b></td>
+                    <td class="details">
+                        <textarea name="" id="" cols="30" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><b>Resume</b></td>
+                    <td class="details">
+                        <input type="file" name="" id="">
+                    </td>
+                </tr>
+            </table>
+        </div>
+            <br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+        <br>
+        <br>
+    </form>
+    <br>
+</body>
+</html>

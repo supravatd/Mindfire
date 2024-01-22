@@ -1,0 +1,41 @@
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    width: 40%;
+}
+form{
+    border: 3px solid black;
+}
+body{
+    background-color: rgb(184, 211, 211);
+}
+.label{
+    text-align: right;
+}
+.details{
+    text-align: left;
+}
+sup{
+    color: red;
+}
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+
+    .name,
+    .email,
+    .dob,
+    .age,
+    .gender {
+        width: 48%;
+    }
+
+    .country {
+        margin-right: 2%;
+        /* Adjust margin between elements */
+    }
+
+    .flex-button {
+        flex-direction: column;
+        /* Stack buttons vertically on tablets */
+    }
+}
