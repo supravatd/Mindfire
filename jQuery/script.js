@@ -112,6 +112,7 @@ $(document).ready(function () {
     }
   }
 
+  //Display Data in Modal Box
   function displayFormData() {
     $("#displayModalBox").css("display", "block");
     $("#displayData .div-display").remove();

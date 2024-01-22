@@ -65,8 +65,6 @@ SELECT * FROM Employee WHERE EmployeeID > (SELECT AVG(EmployeeID) FROM Employee)
 
 UPDATE Employee SET City = 'New York' WHERE LastName = 'Spencer';
 
-DELETE FROM Employee WHERE AddressLine = 'Chile';
-
 CREATE INDEX idx_City ON Employee(City);
 
 SELECT e.FirstName, e.LastName, d.DepartmentName

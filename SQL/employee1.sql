@@ -94,5 +94,3 @@ SET @avgsal = (SELECT AVG(Salary) FROM Employees);
 
 PRINT 'Total Number of Employees: ' + CAST(@count AS VARCHAR);
 PRINT 'Average Salary: ' + CAST(@avgsal AS VARCHAR);
-
---TRIGERS
