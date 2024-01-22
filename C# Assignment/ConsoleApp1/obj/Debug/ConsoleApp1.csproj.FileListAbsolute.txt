@@ -1,0 +1,7 @@
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\supravatd\Documents\Mindfire\C# Assignment\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
