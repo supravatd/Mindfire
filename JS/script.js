@@ -1,3 +1,4 @@
+//Form Validation
 function validateInput(inputField, initial = false) {
   const label = inputField.getAttribute("data-entry-label");
   const error = inputField.parentElement.querySelector(".errorDisplay");
