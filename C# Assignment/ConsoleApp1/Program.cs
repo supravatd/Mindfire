@@ -10,15 +10,30 @@ namespace ConsoleApp1
             string fileName = "data.txt";
             writeData(fileName);
             displayData(fileName);
-            Console.Write("Enter data or exit? (enter/exit):");
+
+            Console.Write("Enter Data/Display Data/Exit (enter/display/exit): ");
             string option = Console.ReadLine().ToLower();
-            while (option == "enter")
+
+            while (option != "exit")
             {
-                writeData(fileName);
-                displayData(fileName);
-                Console.Write("Enter data or exit? (enter/exit):");
+                if (option == "enter")
+                {
+                    writeData(fileName);
+                    displayData(fileName);
+                }
+                else if (option == "display")
+                {
+                    displayData(fileName);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option. Please enter 'enter', 'display', or 'exit'.");
+                }
+
+                Console.Write("Enter Data/Display Data/Exit (enter/display/exit): ");
                 option = Console.ReadLine().ToLower();
             }
+
             Console.ReadLine();
         }
 
@@ -32,7 +47,7 @@ namespace ConsoleApp1
                 {
                     w.WriteLine(data);
                 }
-                Console.WriteLine("Do you want to add more data? (yes/no): ");
+                Console.Write("Do you want to add more data? (yes/no): ");
             }
             while (Console.ReadLine().ToLower() == "yes");
         }
@@ -42,9 +57,9 @@ namespace ConsoleApp1
             if (File.Exists(fileName))
             {
                 Console.WriteLine("File Data:");
-                using (StreamReader r= new StreamReader(fileName))
+                using (StreamReader r = new StreamReader(fileName))
                 {
-                    while(!r.EndOfStream)
+                    while (!r.EndOfStream)
                     {
                         Console.WriteLine(r.ReadLine());
                     }
