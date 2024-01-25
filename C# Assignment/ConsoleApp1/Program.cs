@@ -13,7 +13,6 @@ namespace ConsoleApp1
 
             Console.Write("Enter Data/Display Data/Exit (enter/display/exit): ");
             string option = Console.ReadLine().ToLower();
-
             while (option != "exit")
             {
                 if (option == "enter")
