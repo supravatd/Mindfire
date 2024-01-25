@@ -8,22 +8,21 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             string fileName = "data.txt";
-            writeData(fileName);
-            displayData(fileName);
+            WriteData(fileName);
+            DisplayData(fileName);
 
             Console.Write("Enter Data/Display Data/Exit (enter/display/exit): ");
             string option = Console.ReadLine().ToLower();
-
             while (option != "exit")
             {
                 if (option == "enter")
                 {
-                    writeData(fileName);
-                    displayData(fileName);
+                    WriteData(fileName);
+                    DisplayData(fileName);
                 }
                 else if (option == "display")
                 {
-                    displayData(fileName);
+                    DisplayData(fileName);
                 }
                 else
                 {
@@ -37,7 +36,7 @@ namespace ConsoleApp1
             Console.ReadLine();
         }
 
-        private static void writeData(string fileName)
+        private static void WriteData(string fileName)
         {
             do
             {
@@ -52,7 +51,7 @@ namespace ConsoleApp1
             while (Console.ReadLine().ToLower() == "yes");
         }
 
-        private static void displayData(string fileName)
+        private static void DisplayData(string fileName)
         {
             if (File.Exists(fileName))
             {
