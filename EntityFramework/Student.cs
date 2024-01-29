@@ -23,9 +23,9 @@ namespace EntityFramework
         public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<int> StandardId { get; set; }
+        public Nullable<int> SemesterId { get; set; }
     
-        public virtual Standard Standard { get; set; }
+        public virtual Semester Semester { get; set; }
         public virtual StudentAddress StudentAddress { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course> Courses { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StudentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="StudentDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseId" />
@@ -12,14 +12,14 @@
           <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseName" Type="varchar" MaxLength="100" />
           <Property Name="TeacherId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
         </EntityType>
-        <EntityType Name="Standard">
+        <EntityType Name="Semester">
           <Key>
-            <PropertyRef Name="StandardId" />
+            <PropertyRef Name="SemesterId" />
           </Key>
-          <Property Name="StandardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StandardName" Type="varchar" MaxLength="100" />
-          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="SemesterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemesterName" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -28,7 +28,7 @@
           <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" />
           <Property Name="LastName" Type="varchar" MaxLength="100" />
-          <Property Name="StandardId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
         </EntityType>
         <EntityType Name="StudentAddress">
           <Key>
@@ -55,7 +55,7 @@
           <Property Name="TeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" />
           <Property Name="LastName" Type="varchar" MaxLength="100" />
-          <Property Name="StandardId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -83,14 +83,14 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Student__Standar__3F466844">
-          <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Standard">
-              <PropertyRef Name="StandardId" />
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
             </Principal>
             <Dependent Role="Student">
-              <PropertyRef Name="StandardId" />
+              <PropertyRef Name="SemesterId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -131,14 +131,14 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Teacher__Standar__398D8EEE">
-          <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Standard">
-              <PropertyRef Name="StandardId" />
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
             </Principal>
             <Dependent Role="Teacher">
-              <PropertyRef Name="StandardId" />
+              <PropertyRef Name="SemesterId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -159,9 +159,9 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           <Parameter Name="FirstName" Type="varchar" Mode="In" />
           <Parameter Name="LastName" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="StudentModelStoreContainer">
+        <EntityContainer Name="StudentDataModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Standard" EntityType="Self.Standard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
@@ -180,7 +180,7 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
           <AssociationSet Name="FK__Student__Standar__3F466844" Association="Self.FK__Student__Standar__3F466844">
-            <End Role="Standard" EntitySet="Standard" />
+            <End Role="Semester" EntitySet="Semester" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
           <AssociationSet Name="FK__StudentAd__Stude__4222D4EF" Association="Self.FK__StudentAd__Stude__4222D4EF">
@@ -196,7 +196,7 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             <End Role="StudentCourse" EntitySet="StudentCourse" />
           </AssociationSet>
           <AssociationSet Name="FK__Teacher__Standar__398D8EEE" Association="Self.FK__Teacher__Standar__398D8EEE">
-            <End Role="Standard" EntitySet="Standard" />
+            <End Role="Semester" EntitySet="Semester" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
         </EntityContainer>
@@ -204,7 +204,7 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="StudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="StudentDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseId" />
@@ -212,18 +212,18 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CourseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TeacherId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__Course__TeacherI__3C69FB99" FromRole="Course" ToRole="Teacher" />
           <NavigationProperty Name="Students" Relationship="Self.StudentCourse" FromRole="Course" ToRole="Student" />
         </EntityType>
-        <EntityType Name="Standard">
+        <EntityType Name="Semester">
           <Key>
-            <PropertyRef Name="StandardId" />
+            <PropertyRef Name="SemesterId" />
           </Key>
-          <Property Name="StandardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StandardName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Standar__3F466844" FromRole="Standard" ToRole="Student" />
-          <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__Standar__398D8EEE" FromRole="Standard" ToRole="Teacher" />
+          <Property Name="SemesterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemesterName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Standar__3F466844" FromRole="Semester" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__Standar__398D8EEE" FromRole="Semester" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -232,8 +232,8 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StandardId" Type="Int32" />
-          <NavigationProperty Name="Standard" Relationship="Self.FK__Student__Standar__3F466844" FromRole="Student" ToRole="Standard" />
+          <Property Name="SemesterId" Type="Int32" />
+          <NavigationProperty Name="Semester" Relationship="Self.FK__Student__Standar__3F466844" FromRole="Student" ToRole="Semester" />
           <NavigationProperty Name="StudentAddress" Relationship="Self.FK__StudentAd__Stude__4222D4EF" FromRole="Student" ToRole="StudentAddress" />
           <NavigationProperty Name="Courses" Relationship="Self.StudentCourse" FromRole="Student" ToRole="Course" />
         </EntityType>
@@ -255,9 +255,9 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StandardId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
           <NavigationProperty Name="Courses" Relationship="Self.FK__Course__TeacherI__3C69FB99" FromRole="Teacher" ToRole="Course" />
-          <NavigationProperty Name="Standard" Relationship="Self.FK__Teacher__Standar__398D8EEE" FromRole="Teacher" ToRole="Standard" />
+          <NavigationProperty Name="Semester" Relationship="Self.FK__Teacher__Standar__398D8EEE" FromRole="Teacher" ToRole="Semester" />
         </EntityType>
         <EntityType Name="vwStudentCourse">
           <Key>
@@ -283,26 +283,26 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Student__Standar__3F466844">
-          <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Standard">
-              <PropertyRef Name="StandardId" />
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
             </Principal>
             <Dependent Role="Student">
-              <PropertyRef Name="StandardId" />
+              <PropertyRef Name="SemesterId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Teacher__Standar__398D8EEE">
-          <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Standard">
-              <PropertyRef Name="StandardId" />
+            <Principal Role="Semester">
+              <PropertyRef Name="SemesterId" />
             </Principal>
             <Dependent Role="Teacher">
-              <PropertyRef Name="StandardId" />
+              <PropertyRef Name="SemesterId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -324,7 +324,7 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
         </Association>
         <EntityContainer Name="EF_Demo_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="Self.Course" />
-          <EntitySet Name="Standards" EntityType="Self.Standard" />
+          <EntitySet Name="Semesters" EntityType="Self.Semester" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="StudentAddresses" EntityType="Self.StudentAddress" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
@@ -334,11 +334,11 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK__Student__Standar__3F466844" Association="Self.FK__Student__Standar__3F466844">
-            <End Role="Standard" EntitySet="Standards" />
+            <End Role="Semester" EntitySet="Semesters" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK__Teacher__Standar__398D8EEE" Association="Self.FK__Teacher__Standar__398D8EEE">
-            <End Role="Standard" EntitySet="Standards" />
+            <End Role="Semester" EntitySet="Semesters" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
           <AssociationSet Name="FK__StudentAd__Stude__4222D4EF" Association="Self.FK__StudentAd__Stude__4222D4EF">
@@ -352,10 +352,10 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
           <FunctionImport Name="spDeleteStudent">
             <Parameter Name="StudentId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spGetCoursesByStudentId" ReturnType="Collection(StudentModel.spGetCoursesByStudentId_Result)">
+          <FunctionImport Name="spGetCoursesByStudentId" ReturnType="Collection(StudentDataModel.spGetCoursesByStudentId_Result)">
             <Parameter Name="StudentID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spInsertStudent" ReturnType="Collection(Decimal)">
+          <FunctionImport Name="spInsertStudent">
             <Parameter Name="StandardId" Mode="In" Type="Int32" />
             <Parameter Name="FirstName" Mode="In" Type="String" />
             <Parameter Name="LastName" Mode="In" Type="String" />
@@ -377,37 +377,37 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StudentModelStoreContainer" CdmEntityContainer="EF_Demo_DBEntities">
+        <EntityContainerMapping StorageEntityContainer="StudentDataModelStoreContainer" CdmEntityContainer="EF_Demo_DBEntities">
           <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="StudentModel.Course">
+            <EntityTypeMapping TypeName="StudentDataModel.Course">
               <MappingFragment StoreEntitySet="Course">
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Standards">
-            <EntityTypeMapping TypeName="StudentModel.Standard">
-              <MappingFragment StoreEntitySet="Standard">
-                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
-                <ScalarProperty Name="StandardName" ColumnName="StandardName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+          <EntitySetMapping Name="Semesters">
+            <EntityTypeMapping TypeName="StudentDataModel.Semester">
+              <MappingFragment StoreEntitySet="Semester">
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="StudentModel.Student">
+            <EntityTypeMapping TypeName="StudentDataModel.Student">
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudentAddresses">
-            <EntityTypeMapping TypeName="StudentModel.StudentAddress">
+            <EntityTypeMapping TypeName="StudentDataModel.StudentAddress">
               <MappingFragment StoreEntitySet="StudentAddress">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Address1" ColumnName="Address1" />
@@ -418,17 +418,17 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teachers">
-            <EntityTypeMapping TypeName="StudentModel.Teacher">
+            <EntityTypeMapping TypeName="StudentDataModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vwStudentCourses">
-            <EntityTypeMapping TypeName="StudentModel.vwStudentCourse">
+            <EntityTypeMapping TypeName="StudentDataModel.vwStudentCourse">
               <MappingFragment StoreEntitySet="vwStudentCourse">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -438,7 +438,7 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="StudentCourse" TypeName="StudentModel.StudentCourse" StoreEntitySet="StudentCourse">
+          <AssociationSetMapping Name="StudentCourse" TypeName="StudentDataModel.StudentCourse" StoreEntitySet="StudentCourse">
             <EndProperty Name="Course">
               <ScalarProperty Name="CourseId" ColumnName="CourseId" />
             </EndProperty>
@@ -446,18 +446,18 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
               <ScalarProperty Name="StudentId" ColumnName="StudentId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="spDeleteStudent" FunctionName="StudentModel.Store.spDeleteStudent" />
-          <FunctionImportMapping FunctionImportName="spGetCoursesByStudentId" FunctionName="StudentModel.Store.spGetCoursesByStudentId">
+          <FunctionImportMapping FunctionImportName="spDeleteStudent" FunctionName="StudentDataModel.Store.spDeleteStudent" />
+          <FunctionImportMapping FunctionImportName="spGetCoursesByStudentId" FunctionName="StudentDataModel.Store.spGetCoursesByStudentId">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="StudentModel.spGetCoursesByStudentId_Result">
+              <ComplexTypeMapping TypeName="StudentDataModel.spGetCoursesByStudentId_Result">
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spInsertStudent" FunctionName="StudentModel.Store.spInsertStudent" />
-          <FunctionImportMapping FunctionImportName="spUpdateStudent" FunctionName="StudentModel.Store.spUpdateStudent" />
+          <FunctionImportMapping FunctionImportName="spInsertStudent" FunctionName="StudentDataModel.Store.spInsertStudent" />
+          <FunctionImportMapping FunctionImportName="spUpdateStudent" FunctionName="StudentDataModel.Store.spUpdateStudent" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

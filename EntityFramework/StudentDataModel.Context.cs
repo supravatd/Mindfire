@@ -28,7 +28,7 @@ namespace EntityFramework
         }
     
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Standard> Standards { get; set; }
+        public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentAddress> StudentAddresses { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
@@ -52,7 +52,7 @@ namespace EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetCoursesByStudentId_Result>("spGetCoursesByStudentId", studentIDParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> spInsertStudent(Nullable<int> standardId, string firstName, string lastName)
+        public virtual int spInsertStudent(Nullable<int> standardId, string firstName, string lastName)
         {
             var standardIdParameter = standardId.HasValue ?
                 new ObjectParameter("StandardId", standardId) :
@@ -66,7 +66,7 @@ namespace EntityFramework
                 new ObjectParameter("LastName", lastName) :
                 new ObjectParameter("LastName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("spInsertStudent", standardIdParameter, firstNameParameter, lastNameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertStudent", standardIdParameter, firstNameParameter, lastNameParameter);
         }
     
         public virtual int spUpdateStudent(Nullable<int> studentId, Nullable<int> standardId, string firstName, string lastName)

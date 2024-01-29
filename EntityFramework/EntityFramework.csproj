@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{784F0B62-2997-4F3F-9604-986F806EA871}</ProjectGuid>
+    <ProjectGuid>{71C3E935-4A67-49C2-A93F-AC3C584092F5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>EntityFramework</RootNamespace>
     <AssemblyName>EntityFramework</AssemblyName>
@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -52,15 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger.cs" />
     <Compile Include="Course.cs">
       <DependentUpon>StudentDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="spGetCoursesByStudentId_Result.cs">
+    <Compile Include="Semester.cs">
       <DependentUpon>StudentDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Standard.cs">
+    <Compile Include="spGetCoursesByStudentId_Result.cs">
       <DependentUpon>StudentDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Student.cs">
@@ -93,29 +95,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <EntityDeploy Include="StudentDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StudentDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="StudentDataModel.edmx.diagram">
       <DependentUpon>StudentDataModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="StudentDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StudentDataModel.edmx</DependentUpon>
       <LastGenOutput>StudentDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>StudentDataModel.edmx</DependentUpon>
     </Content>
     <Content Include="StudentDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StudentDataModel.edmx</DependentUpon>
       <LastGenOutput>StudentDataModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

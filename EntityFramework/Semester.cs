@@ -12,18 +12,17 @@ namespace EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Standard
+    public partial class Semester
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Standard()
+        public Semester()
         {
             this.Students = new HashSet<Student>();
             this.Teachers = new HashSet<Teacher>();
         }
     
-        public int StandardId { get; set; }
-        public string StandardName { get; set; }
-        public string Description { get; set; }
+        public int SemesterId { get; set; }
+        public string SemesterName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
