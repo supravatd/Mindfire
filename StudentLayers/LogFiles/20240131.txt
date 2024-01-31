@@ -48,3 +48,80 @@ System.NotSupportedException: The entity or complex type 'StudentDataModel.Stude
    at StudentLayers.DAL.DataAccessLayer.SearchStudent(String searchString) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 138
    at StudentLayers.Business.BusinessLogic.SearchStudent(String searchString) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.Business\BusinessLogic.cs:line 31
    at StudentLayers.Program.CaseSearchStudent() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 167
+System.NotSupportedException: The entity or complex type 'StudentDataModel.Student' cannot be constructed in a LINQ to Entities query.
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.CheckInitializerType(Type type)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MemberInitTranslator.TypedTranslate(ExpressionConverter parent, MemberInitExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SelectTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at StudentLayers.DAL.DataAccessLayer.SearchStudent(String searchString) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 137
+   at StudentLayers.Business.BusinessLogic.SearchStudent(String searchString) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.Business\BusinessLogic.cs:line 31
+   at StudentLayers.Program.CaseSearchStudent() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 167
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at StudentLayers.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 57
+   at StudentLayers.Program.Main() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 18
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at StudentLayers.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 57
+   at StudentLayers.Program.Main() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 18
+System.InvalidOperationException: The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Infrastructure.DependencyResolution.ProviderServicesFactory.GetInstance(String providerTypeName, String providerInvariantName)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__2(ProviderElement e)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Internal.AppConfig.get_DbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.RegisterDbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetServiceFactory(Type type, String name)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.<>c__DisplayClass1.<GetService>b__0(Tuple`2 t)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.<>c__DisplayClass3.<GetService>b__0(IDbDependencyResolver r)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.CompositeResolver`2.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.DbDependencyResolverExtensions.GetService[T](IDbDependencyResolver resolver)
+   at System.Data.Entity.DbContext.InitializeLazyInternalContext(IInternalConnection internalConnection, DbCompiledModel model)
+   at System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   at StudentLayers.DAL.EF_Demo_DBEntities..ctor() in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\StudentDataModel.Context.cs:line 21
+   at StudentLayers.DAL.DataAccessLayer.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 17
+System.Exception: Something went wrong
+   at StudentLayers.DAL.DataAccessLayer.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 17
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at StudentLayers.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 58
+   at StudentLayers.Program.Main() in C:\Users\supravatd\Documents\Mindfire\StudentLayers\Program.cs:line 19
+System.Exception: Something went wrong
+   at StudentLayers.DAL.DataAccessLayer.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 17
+System.Exception: Something went wrong
+   at StudentLayers.DAL.DataAccessLayer.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 17
+System.Exception: Something went wrong
+   at StudentLayers.DAL.DataAccessLayer.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\StudentLayers.DAL\DataAccessLayer.cs:line 17

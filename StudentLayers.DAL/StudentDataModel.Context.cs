@@ -34,7 +34,6 @@ namespace StudentLayers.DAL
         public virtual DbSet<StudentCourse> StudentCourses { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<vwStudentCourse> vwStudentCourses { get; set; }
-        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
     
         public virtual int spDeleteStudent(Nullable<int> studentId)
         {

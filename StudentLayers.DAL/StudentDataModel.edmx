@@ -14,14 +14,6 @@
           <Property Name="TeacherId" Type="int" />
           <Property Name="SemesterId" Type="int" />
         </EntityType>
-        <EntityType Name="ErrorLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ErrorMessage" Type="nvarchar(max)" />
-          <Property Name="LogTime" Type="datetime" />
-        </EntityType>
         <EntityType Name="Semester">
           <Key>
             <PropertyRef Name="SemesterId" />
@@ -175,7 +167,6 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
         </Function>
         <EntityContainer Name="StudentDataModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
@@ -268,7 +259,6 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentCourse" EntitySet="StudentCourses" />
           </AssociationSet>
-          <EntitySet Name="ErrorLogs" EntityType="StudentDataModel.ErrorLog" />
         </EntityContainer>
         <ComplexType Name="spGetCoursesByStudentId_Result">
           <Property Type="Int32" Name="CourseId" Nullable="true" />
@@ -424,14 +414,6 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ErrorLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LogTime" Type="DateTime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -516,15 +498,6 @@ warning 6002: The table/view 'EF_Demo_DB.dbo.vwStudentCourse' does not have a pr
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ErrorLogs">
-            <EntityTypeMapping TypeName="StudentDataModel.ErrorLog">
-              <MappingFragment StoreEntitySet="ErrorLog">
-                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,114 +1,117 @@
 ﻿using StudentLayers.DAL;
 using StudentLayers.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace StudentLayers.Business
 {
     public class BusinessLogic
     {
-        public static void DisplayStudent(string fileName)
+        public static List<StudentInsert> DisplayStudent(string fileName)
         {
-            DAL.DataAccessLayer.DisplayStudent(fileName);
+            return DAL.DataAccessLayer.DisplayStudent(fileName);
         }
 
-        public static void InsertStudent(StudentInsert student1, string fileName)
+        public static bool InsertStudent(StudentInsert student1, string fileName)
         {
-            DAL.DataAccessLayer.InsertStudent(student1, fileName);
+            return DAL.DataAccessLayer.InsertStudent(student1, fileName);
         }
 
-        public static void UpdateStudent(int studentId, string fileName)
+        public static bool UpdateStudent(int studentId,StudentInsert studentInput, string fileName)
         {
-            DAL.DataAccessLayer.UpdateStudent(studentId, fileName);
+            return DAL.DataAccessLayer.UpdateStudent(studentId,studentInput, fileName);
         }
 
-        public static void DeleteStudent(int studentId, string fileName)
+        public static bool DeleteStudent(int studentId, string fileName)
         {
-            DAL.DataAccessLayer.DeleteStudent(studentId, fileName);
+           return DAL.DataAccessLayer.DeleteStudent(studentId, fileName);
         }
 
-        public static void SearchStudent(string searchString)
+        public static List<StudentInsert> SearchStudent(string searchString)
         {
-            DAL.DataAccessLayer.SearchStudent(searchString);
+            return DAL.DataAccessLayer.SearchStudent(searchString);
         }
 
-        public static void DisplayTeacher(string fileName)
+        public static List<TeacherInsert> DisplayTeacher(string fileName)
         {
-            DAL.DataAccessLayer.DisplayTeacher(fileName);
+            return DAL.DataAccessLayer.DisplayTeacher(fileName);
         }
 
-        public static void InsertTeacher(TeacherInsert teacher1, string fileName)
+        public static bool InsertTeacher(TeacherInsert teacher1, string fileName)
         {
-            DAL.DataAccessLayer.InsertTeacher(teacher1, fileName);
+            return DAL.DataAccessLayer.InsertTeacher(teacher1, fileName);
         }
 
-        public static void UpdateTeacher(int teacherId, string fileName)
+        public static bool UpdateTeacher(int teacherId, TeacherInsert teacher, string fileName)
         {
-            DAL.DataAccessLayer.UpdateTeacher(teacherId, fileName);
+            return DAL.DataAccessLayer.UpdateTeacher(teacherId, teacher, fileName);
         }
 
-        public static void DeleteTeacher(int teacherId, string fileName)
+        public static bool DeleteTeacher(int teacherId, string fileName)
         {
-            DAL.DataAccessLayer.DeleteTeacher(teacherId, fileName);
+            return DAL.DataAccessLayer.DeleteTeacher(teacherId, fileName);
         }
 
-        public static void DisplaySemester(string fileName)
+        public static List<SemesterInsert> DisplaySemesters(string fileName)
         {
-            DAL.DataAccessLayer.DisplaySemester(fileName);
+            List<SemesterInsert> allSemesters = DAL.DataAccessLayer.DisplaySemesters(fileName);
+            return allSemesters;
         }
 
-        public static void InsertSemester(string semesterName, string fileName)
+        public static bool InsertSemester(string semesterName, string fileName)
         {
-            DAL.DataAccessLayer.InsertSemester(semesterName, fileName);
+            bool res = DAL.DataAccessLayer.InsertSemester(semesterName, fileName);
+            return res;
         }
 
-        public static void UpdateSemester(int semesterId, string fileName)
+        public static bool UpdateSemester(int semesterId, string newSemesterName, string fileName)
         {
-            DAL.DataAccessLayer.UpdateSemester(semesterId, fileName);
+            return DAL.DataAccessLayer.UpdateSemester(semesterId, newSemesterName, fileName);
         }
 
-        public static void DeleteSemester(int semesterId, string fileName)
+        public static bool DeleteSemester(int semesterId, string fileName)
         {
-            DAL.DataAccessLayer.DeleteSemester(semesterId, fileName);
+            return DAL.DataAccessLayer.DeleteSemester(semesterId, fileName);
         }
 
-        public static void DisplayCourse(string fileName)
+        public static List<CourseDisplay> DisplayCourse(string fileName)
         {
-            DAL.DataAccessLayer.DisplayCourse(fileName);
+            return DAL.DataAccessLayer.GetCourses(fileName);
         }
 
-        public static void InsertCourse(string courseName, string fileName)
+        public static bool InsertCourse(string courseName, string fileName)
         {
-            DAL.DataAccessLayer.InsertCourse(courseName, fileName);
+            return DAL.DataAccessLayer.InsertCourse(courseName, fileName);
         }
 
-        public static void UpdateCourse(int courseId, string fileName)
+        public static bool UpdateCourse(int courseId, string newCourseName, string fileName)
         {
-            DAL.DataAccessLayer.UpdateCourse(courseId, fileName);
+            return DAL.DataAccessLayer.UpdateCourse(courseId, newCourseName, fileName);
         }
 
-        public static void DeleteCourse(int courseId, string fileName)
+        public static bool DeleteCourse(int courseId, string fileName)
         {
-            DAL.DataAccessLayer.DeleteCourse(courseId, fileName);
+            return DAL.DataAccessLayer.DeleteCourse(courseId, fileName);
         }
 
-        public static void DisplayAddress(string fileName)
+        public static List<AddressInsert> DisplayAddress(string fileName)
         {
-            DAL.DataAccessLayer.DisplayAddress(fileName);
+            return DAL.DataAccessLayer.DisplayAddress(fileName);
         }
 
-        public static void InsertAddress(AddressInsert address, string fileName)
+        public static bool InsertAddress(AddressInsert address, string fileName)
         {
-            DAL.DataAccessLayer.InsertAddress(address, fileName);
+            return DAL.DataAccessLayer.InsertAddress(address, fileName);
         }
 
-        public static void UpdateAddress(int studentId, string fileName)
+        public static bool UpdateAddress(int studentId, AddressInsert address, string fileName)
         {
-            DAL.DataAccessLayer.UpdateAddress(studentId, fileName);
+            return DAL.DataAccessLayer.UpdateAddress(studentId, address, fileName);
         }
 
-        public static void DeleteAddress(int studentId, string fileName)
+        public static bool DeleteAddress(int studentId, string fileName)
         {
-            DAL.DataAccessLayer.DeleteAddress(studentId, fileName);
+            return DAL.DataAccessLayer.DeleteAddress(studentId, fileName);
         }
 
     }

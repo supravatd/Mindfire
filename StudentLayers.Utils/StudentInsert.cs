@@ -11,5 +11,7 @@ namespace StudentLayers.Utils
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int SemesterId { get; set; }
+        public int StudentId { get; set; }
+        public string SemesterName { get; set; }
     }
 }

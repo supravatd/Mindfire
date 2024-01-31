@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressInsert.cs" />
+    <Compile Include="CourseDisplay.cs" />
+    <Compile Include="SemesterInsert.cs" />
     <Compile Include="TeacherInsert.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="StudentInsert.cs" />

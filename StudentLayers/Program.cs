@@ -3,6 +3,7 @@ using StudentLayers.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using static StudentLayers.Utils.Utils;
 
 namespace StudentLayers
@@ -60,7 +61,19 @@ namespace StudentLayers
                 switch (input)
                 {
                     case CrudOp.View_All_Student:
-                        Business.BusinessLogic.DisplayStudent(fileName);
+                        List<StudentInsert> allStudents = Business.BusinessLogic.DisplayStudent(fileName);
+                        if (allStudents != null && allStudents.Count > 0)
+                        {
+                            Console.WriteLine("All Students:");
+                            foreach (var student in allStudents)
+                            {
+                                Console.WriteLine($"ID: {student.StudentId} Name: {student.FirstName} {student.LastName}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No students found.");
+                        }
                         break;
 
                     case CrudOp.Insert_Student:
@@ -80,7 +93,19 @@ namespace StudentLayers
                         break;
 
                     case CrudOp.View_All_Teacher:
-                        Business.BusinessLogic.DisplayTeacher(fileName);
+                        List<TeacherInsert> allTeachers = Business.BusinessLogic.DisplayTeacher(fileName);
+                        if (allTeachers != null && allTeachers.Count > 0)
+                        {
+                            Console.WriteLine("All Teachers:");
+                            foreach (var teacher in allTeachers)
+                            {
+                                Console.WriteLine($"Teacher ID: {teacher.TeacherId}, First Name: {teacher.FirstName}, Last Name: {teacher.LastName}, Semester ID: {teacher.SemesterId}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No teachers found.");
+                        }
                         break;
 
                     case CrudOp.Insert_Teacher:
@@ -96,7 +121,11 @@ namespace StudentLayers
                         break;
 
                     case CrudOp.View_All_Semester:
-                        Business.BusinessLogic.DisplaySemester(fileName);
+                        List<SemesterInsert> allSemesters = BusinessLogic.DisplaySemesters(fileName);
+                        foreach (var semester in allSemesters)
+                        {
+                            Console.WriteLine($"ID: {semester.SemesterId}, Name: {semester.SemesterName}");
+                        }
                         break;
 
                     case CrudOp.Insert_Semester:
@@ -112,7 +141,11 @@ namespace StudentLayers
                         break;
 
                     case CrudOp.View_All_Course:
-                        Business.BusinessLogic.DisplayCourse(fileName);
+                        List<CourseDisplay> allCourses = Business.BusinessLogic.DisplayCourse(fileName);
+                        foreach (var course in allCourses)
+                        {
+                            Console.WriteLine($"ID: {course.CourseId}, Name: {course.CourseName}");
+                        }
                         break;
 
                     case CrudOp.Insert_Course:
@@ -128,7 +161,11 @@ namespace StudentLayers
                         break;
 
                     case CrudOp.View_All_Address:
-                        Business.BusinessLogic.DisplayAddress(fileName);
+                        List<AddressInsert> allAddresses = Business.BusinessLogic.DisplayAddress(fileName);
+                        foreach (var address in allAddresses)
+                        {
+                            Console.WriteLine($"Student ID: {address.StudentId}, Address1: {address.Address1}, Address2: {address.Address2}, Mobile: {address.Mobile}, Email: {address.Email}");
+                        }
                         break;
 
                     case CrudOp.Insert_Address:
@@ -164,7 +201,20 @@ namespace StudentLayers
                 Console.WriteLine("Enter the search string:");
                 string searchString = Console.ReadLine();
 
-                Business.BusinessLogic.SearchStudent(searchString);
+                List<StudentInsert> searchResults = Business.BusinessLogic.SearchStudent(searchString);
+
+                if (searchResults.Count > 0)
+                {
+                    Console.WriteLine("Search Results:");
+                    foreach (var result in searchResults)
+                    {
+                        Console.WriteLine($"Student ID: {result.StudentId}, Name: {result.FirstName} {result.LastName}, Semester: {result.SemesterId}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No students found matching the search criteria.");
+                }
             }
             catch (Exception ex)
             {
@@ -194,7 +244,25 @@ namespace StudentLayers
             try
             {
                 int studentId = GetValidIntegerInput("Student ID");
-                Business.BusinessLogic.UpdateStudent(studentId, fileName);
+                string newFirstName = GetValidStringInput("New First Name");
+                string newLastName = GetValidStringInput("New Last Name");
+                int newSemesterId = GetValidIntegerInput("New Semester ID");
+
+                StudentInsert studentInput = new StudentInsert
+                {
+                    FirstName = newFirstName,
+                    LastName = newLastName,
+                    SemesterId = newSemesterId
+                };
+                bool isUpdated = Business.BusinessLogic.UpdateStudent(studentId, studentInput, fileName);
+                if (isUpdated)
+                {
+                    Console.WriteLine("Student updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update student. Student not found.");
+                }
             }
             catch (Exception ex)
             {
@@ -207,7 +275,16 @@ namespace StudentLayers
             try
             {
                 int studentId = GetValidIntegerInput("Student ID");
-                Business.BusinessLogic.DeleteStudent(studentId, fileName);
+                bool isDeleted = Business.BusinessLogic.DeleteStudent(studentId, fileName);
+
+                if (isDeleted)
+                {
+                    Console.WriteLine("Student deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to delete student. Student not found.");
+                }
             }
             catch (Exception ex)
             {
@@ -224,7 +301,16 @@ namespace StudentLayers
                 int semesterId = GetValidIntegerInput("Semester ID");
 
                 TeacherInsert teacher1 = new TeacherInsert { FirstName = firstName, LastName = lastName, SemesterId = semesterId };
-                Business.BusinessLogic.InsertTeacher(teacher1, fileName);
+                bool isInserted = Business.BusinessLogic.InsertTeacher(teacher1, fileName);
+
+                if (isInserted)
+                {
+                    Console.WriteLine("Teacher added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to add teacher.");
+                }
             }
             catch (Exception ex)
             {
@@ -237,7 +323,27 @@ namespace StudentLayers
             try
             {
                 int teacherId = GetValidIntegerInput("Teacher ID");
-                Business.BusinessLogic.UpdateTeacher(teacherId, fileName);
+                string newFirstName = GetValidStringInput("New First Name");
+                string newLastName = GetValidStringInput("New Last Name");
+                int newSemesterId = GetValidIntegerInput("New Semester ID");
+
+                TeacherInsert teacherInput = new TeacherInsert
+                {
+                    FirstName = newFirstName,
+                    LastName = newLastName,
+                    SemesterId = newSemesterId
+                };
+
+                bool isUpdated = Business.BusinessLogic.UpdateTeacher(teacherId, teacherInput, fileName);
+
+                if (isUpdated)
+                {
+                    Console.WriteLine("Teacher updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update teacher. Teacher not found.");
+                }
             }
             catch (Exception ex)
             {
@@ -250,7 +356,16 @@ namespace StudentLayers
             try
             {
                 int teacherId = GetValidIntegerInput("Teacher ID");
-                Business.BusinessLogic.DeleteTeacher(teacherId, fileName);
+                bool isDeleted = Business.BusinessLogic.DeleteTeacher(teacherId, fileName);
+
+                if (isDeleted)
+                {
+                    Console.WriteLine("Teacher deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to delete teacher. Teacher not found.");
+                }
             }
             catch (Exception ex)
             {
@@ -263,7 +378,15 @@ namespace StudentLayers
             try
             {
                 string semesterName = GetValidStringInput("Semester Name");
-                Business.BusinessLogic.InsertSemester(semesterName, fileName);
+                bool isInserted = Business.BusinessLogic.InsertSemester(semesterName, fileName);
+                if (isInserted)
+                {
+                    Console.WriteLine("Semester Inserted Successfully");
+                }
+                else
+                {
+                    Console.WriteLine("Semester Not Inserted");
+                }
             }
             catch (Exception ex)
             {
@@ -276,7 +399,18 @@ namespace StudentLayers
             try
             {
                 int semesterId = GetValidIntegerInput("Semester ID");
-                Business.BusinessLogic.UpdateSemester(semesterId, fileName);
+                string newSemesterName = GetValidStringInput("New Semester Name");
+
+                bool isUpdated = Business.BusinessLogic.UpdateSemester(semesterId, newSemesterName, fileName);
+
+                if (isUpdated)
+                {
+                    Console.WriteLine("Semester updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Semester not found or update failed.");
+                }
             }
             catch (Exception ex)
             {
@@ -289,7 +423,16 @@ namespace StudentLayers
             try
             {
                 int semesterId = GetValidIntegerInput("Semester ID");
-                Business.BusinessLogic.DeleteSemester(semesterId, fileName);
+                bool isDeleted = Business.BusinessLogic.DeleteSemester(semesterId, fileName);
+
+                if (isDeleted)
+                {
+                    Console.WriteLine("Semester deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Semester not found or delete failed.");
+                }
             }
             catch (Exception ex)
             {
@@ -302,7 +445,16 @@ namespace StudentLayers
             try
             {
                 string courseName = GetValidStringInput("Course Name");
-                Business.BusinessLogic.InsertCourse(courseName, fileName);
+                bool isInserted = Business.BusinessLogic.InsertCourse(courseName, fileName);
+
+                if (isInserted)
+                {
+                    Console.WriteLine("Course added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to add course.");
+                }
             }
             catch (Exception ex)
             {
@@ -315,7 +467,18 @@ namespace StudentLayers
             try
             {
                 int courseId = GetValidIntegerInput("Course ID");
-                Business.BusinessLogic.UpdateCourse(courseId, fileName);
+                string newCourseName = GetValidStringInput("New Course Name");
+
+                bool isUpdated = Business.BusinessLogic.UpdateCourse(courseId, newCourseName, fileName);
+
+                if (isUpdated)
+                {
+                    Console.WriteLine("Course updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update course.");
+                }
             }
             catch (Exception ex)
             {
@@ -328,7 +491,16 @@ namespace StudentLayers
             try
             {
                 int courseId = GetValidIntegerInput("Course ID");
-                Business.BusinessLogic.DeleteCourse(courseId, fileName);
+                bool isDeleted = Business.BusinessLogic.DeleteCourse(courseId, fileName);
+
+                if (isDeleted)
+                {
+                    Console.WriteLine("Course deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to delete course.");
+                }
             }
             catch (Exception ex)
             {
@@ -336,7 +508,7 @@ namespace StudentLayers
             }
         }
 
-        public static void CaseInsertAddress()
+        private static void CaseInsertAddress()
         {
             try
             {
@@ -347,7 +519,17 @@ namespace StudentLayers
                 string email = GetValidStringInput("Email");
 
                 AddressInsert address = new AddressInsert { StudentId = studentId, Address1 = address1, Address2 = address2, Mobile = mobile, Email = email };
-                Business.BusinessLogic.InsertAddress(address, fileName);
+
+                bool isInserted = Business.BusinessLogic.InsertAddress(address, fileName);
+
+                if (isInserted)
+                {
+                    Console.WriteLine("Student address added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to add student address.");
+                }
             }
             catch (Exception ex)
             {
@@ -360,7 +542,21 @@ namespace StudentLayers
             try
             {
                 int studentId = GetValidIntegerInput("Student ID");
-                Business.BusinessLogic.UpdateAddress(studentId, fileName);
+                string address1 = GetValidStringInput("Address1");
+                string address2 = GetValidStringInput("Address2");
+                string mobile = GetValidStringInput("Mobile");
+                string email = GetValidStringInput("Email");
+
+                AddressInsert address = new AddressInsert { Address1 = address1, Address2 = address2, Mobile = mobile, Email = email };
+                bool isUpdated = Business.BusinessLogic.UpdateAddress(studentId, address, fileName);
+                if (isUpdated)
+                {
+                    Console.WriteLine("Student address updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update student address OR Student address not found.");
+                }
             }
             catch (Exception ex)
             {
@@ -373,7 +569,16 @@ namespace StudentLayers
             try
             {
                 int studentId = GetValidIntegerInput("Student ID");
-                Business.BusinessLogic.DeleteAddress(studentId, fileName);
+                bool isDeleted = Business.BusinessLogic.DeleteAddress(studentId, fileName);
+
+                if (isDeleted)
+                {
+                    Console.WriteLine("Student address deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to delete student address. Student address not found.");
+                }
             }
             catch (Exception ex)
             {

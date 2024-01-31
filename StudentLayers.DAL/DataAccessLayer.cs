@@ -3,24 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace StudentLayers.DAL
 {
     public class DataAccessLayer
     {
-        public static void DisplayStudent(string fileName)
+        public static List<StudentInsert> DisplayStudent(string fileName)
         {
+            List<StudentInsert> allStudentsDisplay = new List<StudentInsert>();
             try
             {
                 using (EF_Demo_DBEntities stud = new EF_Demo_DBEntities())
                 {
                     List<Student> allStudents = stud.Students.Include("Semester").ToList();
 
-                    Console.WriteLine("All Students:");
                     foreach (var student in allStudents)
                     {
                         string semesterName = student.SemesterId != null ? student.Semester.SemesterName : "";
-                        Console.WriteLine($"ID: {student.StudentId} Name: {student.FirstName} {student.LastName} Semester: {semesterName}");
+                        StudentInsert studentDisplay = new StudentInsert
+                        {
+                            StudentId = student.StudentId,
+                            FirstName = student.FirstName,
+                            LastName = student.LastName
+                        };
+                        allStudentsDisplay.Add(studentDisplay);
                     }
                 }
             }
@@ -28,9 +35,10 @@ namespace StudentLayers.DAL
             {
                 Logger.AddData(ex, fileName);
             }
+            return allStudentsDisplay;
         }
 
-        public static void InsertStudent(StudentInsert student1, string fileName)
+        public static bool InsertStudent(StudentInsert student1, string fileName)
         {
             try
             {
@@ -44,17 +52,20 @@ namespace StudentLayers.DAL
                     };
 
                     context.Students.Add(student);
+                    context.SaveChanges();
 
-                    Console.WriteLine("Student added successfully.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void UpdateStudent(int studentId, string fileName)
+
+        public static bool UpdateStudent(int studentId,StudentInsert studentUpdate, string fileName)
         {
             try
             {
@@ -64,36 +75,28 @@ namespace StudentLayers.DAL
 
                     if (studentToUpdate != null)
                     {
-                        Console.WriteLine("Enter new First Name:");
-                        string newFirstName = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Last Name:");
-                        string newLastName = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Semester ID:");
-                        int newSemesterId = int.Parse(Console.ReadLine());
-
-                        studentToUpdate.FirstName = newFirstName;
-                        studentToUpdate.LastName = newLastName;
-                        studentToUpdate.SemesterId = newSemesterId;
+                        studentToUpdate.FirstName = studentUpdate.FirstName;
+                        studentToUpdate.LastName = studentUpdate.LastName;
+                        studentToUpdate.SemesterId = studentUpdate.SemesterId;
 
                         stud.SaveChanges();
 
-                        Console.WriteLine("Student updated successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Student not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DeleteStudent(int studentId, string fileName)
+        public static bool DeleteStudent(int studentId, string fileName)
         {
             try
             {
@@ -106,54 +109,61 @@ namespace StudentLayers.DAL
                         stud.Students.Remove(studentToDelete);
                         stud.SaveChanges();
 
-                        Console.WriteLine("Student deleted successfully.");
+                        return true; 
                     }
                     else
                     {
-                        Console.WriteLine("Student not found.");
+                        return false; 
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false; 
             }
         }
 
-        public static void SearchStudent(string searchString)
+        public static List<StudentInsert> SearchStudent(string searchString)
         {
+            List<StudentInsert> searchResults = new List<StudentInsert>();
+
             using (EF_Demo_DBEntities context = new EF_Demo_DBEntities())
             {
                 var students = from s in context.Students
-                               join sem in context.Semesters on s.SemesterId equals sem.SemesterId
                                where s.FirstName.Contains(searchString)
-                               select new Student
+                               select new StudentInsert
                                {
                                    StudentId = s.StudentId,
                                    FirstName = s.FirstName,
                                    LastName = s.LastName,
-                                   SemesterId = s.SemesterId
+                                   SemesterId = (int)s.SemesterId
                                };
 
-                foreach (var student in students)
-                {
-                    Console.WriteLine($"Student ID: {student.StudentId}, Name: {student.FirstName} {student.LastName}, Semester: {student.SemesterId}");
-                }
+                searchResults.AddRange(students);
             }
+
+            return searchResults;
         }
 
-        public static void DisplayTeacher(string fileName)
+        public static List<TeacherInsert> DisplayTeacher(string fileName)
         {
+            List<TeacherInsert> displayTeachers = new List<TeacherInsert>();
             try
             {
                 using (EF_Demo_DBEntities stud = new EF_Demo_DBEntities())
                 {
                     List<Teacher> allTeachers = stud.Teachers.ToList();
-
-                    Console.WriteLine("All Teachers:");
                     foreach (var teacher in allTeachers)
                     {
-                        Console.WriteLine($"Teacher ID: {teacher.TeacherId}, First Name: {teacher.FirstName}, Last Name: {teacher.LastName}, Semester ID: {teacher.SemesterId}");
+                        TeacherInsert displayTeacher = new TeacherInsert
+                        {
+                            TeacherId = teacher.TeacherId,
+                            FirstName = teacher.FirstName,
+                            LastName = teacher.LastName,
+                            SemesterId = (int)teacher.SemesterId
+                        };
+                        displayTeachers.Add(displayTeacher);
                     }
                 }
             }
@@ -161,9 +171,10 @@ namespace StudentLayers.DAL
             {
                 Logger.AddData(ex, fileName);
             }
+            return displayTeachers;
         }
 
-        public static void InsertTeacher(TeacherInsert teacher1, string fileName)
+        public static bool InsertTeacher(TeacherInsert teacher, string fileName)
         {
             try
             {
@@ -171,24 +182,24 @@ namespace StudentLayers.DAL
                 {
                     Teacher newTeacher = new Teacher
                     {
-                        FirstName = teacher1.FirstName,
-                        LastName = teacher1.LastName,
-                        SemesterId = teacher1.SemesterId
+                        FirstName = teacher.FirstName,
+                        LastName = teacher.LastName,
+                        SemesterId = teacher.SemesterId
                     };
 
                     stud.Teachers.Add(newTeacher);
                     stud.SaveChanges();
-
-                    Console.WriteLine("Teacher added successfully.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void UpdateTeacher(int teacherId, string fileName)
+        public static bool UpdateTeacher(int teacherId, TeacherInsert teacher, string fileName)
         {
             try
             {
@@ -198,36 +209,27 @@ namespace StudentLayers.DAL
 
                     if (teacherToUpdate != null)
                     {
-                        Console.WriteLine("Enter new First Name:");
-                        string newFirstName = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Last Name:");
-                        string newLastName = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Semester ID:");
-                        int newSemesterId = int.Parse(Console.ReadLine());
-
-                        teacherToUpdate.FirstName = newFirstName;
-                        teacherToUpdate.LastName = newLastName;
-                        teacherToUpdate.SemesterId = newSemesterId;
+                        teacherToUpdate.FirstName = teacher.FirstName;
+                        teacherToUpdate.LastName = teacher.LastName;
+                        teacherToUpdate.SemesterId = teacher.SemesterId;
 
                         stud.SaveChanges();
-
-                        Console.WriteLine("Teacher updated successfully.");
+                        return true; 
                     }
                     else
                     {
-                        Console.WriteLine("Teacher not found.");
+                        return false; 
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DeleteTeacher(int teacherId, string fileName)
+        public static bool DeleteTeacher(int teacherId, string fileName)
         {
             try
             {
@@ -239,33 +241,39 @@ namespace StudentLayers.DAL
                     {
                         stud.Teachers.Remove(teacherToDelete);
                         stud.SaveChanges();
-
-                        Console.WriteLine("Teacher deleted successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Teacher not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DisplaySemester(string fileName)
+        public static List<SemesterInsert> DisplaySemesters(string fileName)
         {
+            List<SemesterInsert> allSemesters = null;
             try
             {
-                using (EF_Demo_DBEntities stud = new EF_Demo_DBEntities())
+                using (EF_Demo_DBEntities dbContext = new EF_Demo_DBEntities())
                 {
-                    List<Semester> allSemesters = stud.Semesters.ToList();
-
-                    Console.WriteLine("All Semesters:");
-                    foreach (var semester in allSemesters)
+                    List<Semester> allSem = dbContext.Semesters.ToList();
+                    allSemesters = new List<SemesterInsert>();
+                    foreach (var semester in allSem)
                     {
-                        Console.WriteLine($"ID: {semester.SemesterId}, Name: {semester.SemesterName}");
+                        SemesterInsert output = new SemesterInsert
+                        {
+                            SemesterId = semester.SemesterId,
+                            SemesterName = semester.SemesterName,
+
+                        };
+                        allSemesters.Add(output);
                     }
                 }
             }
@@ -273,9 +281,10 @@ namespace StudentLayers.DAL
             {
                 Logger.AddData(ex, fileName);
             }
+            return allSemesters;
         }
 
-        public static void InsertSemester(string semesterName, string fileName)
+        public static bool InsertSemester(string semesterName, string fileName)
         {
             try
             {
@@ -289,16 +298,17 @@ namespace StudentLayers.DAL
                     stud.Semesters.Add(newSemester);
                     stud.SaveChanges();
 
-                    Console.WriteLine("Semester added successfully.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void UpdateSemester(int semesterId, string fileName)
+        public static bool UpdateSemester(int semesterId, string newSemesterName, string fileName)
         {
             try
             {
@@ -308,27 +318,24 @@ namespace StudentLayers.DAL
 
                     if (semesterToUpdate != null)
                     {
-                        Console.WriteLine("Enter new name:");
-                        string newSemesterName = Console.ReadLine();
-
                         semesterToUpdate.SemesterName = newSemesterName;
                         stud.SaveChanges();
-
-                        Console.WriteLine("Semester updated successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Semester not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DeleteSemester(int semesterId, string fileName)
+        public static bool DeleteSemester(int semesterId, string fileName)
         {
             try
             {
@@ -340,33 +347,37 @@ namespace StudentLayers.DAL
                     {
                         stud.Semesters.Remove(semesterToDelete);
                         stud.SaveChanges();
-
-                        Console.WriteLine("Semester deleted successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Semester not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DisplayCourse(string fileName)
+        public static List<CourseDisplay> GetCourses(string fileName)
         {
+            List<CourseDisplay> allCourses = new List<CourseDisplay>();
             try
             {
                 using (EF_Demo_DBEntities stud = new EF_Demo_DBEntities())
                 {
-                    List<Course> allCourses = stud.Courses.ToList();
-
-                    Console.WriteLine("All Courses:");
-                    foreach (var course in allCourses)
+                    List<Course> all = stud.Courses.ToList();
+                    foreach (var course in all)
                     {
-                        Console.WriteLine($"ID: {course.CourseId}, Name: {course.CourseName}");
+                        CourseDisplay courseDisplay = new CourseDisplay
+                        {
+                            CourseId = course.CourseId,
+                            CourseName = course.CourseName,
+                        };
+                        allCourses.Add(courseDisplay);
                     }
                 }
             }
@@ -374,9 +385,10 @@ namespace StudentLayers.DAL
             {
                 Logger.AddData(ex, fileName);
             }
+            return allCourses;
         }
 
-        public static void InsertCourse(string courseName, string fileName)
+        public static bool InsertCourse(string courseName, string fileName)
         {
             try
             {
@@ -390,16 +402,17 @@ namespace StudentLayers.DAL
                     stud.Courses.Add(newCourse);
                     stud.SaveChanges();
 
-                    Console.WriteLine("Course added successfully.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void UpdateCourse(int courseId, string fileName)
+        public static bool UpdateCourse(int courseId, string newCourseName, string fileName)
         {
             try
             {
@@ -409,27 +422,24 @@ namespace StudentLayers.DAL
 
                     if (courseToUpdate != null)
                     {
-                        Console.WriteLine("Enter new name:");
-                        string newCourseName = Console.ReadLine();
-
                         courseToUpdate.CourseName = newCourseName;
                         stud.SaveChanges();
-
-                        Console.WriteLine("Course updated successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Course not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DeleteCourse(int courseId, string fileName)
+        public static bool DeleteCourse(int courseId, string fileName)
         {
             try
             {
@@ -441,33 +451,42 @@ namespace StudentLayers.DAL
                     {
                         stud.Courses.Remove(courseToDelete);
                         stud.SaveChanges();
-
-                        Console.WriteLine("Course deleted successfully.");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Course not found.");
+                        return false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void DisplayAddress(string fileName)
+        public static List<AddressInsert> DisplayAddress(string fileName)
         {
+            List<AddressInsert> allAddresses = new List<AddressInsert>();
             try
             {
                 using (EF_Demo_DBEntities stud = new EF_Demo_DBEntities())
                 {
-                    List<StudentAddress> allAddresses = stud.StudentAddresses.ToList();
+                    List<StudentAddress> allStudentAddresses = stud.StudentAddresses.ToList();
 
-                    Console.WriteLine("All Student Addresses:");
-                    foreach (var address in allAddresses)
+                    foreach (var address in allStudentAddresses)
                     {
-                        Console.WriteLine($"Student ID: {address.StudentId}, Address1: {address.Address1}, Address2: {address.Address2}, Mobile: {address.Mobile}, Email: {address.Email}");
+                        AddressInsert addressInsert = new AddressInsert
+                        {
+                            StudentId = address.StudentId,
+                            Address1 = address.Address1,
+                            Address2 = address.Address2,
+                            Mobile = address.Mobile,
+                            Email = address.Email
+                        };
+
+                        allAddresses.Add(addressInsert);
                     }
                 }
             }
@@ -475,9 +494,10 @@ namespace StudentLayers.DAL
             {
                 Logger.AddData(ex, fileName);
             }
+            return allAddresses;
         }
 
-        public static void InsertAddress(AddressInsert address, string fileName)
+        public static bool InsertAddress(AddressInsert address, string fileName)
         {
             try
             {
@@ -494,17 +514,18 @@ namespace StudentLayers.DAL
 
                     stud.StudentAddresses.Add(newAddress);
                     stud.SaveChanges();
-
-                    Console.WriteLine("Student address added successfully.");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
 
-        public static void UpdateAddress(int studentId, string fileName)
+
+        public static bool UpdateAddress(int studentId,AddressInsert address, string fileName)
         {
             try
             {
@@ -514,40 +535,28 @@ namespace StudentLayers.DAL
 
                     if (addressToUpdate != null)
                     {
-                        Console.WriteLine("Enter new Address1:");
-                        string newAddress1 = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Address2:");
-                        string newAddress2 = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Mobile:");
-                        string newMobile = Console.ReadLine();
-
-                        Console.WriteLine("Enter new Email:");
-                        string newEmail = Console.ReadLine();
-
-                        addressToUpdate.Address1 = newAddress1;
-                        addressToUpdate.Address2 = newAddress2;
-                        addressToUpdate.Mobile = newMobile;
-                        addressToUpdate.Email = newEmail;
+                        addressToUpdate.Address1 = address.Address1;
+                        addressToUpdate.Address2 = address.Address2;
+                        addressToUpdate.Mobile = address.Mobile;
+                        addressToUpdate.Email = address.Email;
 
                         stud.SaveChanges();
-
-                        Console.WriteLine("Student address updated successfully.");
+                        return true; 
                     }
                     else
                     {
-                        Console.WriteLine("Student address not found.");
+                        return false; 
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false; 
             }
         }
 
-        public static void DeleteAddress(int studentId, string fileName)
+        public static bool DeleteAddress(int studentId, string fileName)
         {
             try
             {
@@ -559,20 +568,21 @@ namespace StudentLayers.DAL
                     {
                         stud.StudentAddresses.Remove(addressToDelete);
                         stud.SaveChanges();
-
-                        Console.WriteLine("Student address deleted successfully.");
+                        return true; 
                     }
                     else
                     {
-                        Console.WriteLine("Student address not found.");
+                        return false; 
                     }
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+                return false;
             }
         }
+
 
     }
 }

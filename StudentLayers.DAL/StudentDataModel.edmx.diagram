@@ -18,7 +18,6 @@
         <AssociationConnector Association="StudentDataModel.FK__Teacher__Standar__398D8EEE" />
         <AssociationConnector Association="StudentDataModel.FK__StudentAd__Stude__4222D4EF" />
         <AssociationConnector Association="StudentDataModel.FK__StudentCo__Stude__44FF419A" />
-        <EntityTypeShape EntityType="StudentDataModel.ErrorLog" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
