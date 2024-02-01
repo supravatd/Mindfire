@@ -191,7 +191,7 @@ namespace StudentLayers
                         break;
 
                 }
-            } while (result != 21);
+            } while (result != 22);
         }
 
         private static void CaseSearchStudent()
