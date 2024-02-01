@@ -1,0 +1,332 @@
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at StudentLayer.DAL.DAL.DisplayTeacher(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 154
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable<TResult>.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.InvalidOperationException: No connection string named 'StudentEntities' could be found in the application config file.
+   at System.Data.Entity.Internal.LazyInternalConnection.get_ConnectionHasModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Include(String path)
+   at System.Data.Entity.Infrastructure.DbQuery`1.Include(String path)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.Data.Entity.Core.MetadataException: Schema specified is not valid. Errors: 
+StudentDataModel.ssdl(2,2) : error 0152: No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Core.Metadata.Edm.StoreItemCollection.Loader.ThrowOnNonWarningErrors()
+   at System.Data.Entity.Core.Metadata.Edm.StoreItemCollection.Loader.LoadItems(IEnumerable`1 xmlReaders, IEnumerable`1 sourceFilePaths)
+   at System.Data.Entity.Core.Metadata.Edm.StoreItemCollection.Loader..ctor(IEnumerable`1 xmlReaders, IEnumerable`1 sourceFilePaths, Boolean throwOnError, IDbDependencyResolver resolver)
+   at System.Data.Entity.Core.Metadata.Edm.StoreItemCollection.Init(IEnumerable`1 xmlReaders, IEnumerable`1 filePaths, Boolean throwOnError, IDbDependencyResolver resolver, DbProviderManifest& providerManifest, DbProviderFactory& providerFactory, String& providerInvariantName, String& providerManifestToken, Memoizer`2& cachedCTypeFunction)
+   at System.Data.Entity.Core.Metadata.Edm.StoreItemCollection..ctor(IEnumerable`1 xmlReaders, IEnumerable`1 filePaths)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataCache.LoadStoreCollection(EdmItemCollection edmItemCollection, MetadataArtifactLoader loader)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Core.Metadata.Edm.MetadataCache.<>c__DisplayClass5.<>c__DisplayClass7.<GetMetadataWorkspace>b__4()
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.LoadAndCheckItemCollection[T](Func`1 itemCollectionLoader)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.<>c__DisplayClass16.<.ctor>b__f()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace, Boolean required)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.GetItemCollection(DataSpace dataSpace)
+   at System.Data.Entity.Core.Objects.ObjectContext.InitializeMappingViewCacheFactory(DbContext owner)
+   at System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
+   at System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Include(String path)
+   at System.Data.Entity.Infrastructure.DbQuery`1.Include(String path)
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 17
+System.InvalidOperationException: The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Infrastructure.DependencyResolution.ProviderServicesFactory.GetInstance(String providerTypeName, String providerInvariantName)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__2(ProviderElement e)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Internal.AppConfig.get_DbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.RegisterDbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetServiceFactory(Type type, String name)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.<>c__DisplayClass1.<GetService>b__0(Tuple`2 t)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.<>c__DisplayClass3.<GetService>b__0(IDbDependencyResolver r)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.CompositeResolver`2.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.DbDependencyResolverExtensions.GetService[T](IDbDependencyResolver resolver)
+   at System.Data.Entity.DbContext.InitializeLazyInternalContext(IInternalConnection internalConnection, DbCompiledModel model)
+   at System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   at StudentLayer.DAL.StudentEntities..ctor() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\StudentDataModel.Context.cs:line 19
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 15
+System.InvalidOperationException: The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Infrastructure.DependencyResolution.ProviderServicesFactory.GetInstance(String providerTypeName, String providerInvariantName)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__2(ProviderElement e)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Internal.AppConfig.get_DbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.RegisterDbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetServiceFactory(Type type, String name)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.<>c__DisplayClass1.<GetService>b__0(Tuple`2 t)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.<>c__DisplayClass3.<GetService>b__0(IDbDependencyResolver r)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.CompositeResolver`2.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.DbDependencyResolverExtensions.GetService[T](IDbDependencyResolver resolver)
+   at System.Data.Entity.DbContext.InitializeLazyInternalContext(IInternalConnection internalConnection, DbCompiledModel model)
+   at System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   at StudentLayer.DAL.StudentEntities..ctor() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\StudentDataModel.Context.cs:line 19
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 15
+System.InvalidOperationException: The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Infrastructure.DependencyResolution.ProviderServicesFactory.GetInstance(String providerTypeName, String providerInvariantName)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__2(ProviderElement e)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Internal.AppConfig.get_DbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.RegisterDbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetServiceFactory(Type type, String name)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.<>c__DisplayClass1.<GetService>b__0(Tuple`2 t)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.<>c__DisplayClass3.<GetService>b__0(IDbDependencyResolver r)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.CompositeResolver`2.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.DbDependencyResolverExtensions.GetService[T](IDbDependencyResolver resolver)
+   at System.Data.Entity.DbContext.InitializeLazyInternalContext(IInternalConnection internalConnection, DbCompiledModel model)
+   at System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   at StudentLayer.DAL.StudentEntities..ctor() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\StudentDataModel.Context.cs:line 19
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 15
+System.InvalidOperationException: The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+   at System.Data.Entity.Infrastructure.DependencyResolution.ProviderServicesFactory.GetInstance(String providerTypeName, String providerInvariantName)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__2(ProviderElement e)
+   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Internal.AppConfig.<.ctor>b__1()
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.LazyInitValue()
+   at System.Lazy`1.get_Value()
+   at System.Data.Entity.Internal.AppConfig.get_DbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.RegisterDbProviderServices()
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetServiceFactory(Type type, String name)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.<>c__DisplayClass1.<GetService>b__0(Tuple`2 t)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at System.Data.Entity.Infrastructure.DependencyResolution.AppConfigDependencyResolver.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.<>c__DisplayClass3.<GetService>b__0(IDbDependencyResolver r)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at System.Data.Entity.Infrastructure.DependencyResolution.ResolverChain.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.CompositeResolver`2.GetService(Type type, Object key)
+   at System.Data.Entity.Infrastructure.DependencyResolution.DbDependencyResolverExtensions.GetService[T](IDbDependencyResolver resolver)
+   at System.Data.Entity.DbContext.InitializeLazyInternalContext(IInternalConnection internalConnection, DbCompiledModel model)
+   at System.Data.Entity.DbContext..ctor(String nameOrConnectionString)
+   at StudentLayer.DAL.StudentEntities..ctor() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\StudentDataModel.Context.cs:line 19
+   at StudentLayer.DAL.DAL.DisplayStudent(String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 15
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 121
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 124
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 124
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 124
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 124
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList, String filePath) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 156
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList, String filePath) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 156
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList, String filePath) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 156
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList, String filePath) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 156
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportToExcel[T](List`1 dataList, String filePath) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 156
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 183
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 154
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 180
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 154
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 154
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 182
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 151
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 21
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 157
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 180
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 152
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 22
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 158
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 180
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 152
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 22
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sheet1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 dataList, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 158
+   at StudentLayer.Program.ExportToExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 180
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 152
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 22
+System.NotImplementedException: The method or operation is not implemented.
+   at StudentLayer.Program.CaseBoth() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 198
+   at StudentLayer.Program.ExportData() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 191
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 152
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 22
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at StudentLayer.Business.BusinessLayer.ExportDataToExcel[T](List`1 data, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 154
+   at StudentLayer.Program.CaseExcel() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 252
+   at StudentLayer.Program.CaseBoth() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 199
+   at StudentLayer.Program.ExportData() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 191
+   at StudentLayer.Program.CrudOperations() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 152
+   at StudentLayer.Program.Main() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 22
