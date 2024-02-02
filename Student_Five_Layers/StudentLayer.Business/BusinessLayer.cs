@@ -201,10 +201,6 @@ namespace StudentLayer.Business
             try
             {
                 FileInfo file = new FileInfo(filePath);
-                if (file.Exists)
-                {
-                    file.Delete();
-                }
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 using (ExcelPackage package = new ExcelPackage(file))
                 {

@@ -104,3 +104,43 @@ OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext prope
    at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
    at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
    at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 209
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 4
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 2
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 3
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 4
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 1
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 2
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 3
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 4
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211
+System.InvalidOperationException: A worksheet with this name already exists in the workbook : Sem 4
+   at OfficeOpenXml.ExcelWorksheets.AddSheet(String Name, Boolean isChart, Nullable`1 chartType, ExcelPivotTable pivotTableSource, XmlElement sheetElement)
+   at OfficeOpenXml.ExcelWorksheets.Add(String Name)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 211

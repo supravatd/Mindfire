@@ -567,9 +567,9 @@ namespace StudentLayer.DAL
                                    select new ExportDataModel
                                    {
                                        StudentId = student.StudentId,
-                                       StudentName = student.FirstName + " " + student.LastName, // Use string concatenation
+                                       StudentName = student.FirstName + " " + student.LastName,
                                        CourseName = course.CourseName,
-                                       TeacherName = teacher.FirstName + " " + teacher.LastName, // Use string concatenation
+                                       TeacherName = teacher.FirstName + " " + teacher.LastName,
                                        SemesterName = semesterName
                                    };
 
