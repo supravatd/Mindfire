@@ -1,4 +1,5 @@
-﻿using StudentLayer.Utils;
+﻿using AutoMapper;
+using StudentLayer.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ namespace StudentLayer.DAL
 {
     public class DAL
     {
+
         public static List<StudentModel> DisplayStudent(string fileName)
         {
             List<StudentModel> allStudentsDisplay = new List<StudentModel>();
@@ -15,18 +17,8 @@ namespace StudentLayer.DAL
                 using (StudentEntities stud = new StudentEntities())
                 {
                     List<Student> allStudents = stud.Students.ToList();
-
-                    foreach (var student in allStudents)
-                    {
-                        StudentModel studentDisplay = new StudentModel
-                        {
-                            StudentId = student.StudentId,
-                            FirstName = student.FirstName,
-                            LastName = student.LastName,
-                            SemesterId = (int)student.SemesterId
-                        };
-                        allStudentsDisplay.Add(studentDisplay);
-                    }
+                    var mapper = MapperConfig.ConfigureDisplayMapper();
+                    allStudentsDisplay = mapper.Map<List<Student>, List<StudentModel>>(allStudents);
                 }
             }
             catch (Exception ex)
@@ -35,23 +27,17 @@ namespace StudentLayer.DAL
             }
             return allStudentsDisplay;
         }
-
         public static bool InsertStudent(StudentModel student1, string fileName)
         {
             try
             {
                 using (StudentEntities context = new StudentEntities())
                 {
-                    Student student = new Student
-                    {
-                        FirstName = student1.FirstName,
-                        LastName = student1.LastName,
-                        SemesterId = student1.SemesterId
-                    };
+                    var mapper = MapperConfig.ConfigureInsertMapper();
+                    Student student = mapper.Map<StudentModel, Student>(student1);
 
                     context.Students.Add(student);
                     context.SaveChanges();
-
                     return true;
                 }
             }
@@ -63,22 +49,18 @@ namespace StudentLayer.DAL
         }
 
 
-        public static bool UpdateStudent(int studentId, StudentModel studentUpdate, string fileName)
+        public static bool UpdateStudent(StudentModel studentUpdate, string fileName)
         {
             try
             {
                 using (StudentEntities stud = new StudentEntities())
                 {
-                    Student studentToUpdate = stud.Students.Find(studentId);
-
+                    Student studentToUpdate = stud.Students.Find(studentUpdate.StudentId);
+                    var mapper = MapperConfig.ConfigureUpdateMapper();
                     if (studentToUpdate != null)
                     {
-                        studentToUpdate.FirstName = studentUpdate.FirstName;
-                        studentToUpdate.LastName = studentUpdate.LastName;
-                        studentToUpdate.SemesterId = studentUpdate.SemesterId;
-
+                        mapper.Map(studentUpdate, studentToUpdate);
                         stud.SaveChanges();
-
                         return true;
                     }
                     else
@@ -101,7 +83,6 @@ namespace StudentLayer.DAL
                 using (StudentEntities stud = new StudentEntities())
                 {
                     Student studentToDelete = stud.Students.Find(studentId);
-
                     if (studentToDelete != null)
                     {
                         stud.Students.Remove(studentToDelete);
@@ -152,17 +133,8 @@ namespace StudentLayer.DAL
                 using (StudentEntities stud = new StudentEntities())
                 {
                     List<Teacher> allTeachers = stud.Teachers.ToList();
-                    foreach (var teacher in allTeachers)
-                    {
-                        TeacherModel displayTeacher = new TeacherModel
-                        {
-                            TeacherId = teacher.TeacherId,
-                            FirstName = teacher.FirstName,
-                            LastName = teacher.LastName,
-                            SemesterId = (int)teacher.SemesterId
-                        };
-                        displayTeachers.Add(displayTeacher);
-                    }
+                    var mapper = MapperConfig.ConfigureDisplayMapper();
+                    displayTeachers = mapper.Map<List<Teacher>, List<TeacherModel>>(allTeachers);
                 }
             }
             catch (Exception ex)
@@ -172,20 +144,15 @@ namespace StudentLayer.DAL
             return displayTeachers;
         }
 
-        public static bool InsertTeacher(TeacherModel teacher, string fileName)
+        public static bool InsertTeacher(TeacherModel teacher1, string fileName)
         {
             try
             {
                 using (StudentEntities stud = new StudentEntities())
                 {
-                    Teacher newTeacher = new Teacher
-                    {
-                        FirstName = teacher.FirstName,
-                        LastName = teacher.LastName,
-                        SemesterId = teacher.SemesterId
-                    };
-
-                    stud.Teachers.Add(newTeacher);
+                    var mapper = MapperConfig.ConfigureInsertMapper();
+                    Teacher teacher = mapper.Map<TeacherModel, Teacher>(teacher1);
+                    stud.Teachers.Add(teacher);
                     stud.SaveChanges();
                     return true;
                 }
@@ -197,19 +164,17 @@ namespace StudentLayer.DAL
             }
         }
 
-        public static bool UpdateTeacher(int teacherId, TeacherModel teacher, string fileName)
+        public static bool UpdateTeacher(TeacherModel teacher, string fileName)
         {
             try
             {
                 using (StudentEntities stud = new StudentEntities())
                 {
-                    Teacher teacherToUpdate = stud.Teachers.Find(teacherId);
-
+                    Teacher teacherToUpdate = stud.Teachers.Find(teacher.TeacherId);
+                    var mapper = MapperConfig.ConfigureUpdateMapper();
                     if (teacherToUpdate != null)
                     {
-                        teacherToUpdate.FirstName = teacher.FirstName;
-                        teacherToUpdate.LastName = teacher.LastName;
-                        teacherToUpdate.SemesterId = teacher.SemesterId;
+                        mapper.Map(teacher, teacherToUpdate);
 
                         stud.SaveChanges();
                         return true;
@@ -472,20 +437,8 @@ namespace StudentLayer.DAL
                 using (StudentEntities stud = new StudentEntities())
                 {
                     List<Address> allStudentAddresses = stud.Addresses.ToList();
-
-                    foreach (var address in allStudentAddresses)
-                    {
-                        AddressModel AddressModel = new AddressModel
-                        {
-                            StudentId = address.StudentId,
-                            Street = address.Street,
-                            City = address.City,
-                            State = address.State,
-                            Country = address.Country
-                        };
-
-                        allAddresses.Add(AddressModel);
-                    }
+                    var mapper = MapperConfig.ConfigureDisplayMapper();
+                    allAddresses = mapper.Map<List<Address>, List<AddressModel>>(allStudentAddresses);
                 }
             }
             catch (Exception ex)
@@ -501,15 +454,8 @@ namespace StudentLayer.DAL
             {
                 using (StudentEntities stud = new StudentEntities())
                 {
-                    Address newAddress = new Address
-                    {
-                        StudentId = address.StudentId,
-                        Street = address.Street,
-                        City = address.City,
-                        State = address.State,
-                        Country = address.Country
-                    };
-
+                    var mapper = MapperConfig.ConfigureInsertMapper();
+                    Address newAddress = mapper.Map<AddressModel, Address>(address);
                     stud.Addresses.Add(newAddress);
                     stud.SaveChanges();
                     return true;
@@ -530,14 +476,12 @@ namespace StudentLayer.DAL
                 using (StudentEntities stud = new StudentEntities())
                 {
                     Address addressToUpdate = stud.Addresses.Find(studentId);
+                    var mapper = MapperConfig.ConfigureUpdateMapper();
+                        
 
-                    if (addressToUpdate != null)
+                        if (addressToUpdate != null)
                     {
-                        addressToUpdate.Street = address.Street;
-                        addressToUpdate.City = address.City;
-                        addressToUpdate.State = address.State;
-                        addressToUpdate.Country = address.Country;
-
+                        mapper.Map(address, addressToUpdate);
                         stud.SaveChanges();
                         return true;
                     }
@@ -580,7 +524,6 @@ namespace StudentLayer.DAL
                 return false;
             }
         }
-
 
     }
 }

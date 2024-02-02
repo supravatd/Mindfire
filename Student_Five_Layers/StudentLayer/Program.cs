@@ -352,7 +352,15 @@ namespace StudentLayer
                 int semesterId = GetValidIntegerInput("Semester ID");
 
                 StudentModel student = new StudentModel { FirstName = firstName, LastName = lastName, SemesterId = semesterId };
-                Business.BusinessLayer.InsertStudent(student, fileName);
+                bool isInserted=Business.BusinessLayer.InsertStudent(student, fileName);
+                if (isInserted)
+                {
+                    Console.WriteLine("Student added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to add Student.");
+                }
             }
             catch (Exception ex)
             {
@@ -371,11 +379,12 @@ namespace StudentLayer
 
                 StudentModel studentInput = new StudentModel
                 {
+                    StudentId= studentId,
                     FirstName = newFirstName,
                     LastName = newLastName,
                     SemesterId = newSemesterId
                 };
-                bool isUpdated = Business.BusinessLayer.UpdateStudent(studentId, studentInput, fileName);
+                bool isUpdated = Business.BusinessLayer.UpdateStudent(studentInput, fileName);
                 if (isUpdated)
                 {
                     Console.WriteLine("Student updated successfully.");
@@ -450,12 +459,13 @@ namespace StudentLayer
 
                 TeacherModel teacherInput = new TeacherModel
                 {
+                    TeacherId = teacherId,
                     FirstName = newFirstName,
                     LastName = newLastName,
                     SemesterId = newSemesterId
                 };
 
-                bool isUpdated = Business.BusinessLayer.UpdateTeacher(teacherId, teacherInput, fileName);
+                bool isUpdated = Business.BusinessLayer.UpdateTeacher(teacherInput, fileName);
 
                 if (isUpdated)
                 {

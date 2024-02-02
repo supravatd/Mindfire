@@ -1,0 +1,63 @@
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StudentModel -> Student
+StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
+   at lambda_method(Closure , StudentModel , Student , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at StudentLayer.DAL.DAL.InsertStudent(StudentModel student1, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 37
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StudentModel -> Student
+StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
+   at lambda_method(Closure , StudentModel , Student , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at StudentLayer.DAL.DAL.InsertStudent(StudentModel student1, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 37
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StudentModel -> Student
+StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
+   at lambda_method(Closure , StudentModel , Student , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source)
+   at StudentLayer.DAL.DAL.InsertStudent(StudentModel student1, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 37
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StudentModel -> Student
+StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
+   at lambda_method(Closure , StudentModel , Student , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at StudentLayer.DAL.DAL.UpdateStudent(Int32 studentId, StudentModel studentUpdate, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 62
+System.InvalidOperationException: The property 'StudentId' is part of the object's key information and cannot be modified. 
+   at System.Data.Entity.Core.Objects.EntityEntry.DetectChangesInProperty(Int32 ordinal, Boolean detectOnlyComplexProperties, Boolean detectOnly)
+   at System.Data.Entity.Core.Objects.EntityEntry.DetectChangesInProperties(Boolean detectOnlyComplexProperties)
+   at System.Data.Entity.Core.Objects.ObjectStateManager.DetectChangesInScalarAndComplexProperties(IList`1 entries)
+   at System.Data.Entity.Core.Objects.ObjectStateManager.DetectChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.DetectChanges()
+   at System.Data.Entity.Internal.InternalContext.DetectChanges(Boolean force)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries(Func`2 predicate)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries()
+   at System.Data.Entity.Infrastructure.DbChangeTracker.Entries()
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at StudentLayer.DAL.DAL.UpdateStudent(Int32 studentId, StudentModel studentUpdate, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 63
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StudentModel -> Student
+StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
+   at lambda_method(Closure , StudentModel , Student , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at StudentLayer.DAL.DAL.UpdateStudent(StudentModel studentUpdate, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 62

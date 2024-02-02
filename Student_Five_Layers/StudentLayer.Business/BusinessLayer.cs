@@ -19,9 +19,9 @@ namespace StudentLayer.Business
             return DAL.DAL.InsertStudent(student1, fileName);
         }
 
-        public static bool UpdateStudent(int studentId, StudentModel studentInput, string fileName)
+        public static bool UpdateStudent(StudentModel studentInput, string fileName)
         {
-            return DAL.DAL.UpdateStudent(studentId, studentInput, fileName);
+            return DAL.DAL.UpdateStudent(studentInput, fileName);
         }
 
         public static bool DeleteStudent(int studentId, string fileName)
@@ -44,9 +44,9 @@ namespace StudentLayer.Business
             return DAL.DAL.InsertTeacher(teacher1, fileName);
         }
 
-        public static bool UpdateTeacher(int teacherId, TeacherModel teacher, string fileName)
+        public static bool UpdateTeacher(TeacherModel teacher, string fileName)
         {
-            return DAL.DAL.UpdateTeacher(teacherId, teacher, fileName);
+            return DAL.DAL.UpdateTeacher(teacher, fileName);
         }
 
         public static bool DeleteTeacher(int teacherId, string fileName)
