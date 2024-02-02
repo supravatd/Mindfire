@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using StudentLayer.Models.ModelView;
 using StudentLayer.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace StudentLayer.DAL
 {
@@ -468,7 +471,6 @@ namespace StudentLayer.DAL
             }
         }
 
-
         public static bool UpdateAddress(int studentId, AddressModel address, string fileName)
         {
             try
@@ -477,9 +479,9 @@ namespace StudentLayer.DAL
                 {
                     Address addressToUpdate = stud.Addresses.Find(studentId);
                     var mapper = MapperConfig.ConfigureUpdateMapper();
-                        
 
-                        if (addressToUpdate != null)
+
+                    if (addressToUpdate != null)
                     {
                         mapper.Map(address, addressToUpdate);
                         stud.SaveChanges();
@@ -522,6 +524,56 @@ namespace StudentLayer.DAL
             {
                 Logger.AddData(ex, fileName);
                 return false;
+            }
+        }
+
+        public static bool AssignStudentToCourse(int studentId, int courseId, string fileName)
+        {
+            try
+            {
+                using (StudentEntities stud = new StudentEntities())
+                {
+                    if (stud.StudentCourses.Any(sc => sc.StudentId == studentId && sc.CourseId == courseId))
+                    {
+                        return false;
+                    }
+                    var studentCourse = new StudentCourse { StudentId = studentId, CourseId = courseId };
+                    stud.StudentCourses.Add(studentCourse);
+                    stud.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex, fileName);
+                return false;
+            }
+        }
+
+        public static List<ExportDataModel> GetCombinedDataForSemester(int semesterId)
+        {
+            using (var context = new StudentEntities())
+            {
+                var semesterName = context.Semesters
+                                         .Where(s => s.SemesterId == semesterId)
+                                         .Select(s => s.SemesterName)
+                                         .FirstOrDefault();
+
+                var combinedData = from teacher in context.Teachers
+                                   join course in context.Courses on teacher.TeacherId equals course.TeacherId
+                                   join studentCourse in context.StudentCourses on course.CourseId equals studentCourse.CourseId
+                                   join student in context.Students on studentCourse.StudentId equals student.StudentId
+                                   where course.SemesterId == semesterId
+                                   select new ExportDataModel
+                                   {
+                                       StudentId = student.StudentId,
+                                       StudentName = student.FirstName + " " + student.LastName, // Use string concatenation
+                                       CourseName = course.CourseName,
+                                       TeacherName = teacher.FirstName + " " + teacher.LastName, // Use string concatenation
+                                       SemesterName = semesterName
+                                   };
+
+                return combinedData.ToList();
             }
         }
 

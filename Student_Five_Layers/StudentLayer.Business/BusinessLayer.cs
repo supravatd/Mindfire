@@ -1,8 +1,11 @@
 ﻿using OfficeOpenXml;
 using StudentLayer.DAL;
+using StudentLayer.Models.ModelView;
+using StudentLayer.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace StudentLayer.Business
@@ -32,6 +35,11 @@ namespace StudentLayer.Business
         public static List<StudentModel> SearchStudent(string searchString)
         {
             return DAL.DAL.SearchStudent(searchString);
+        }
+
+        public static bool AssignStudentToCourse(int studentId, int courseId, string fileName)
+        {
+            return DAL.DAL.AssignStudentToCourse(studentId, courseId, fileName);
         }
 
         public static List<TeacherModel> DisplayTeacher(string fileName)
@@ -176,5 +184,60 @@ namespace StudentLayer.Business
 
             File.WriteAllText(fileName, csvContent.ToString());
         }
+
+        public static bool ExportDataForSemesterToExcel(int semesterId,string fileName)
+        {
+            List<ExportDataModel> exportData = DAL.DAL.GetCombinedDataForSemester(semesterId);
+
+            string semesterName = exportData.FirstOrDefault()?.SemesterName;
+
+            return ExportSemesterToExcel(exportData, semesterName,fileName);
+        }
+
+        public static bool ExportSemesterToExcel(List<ExportDataModel> exportData, string semesterName,string fileName)
+        {
+            string filePath = $@"C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\ExcelFile\Semester.xlsx";
+
+            try
+            {
+                FileInfo file = new FileInfo(filePath);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                using (ExcelPackage package = new ExcelPackage(file))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(semesterName);
+
+                    worksheet.Cells[1, 1].Value = "Student ID";
+                    worksheet.Cells[1, 2].Value = "Student Name";
+                    worksheet.Cells[1, 3].Value = "Course Name";
+                    worksheet.Cells[1, 4].Value = "Teacher Name";
+
+                    int row = 2;
+                    foreach (var data in exportData)
+                    {
+                        worksheet.Cells[row, 1].Value = data.StudentId;
+                        worksheet.Cells[row, 2].Value = data.StudentName;
+                        worksheet.Cells[row, 3].Value = data.CourseName;
+                        worksheet.Cells[row, 4].Value = data.TeacherName;
+                        row++;
+                    }
+
+                    package.Save();
+                }
+
+                return true; 
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex, fileName);
+                return false; 
+            }
+        }
+
+
     }
 }
+

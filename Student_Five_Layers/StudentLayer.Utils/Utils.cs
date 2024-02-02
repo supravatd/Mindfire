@@ -8,6 +8,7 @@
             Insert_Student,
             Update_Student,
             Delete_Student,
+            Assign_Student_To_Course,
             Search_Student,
             View_All_Teacher,
             Insert_Teacher,
@@ -26,7 +27,8 @@
             Update_Address,
             Delete_Address,
             Export_Data,
-            Exit
+            Excel_Semester,
+            Exit,
         }
         public enum ExportFormat
         {

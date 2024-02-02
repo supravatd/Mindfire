@@ -1,5 +1,6 @@
 ﻿using StudentLayer.Business;
 using StudentLayer.DAL;
+using StudentLayer.Models.ModelView;
 using StudentLayer.Utils;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace StudentLayer
                 Console.WriteLine($"{(int)CrudOp.Insert_Student} Insert Student");
                 Console.WriteLine($"{(int)CrudOp.Update_Student} Update Student");
                 Console.WriteLine($"{(int)CrudOp.Delete_Student} Delete Student");
+                Console.WriteLine($"{(int)CrudOp.Assign_Student_To_Course} Assign Student to Course");
                 Console.WriteLine($"{(int)CrudOp.Search_Student} Search Student");
                 Console.WriteLine($"{(int)CrudOp.View_All_Teacher} View All Teacher");
                 Console.WriteLine($"{(int)CrudOp.Insert_Teacher} Insert Teacher");
@@ -56,6 +58,7 @@ namespace StudentLayer
                 Console.WriteLine($"{(int)CrudOp.Update_Address} Update Address");
                 Console.WriteLine($"{(int)CrudOp.Delete_Address} Delete Address");
                 Console.WriteLine($"{(int)CrudOp.Export_Data} Export Data");
+                Console.WriteLine($"{(int)CrudOp.Excel_Semester} Semester Details in Excel");
                 Console.WriteLine($"{(int)CrudOp.Exit} Exit");
 
                 Console.Write("Enter your Choice:");
@@ -78,6 +81,10 @@ namespace StudentLayer
 
                     case CrudOp.Delete_Student:
                         CaseDeleteStudent();
+                        break;
+
+                    case CrudOp.Assign_Student_To_Course:
+                        CaseAssignCourse();
                         break;
 
                     case CrudOp.Search_Student:
@@ -150,6 +157,10 @@ namespace StudentLayer
 
                     case CrudOp.Export_Data:
                         ExportData();
+                        break;
+
+                    case CrudOp.Excel_Semester:
+                        ExcelSheet();
                         break;
 
                     case CrudOp.Exit:
@@ -419,6 +430,23 @@ namespace StudentLayer
             catch (Exception ex)
             {
                 Logger.AddData(ex, fileName);
+            }
+        }
+
+        private static void CaseAssignCourse()
+        {
+            int studentId = GetValidIntegerInput("Student ID");
+            int courseId = GetValidIntegerInput("Course ID");
+
+            bool isAssigned = Business.BusinessLayer.AssignStudentToCourse(studentId, courseId, fileName);
+
+            if (isAssigned)
+            {
+                Console.WriteLine("Student assigned to course successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Failed to assign student to course.");
             }
         }
 
@@ -773,5 +801,32 @@ namespace StudentLayer
             } while (string.IsNullOrWhiteSpace(input) || !input.All(char.IsLetter));
             return input;
         }
+
+        private static void ExcelSheet()
+        {
+            try
+            {
+                List<SemesterModel> allSemesters = BusinessLayer.DisplaySemesters(fileName);
+                foreach (var semester in allSemesters)
+                {
+
+                    bool success = BusinessLayer.ExportDataForSemesterToExcel(semester.SemesterId,fileName);
+
+                    if (success)
+                    {
+                        Console.WriteLine("Data exported to Excel successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to export data to Excel.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
     }
+        
 }

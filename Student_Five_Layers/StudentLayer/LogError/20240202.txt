@@ -61,3 +61,46 @@ StudentLayer.DAL.StudentModel -> StudentLayer.DAL.Student
    at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
    at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
    at StudentLayer.DAL.DAL.UpdateStudent(StudentModel studentUpdate, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.DAL\DAL.cs:line 62
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 231
+   at StudentLayer.Program.ExcelSheet() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 814
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 231
+   at StudentLayer.Program.ExcelSheet() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 814
+System.IO.IOException: The process cannot access the file 'C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\ExcelFile\Semseter.xlsx' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 229
+   at StudentLayer.Program.ExcelSheet() in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer\Program.cs:line 814
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 209
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 209
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 209
+OfficeOpenXml.LicenseException: Please set the ExcelPackage.LicenseContext property. See https://epplussoftware.com/developers/licenseexception
+   at OfficeOpenXml.ExcelPackage.get_Workbook()
+   at OfficeOpenXml.ExcelPackage.CreateBlankWb()
+   at OfficeOpenXml.ExcelPackage.ConstructNewFile(String password)
+   at OfficeOpenXml.ExcelPackage..ctor(FileInfo newFile)
+   at StudentLayer.Business.BusinessLayer.ExportSemesterToExcel(List`1 exportData, String semesterName, String fileName) in C:\Users\supravatd\Documents\Mindfire\Student_Five_Layers\StudentLayer.Business\BusinessLayer.cs:line 209
