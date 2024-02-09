@@ -11,7 +11,8 @@ namespace AspNetPractice
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            HiddenField1.Value = DateTime.Now.ToString("D");
+            lblCurrentDateTime.Text = Convert.ToString(HiddenField1.Value);
         }
     }
 }

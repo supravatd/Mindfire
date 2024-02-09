@@ -127,13 +127,25 @@ namespace test
             //    Console.WriteLine(e.Message);
             //}
 
-            string s1 = "Supravat";
-            File.WriteAllText("name.txt", s1);
+            //string s1 = "Supravat";
+            //File.WriteAllText("name.txt", s1);
 
-            string s2 = File.ReadAllText("name.txt");
-            Console.WriteLine(s2);
+            //string s2 = File.ReadAllText("name.txt");
+            //Console.WriteLine(s2);
+
+            //int marks = 100;
+            //change(ref/out marks);
+            //Console.WriteLine(marks);
+
+
 
             Console.ReadLine();
         }
+
+        //private static void change(ref/out int marks)
+        //{
+        //    marks = 0;//need to initialize in out
+        //    marks++;
+        //}
     }
 }
