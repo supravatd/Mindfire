@@ -11,7 +11,7 @@
         <div>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
                 OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit"
-                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting"
+                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" OnRowCreated="GridView1_RowInsert"
                 OnRowCommand="GridView1_RowCommand" OnPageIndexChanging="GridView1_PageIndexChanging"
                 AllowPaging="True" PageSize="10" ShowFooter="True">
                 <Columns>
@@ -27,7 +27,7 @@
                             <asp:TextBox ID="txtNewContactName" runat="server"></asp:TextBox>
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" ShowInsertButton="true"/>
                 </Columns>
             </asp:GridView>
 

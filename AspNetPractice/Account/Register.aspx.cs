@@ -26,6 +26,8 @@ namespace AspNetPractice.Account
 
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                //WebUserControl1 userControl = new WebUserControl1();
+                //userControl.UserID=Email.Text;
             }
             else 
             {

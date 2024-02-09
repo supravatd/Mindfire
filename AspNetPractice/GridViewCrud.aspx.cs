@@ -127,5 +127,10 @@ namespace AspNetPractice
             }
             return dt;
         }
+
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace AspNetPractice
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserId;
+        protected global::System.Web.UI.WebControls.Label UserId;
 
         /// <summary>
         /// Add control.
@@ -58,5 +58,14 @@ namespace AspNetPractice
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
+
+        /// <summary>
+        /// ddlPageNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageNumber;
     }
 }
