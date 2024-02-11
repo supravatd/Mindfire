@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df597b44d4a140c995bb7ca0f6cd8805" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="UserManagementModel.Country" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserManagementModel.State" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="UserManagementModel.FK__State__CountryID__398D8EEE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UserManagementModel.Address" Width="1.5" PointX="8.75" PointY="1.5" />
+        <EntityTypeShape EntityType="UserManagementModel.UserDetail" Width="1.5" PointX="5.875" PointY="0.625" />
+        <AssociationConnector Association="UserManagementModel.FK__Address__UserId__4BAC3F29" />
+        <EntityTypeShape EntityType="UserManagementModel.Note" Width="1.5" PointX="0.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
