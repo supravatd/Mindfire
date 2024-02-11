@@ -13,6 +13,6 @@ namespace DemoUserManagement.Web.User_Control
         {
 
         }
-        public string PageName { get; set; }
+        //public string PageName { get; set; }
     }
 }
