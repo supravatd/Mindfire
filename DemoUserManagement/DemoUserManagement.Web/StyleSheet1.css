@@ -10,3 +10,52 @@
     justify-content: center;
     background: rgb(184, 211, 211);
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.checkbox{
+    margin:0,2px,0,0;
+}
+
+#DisplayUser {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+    #DisplayUser th, #DisplayUser td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #DisplayUser th {
+        background-color: #f2f2f2;
+    }
+
+    #DisplayUser tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    #DisplayUser tr:hover {
+        background-color: #ddd;
+    }
+
+/* Style for the "Add User" button */
+#NewUser {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#NewUser:hover {
+    background-color: #45a049;
+}

@@ -23,9 +23,9 @@ namespace DemoUserManagement.Business
             return countryList;
         }
 
-        public static List<StateModel> GetStateList(string countryName)
+        public static List<StateModel> GetStateList(int countryId)
         {
-            List<State> states = DAL.DAL.GetState(countryName);
+            List<State> states = DAL.DAL.GetState(countryId);
             List<StateModel> stateList = states.Select(state => new StateModel
             {
                 StateId = state.StateID,

@@ -15,130 +15,76 @@ namespace DemoUserManagement.DAL
         string conn = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
         public List<UserModel> Users()
         {
-            UserModel user = null;
-            List<UserModel> users = new List<UserModel>();
-            using (SqlConnection connection = new SqlConnection(conn))
-            {
-                string query = "SELECT * FROM UserDetails";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            user = new UserModel()
-                            {
-                                UserId = (int)reader["UserId"],
-                                FirstName = reader["FirstName"].ToString(),
-                                LastName = reader["LastName"].ToString(),
-                                FatherFirstName = reader["FatherFirstName"].ToString(),
-                                MotherFirstName = reader["MotherFirstName"].ToString(),
-                                Email = reader["Email"].ToString(),
-                                Dob = reader["Dob"].ToString(),
-                                MobileNo = reader["MobileNo"].ToString(),
-                                IDType = reader["IDType"].ToString(),
-                                IDNo = reader["IDNo"].ToString(),
-                                Gender = reader["Gender"].ToString(),
-                                Hobbies = reader["Hobbies"].ToString(),
-                            };
+            List<UserModel> users;
 
-                        users.Add(user);
-                        }
-                    }
-                }
+            using (var context = new DemoUserManagementEntities())
+            {
+                users = context.UserDetails.Select(u => new UserModel
+                {
+                    UserId = u.UserId,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    FatherFirstName = u.FatherFirstName,
+                    MotherFirstName = u.MotherFirstName,
+                    Email = u.Email,
+                    Dob = u.Dob,
+                    MobileNo = u.MobileNo,
+                    IDType = u.IDType,
+                    IDNo = u.IDNo,
+                    Gender = u.Gender,
+                    Hobbies = u.Hobbies
+                }).ToList();
             }
+
             return users;
         }
-
 
         public UserModel GetUserById(string userId)
         {
             UserModel user = null;
 
-            using (SqlConnection connection = new SqlConnection(conn))
+            using (var context = new DemoUserManagementEntities())
             {
-                string query = @"SELECT u.*, a.*
-                                FROM UserDetails u
-                                LEFT JOIN Address a ON u.UserId = a.UserId
-                                WHERE u.UserId = @UserId";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                user = context.UserDetails.Where(u => u.UserId.ToString() == userId).Select(u => new UserModel
                 {
-                    command.Parameters.AddWithValue("@UserId", userId);
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    UserId = u.UserId,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    FatherFirstName = u.FatherFirstName,
+                    FatherMiddleName = u.FatherMiddleName,
+                    FatherLastName = u.FatherLastName,
+                    MotherFirstName = u.MotherFirstName,
+                    MotherMiddleName = u.MotherMiddleName,
+                    MotherLastName = u.MotherLastName,
+                    Email = u.Email,
+                    BloodGroup = u.BloodGroup,
+                    MobileNo = u.MobileNo,
+                    IDType = u.IDType,
+                    IDNo = u.IDNo,
+                    Gender = u.Gender,
+                    Hobbies = u.Hobbies,
+                    Dob = u.Dob,
+                    PresentAddress = u.Addresses.Where(a => a.AddressType == 0).Select(a => new AddressModel
                     {
-                        while (reader.Read())
-                        {
-                            if (user == null)
-                            {
-                                user = new UserModel
-                                {
-                                    UserId = (int)reader["UserId"],
-                                    FirstName = reader["FirstName"].ToString(),
-                                    LastName = reader["LastName"].ToString(),
-                                    FatherFirstName = reader["FatherFirstName"].ToString(),
-                                    FatherMiddleName = reader["FatherMiddleName"].ToString(),
-                                    FatherLastName = reader["FatherLastName"].ToString(),
-                                    MotherFirstName = reader["MotherFirstName"].ToString(),
-                                    MotherMiddleName = reader["MotherMiddleName"].ToString(),
-                                    MotherLastName = reader["MotherLastName"].ToString(),
-                                    Email = reader["Email"].ToString(),
-                                    BloodGroup = reader["BloodGroup"].ToString(),
-                                    MobileNo = reader["MobileNo"].ToString(),
-                                    IDType = reader["IDType"].ToString(),
-                                    IDNo = reader["IDNo"].ToString(),
-                                    Gender = reader["Gender"].ToString(),
-                                    Hobbies = reader["Hobbies"].ToString(),
-                                };
-                            }
-                            string dobString = reader["Dob"].ToString();
-                            DateTime dob;
-                            if (DateTime.TryParseExact(dobString, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dob))
-                            {
-                                user.Dob = dob.ToString();
-                            }
-
-                            int addressType;
-                            if (reader["AddressType"] != DBNull.Value)
-                            {
-                                addressType = Convert.ToInt32(reader["AddressType"]);
-                            }
-                            else
-                            {
-                                addressType = 0;
-                            }
-                            if (addressType == 0)
-                            {
-                                user.PresentAddress = new AddressModel
-                                {
-                                    DoorNo = reader["DoorNo"].ToString(),
-                                    Street = reader["Street"].ToString(),
-                                    City = reader["City"].ToString(),
-                                    PostalCode = reader["PostalCode"].ToString(),
-                                    Country = reader["Country"].ToString(),
-                                    State = reader["State"].ToString()
-                                };
-                            }
-                            else if (addressType == 1)
-                            {
-                                user.PermanentAddress = new AddressModel
-                                {
-                                    DoorNo = reader["DoorNo"].ToString(),
-                                    Street = reader["Street"].ToString(),
-                                    City = reader["City"].ToString(),
-                                    PostalCode = reader["PostalCode"].ToString(),
-                                    Country = reader["Country"].ToString(),
-                                    State = reader["State"].ToString()
-                                };
-                            }
-                        }
-                    }
-                }
+                        DoorNo = a.DoorNo,
+                        Street = a.Street,
+                        City = a.City,
+                        PostalCode = a.PostalCode,
+                        CountryId = (int)a.CountryId,
+                        StateId = (int)a.StateId
+                    }).FirstOrDefault(),
+                    PermanentAddress = u.Addresses.Where(a => a.AddressType == 1).Select(a => new AddressModel
+                    {
+                        DoorNo = a.DoorNo,
+                        Street = a.Street,
+                        City = a.City,
+                        PostalCode = a.PostalCode,
+                        CountryId = (int)a.CountryId,
+                        StateId = (int)a.StateId
+                    }).FirstOrDefault()
+                })
+                    .FirstOrDefault();
             }
-
             return user;
         }
     }

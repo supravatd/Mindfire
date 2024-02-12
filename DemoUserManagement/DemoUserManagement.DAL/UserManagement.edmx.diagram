@@ -4,14 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df597b44d4a140c995bb7ca0f6cd8805" Name="Diagram1" ZoomLevel="92">
-        <EntityTypeShape EntityType="UserManagementModel.Address" Width="1.5" PointX="3" PointY="0.5" />
-        <EntityTypeShape EntityType="UserManagementModel.Country" Width="1.5" PointX="5.75" PointY="1" />
-        <EntityTypeShape EntityType="UserManagementModel.State" Width="1.5" PointX="8" PointY="0.875" />
-        <EntityTypeShape EntityType="UserManagementModel.UserDetail" Width="1.5" PointX="0.75" PointY="0.5" />
+      <Diagram DiagramId="df597b44d4a140c995bb7ca0f6cd8805" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="UserManagementModel.Address" Width="1.5" PointX="6" PointY="3.375" />
+        <EntityTypeShape EntityType="UserManagementModel.Country" Width="1.5" PointX="3.75" PointY="7.5" />
+        <EntityTypeShape EntityType="UserManagementModel.Note" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="UserManagementModel.State" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UserManagementModel.UserDetail" Width="1.5" PointX="0.75" PointY="2.625" />
         <AssociationConnector Association="UserManagementModel.FK__Address__UserId__4BAC3F29" />
+        <AssociationConnector Association="UserManagementModel.FK_Address_Countries" />
+        <AssociationConnector Association="UserManagementModel.FK_Address_States" />
         <AssociationConnector Association="UserManagementModel.FK__State__CountryID__398D8EEE" />
-        <EntityTypeShape EntityType="UserManagementModel.Note" Width="1.5" PointX="3" PointY="3.75" />
         <AssociationConnector Association="UserManagementModel.UserID" />
       </Diagram>
     </edmx:Diagrams>

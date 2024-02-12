@@ -25,14 +25,14 @@ namespace DemoUserManagement.DAL
             return countryList;
         }
 
-        public static List<State> GetState(string countryName)
+        public static List<State> GetState(int countryId)
         {
             List<State> stateList = new List<State>();
             try
             {
                 using (DemoUserManagementEntities context = new DemoUserManagementEntities())
                 {
-                    stateList = context.States.Where(s => s.Country.CountryName == countryName).ToList();
+                    stateList = context.States.Where(s => s.CountryID == countryId).ToList();
                 }
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace DemoUserManagement.DAL
                     MotherMiddleName = userModel.MotherMiddleName,
                     MotherLastName = userModel.MotherLastName,
                     Email = userModel.Email,
-                    Dob = DateTime.Parse(userModel.Dob),
+                    Dob = userModel.Dob,
                     BloodGroup = userModel.BloodGroup,
                     MobileNo = userModel.MobileNo,
                     IDType = userModel.IDType,
@@ -101,8 +101,8 @@ namespace DemoUserManagement.DAL
                     Street = address.Street,
                     City = address.City,
                     PostalCode = address.PostalCode,
-                    Country = address.Country,
-                    State = address.State,
+                    CountryId = address.CountryId,
+                    StateId = address.StateId,
                     UserId = address.UserId,
                 };
                 context.Addresses.Add(user);

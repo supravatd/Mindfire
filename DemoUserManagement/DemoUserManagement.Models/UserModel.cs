@@ -19,7 +19,7 @@ namespace DemoUserManagement.Models
         public string MotherMiddleName { get; set; }
         public string MotherLastName { get; set; }
         public string Email { get; set; }
-        public string Dob { get; set; }
+        public DateTime? Dob { get; set; }
         public string BloodGroup { get; set; }
         public string MobileNo { get; set; }
         public string IDType { get; set; }

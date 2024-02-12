@@ -28,7 +28,7 @@ namespace DemoUserManagement.DAL
                     user.MotherMiddleName = userModel.MotherMiddleName;
                     user.MotherLastName = userModel.MotherLastName;
                     user.Email = userModel.Email;
-                    user.Dob = DateTime.Parse(userModel.Dob);
+                    user.Dob = userModel.Dob;
                     user.BloodGroup = userModel.BloodGroup;
                     user.MobileNo = userModel.MobileNo;
                     user.IDType = userModel.IDType;
@@ -43,8 +43,8 @@ namespace DemoUserManagement.DAL
                         presentAddress.Street = userModel.PresentAddress.Street;
                         presentAddress.City = userModel.PresentAddress.City;
                         presentAddress.PostalCode = userModel.PresentAddress.PostalCode;
-                        presentAddress.Country = userModel.PresentAddress.Country;
-                        presentAddress.State = userModel.PresentAddress.State;
+                        presentAddress.CountryId = userModel.PresentAddress.CountryId;
+                        presentAddress.StateId = userModel.PresentAddress.StateId;
                     }
                 }
 
@@ -55,8 +55,8 @@ namespace DemoUserManagement.DAL
                     permanentAddress.Street = userModel.PermanentAddress.Street;
                     permanentAddress.City = userModel.PermanentAddress.City;
                     permanentAddress.PostalCode = userModel.PermanentAddress.PostalCode;
-                    permanentAddress.Country = userModel.PermanentAddress.Country;
-                    permanentAddress.State = userModel.PermanentAddress.State;
+                    permanentAddress.CountryId = userModel.PermanentAddress.CountryId;
+                    permanentAddress.StateId = userModel.PermanentAddress.StateId;
                 }
 
                 context.SaveChanges();
