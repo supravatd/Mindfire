@@ -14,11 +14,87 @@ namespace DemoUserManagement.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!IsPostBack)
             {
                 PopulateCountries();
+                ddlPresentAddressCountry.SelectedIndexChanged += PresentCountryState;
+                ddlPermanentAddressCountry.SelectedIndexChanged += PermanentCountryState;
                 ShowButton(false);
+                if (!string.IsNullOrEmpty(Request.QueryString["UserId"]))
+                {
+                    NotesUserControl.Visible = true;
+                }
+                else
+                {
+                    NotesUserControl.Visible = false;
+                }
+            }
+            if (Session["UserDetails"] != null)
+            {
+                ShowButton(true);
+                UserModel user = (UserModel)Session["UserDetails"];
+                txtFirstName.Text = user.FirstName;
+                txtLastName.Text = user.LastName;
+                txtFirstName.Text = user.FirstName;
+                txtMiddleName.Text = user.MiddleName;
+                txtLastName.Text = user.LastName;
+                txtFatherFirstName.Text = user.FatherFirstName;
+                txtFatherMiddleName.Text = user.FatherMiddleName;
+                txtFatherLastName.Text = user.FatherLastName;
+                txtMotherFirstName.Text = user.MotherFirstName;
+                txtMotherMiddleName.Text = user.MotherMiddleName;
+                txtMotherLastName.Text = user.MotherLastName;
+                txtEmail.Text = user.Email;
+                txtDateOfBirth.Text = user.Dob;
+                ddlBloodGroup.SelectedValue = user.BloodGroup;
+                txtMobile.Text = user.MobileNo;
+                ddlIdType.SelectedValue = user.IDType;
+                txtIdNumber.Text = user.IDNo;
+
+                if (user.Gender == "Male")
+                    rbMale.Checked = true;
+                else if (user.Gender == "Female")
+                    rbFemale.Checked = true;
+                else if (user.Gender == "Others")
+                    rbOthers.Checked = true;
+
+                string[] hobbies = user.Hobbies.Split(',');
+                foreach (string hobby in hobbies)
+                {
+                    if (hobby == "Reading")
+                        chkReading.Checked = true;
+                    else if (hobby == "Singing")
+                        chkSinging.Checked = true;
+                    else if (hobby == "Dancing")
+                        chkDancing.Checked = true;
+                    else if (hobby == "Traveling")
+                        chkTraveling.Checked = true;
+                    else if (hobby == "Gaming")
+                        chkGaming.Checked = true;
+                    else if (hobby == "Coding")
+                        chkCoding.Checked = true;
+                }
+                if (user.PresentAddress != null)
+                {
+                    txtPresentAddressHouse.Text = user.PresentAddress.DoorNo;
+                    txtPresentAddressStreet.Text = user.PresentAddress.Street;
+                    txtPresentAddressCity.Text = user.PresentAddress.City;
+                    txtPresentAddressPincode.Text = user.PresentAddress.PostalCode;
+                    ddlPresentAddressCountry.SelectedValue = user.PresentAddress.Country;
+                    ddlPresentAddressState.SelectedValue = user.PresentAddress.State;
+                }
+
+                if (user.PermanentAddress != null)
+                {
+                    txtPermanentAddressHouseNo.Text = user.PermanentAddress.DoorNo;
+                    txtPermanentAddressStreet.Text = user.PermanentAddress.Street;
+                    txtPermanentAddressCity.Text = user.PermanentAddress.City;
+                    txtPermanentAddressPincode.Text = user.PermanentAddress.PostalCode;
+                    ddlPermanentAddressCountry.SelectedValue = user.PermanentAddress.Country;
+                    ddlPermanentAddressState.SelectedValue = user.PermanentAddress.State;
+                }
+                Session["UserDetails"] = null;
             }
         }
 
@@ -28,13 +104,11 @@ namespace DemoUserManagement.Web
             {
                 bttnSubmit.Visible = false;
                 bttnEdit.Visible = true;
-                bttnDelete.Visible = true;
             }
             else
             {
-                bttnSubmit.Visible = true; 
+                bttnSubmit.Visible = true;
                 bttnEdit.Visible = false;
-                bttnDelete.Visible = false;
             }
         }
 
@@ -55,34 +129,34 @@ namespace DemoUserManagement.Web
             BindDropDownList(ddlPermanentAddressCountry, countryList, "CountryName", "CountryId");
         }
 
-        private void PopulateStates(DropDownList ddl, int countryId)
+        private void PopulateStates(DropDownList ddl, string countryName)
         {
-            List<StateModel> stateList = Business.Business.GetStateList(countryId);
+            List<StateModel> stateList = Business.Business.GetStateList(countryName);
             BindDropDownList(ddl, stateList, "StateName", "StateId");
         }
 
         protected void PresentCountryState(object sender, EventArgs e)
         {
-            int selectedCountryId = Convert.ToInt32(ddlPresentAddressCountry.SelectedValue);
-            PopulateStates(ddlPresentAddressState, selectedCountryId);
+            string selectedCountryName = ddlPresentAddressCountry.SelectedItem.Text;
+            PopulateStates(ddlPresentAddressState, selectedCountryName);
         }
 
         protected void PermanentCountryState(object sender, EventArgs e)
         {
-            int selectedCountryId = Convert.ToInt32(ddlPermanentAddressCountry.SelectedValue);
-            PopulateStates(ddlPermanentAddressState, selectedCountryId);
+            string selectedCountryName = ddlPermanentAddressCountry.SelectedItem.Text;
+            PopulateStates(ddlPermanentAddressState, selectedCountryName);
         }
 
         protected void SameAsPresent_Check(object sender, EventArgs e)
         {
             if (chkSameAsPresent.Checked)
             {
-                txtPermanentAddressHouseNo.Text=txtPresentAddressHouse.Text;
-                txtPermanentAddressStreet.Text=txtPresentAddressStreet.Text;
-                txtPermanentAddressCity.Text=txtPresentAddressCity.Text;
-                txtPermanentAddressPincode.Text=txtPresentAddressPincode.Text;
-                ddlPermanentAddressCountry.SelectedValue = ddlPresentAddressCountry.SelectedValue;
-                ddlPermanentAddressState.SelectedValue = ddlPresentAddressState.SelectedValue;
+                txtPermanentAddressHouseNo.Text = txtPresentAddressHouse.Text;
+                txtPermanentAddressStreet.Text = txtPresentAddressStreet.Text;
+                txtPermanentAddressCity.Text = txtPresentAddressCity.Text;
+                txtPermanentAddressPincode.Text = txtPresentAddressPincode.Text;
+                ddlPermanentAddressCountry.SelectedItem.Text = ddlPresentAddressCountry.SelectedItem.Text;
+                ddlPermanentAddressState.SelectedItem.Text = ddlPresentAddressState.SelectedItem.Text;
             }
             else
             {
@@ -121,23 +195,24 @@ namespace DemoUserManagement.Web
             {
                 Type = 0,
                 DoorNo = txtPresentAddressHouse.Text,
-                Street=txtPresentAddressStreet.Text,
-                City=txtPresentAddressCity.Text,
-                PostalCode=txtPresentAddressPincode.Text,
-                Country=ddlPresentAddressCountry.SelectedValue,
-                State=ddlPresentAddressState.SelectedValue,
+                Street = txtPresentAddressStreet.Text,
+                City = txtPresentAddressCity.Text,
+                PostalCode = txtPresentAddressPincode.Text,
+                Country = ddlPresentAddressCountry.SelectedItem.Text,
+                State = ddlPresentAddressState.SelectedItem.Text
             };
             AddressModel permanentAddress = new AddressModel
             {
-                Type = 0,
+                Type = 1,
                 DoorNo = txtPermanentAddressHouseNo.Text,
                 Street = txtPermanentAddressStreet.Text,
                 City = txtPermanentAddressCity.Text,
-                PostalCode = txtPresentAddressPincode.Text,
-                Country = ddlPresentAddressCountry.Text,
-                State = ddlPresentAddressState.SelectedValue,
+                PostalCode = txtPermanentAddressPincode.Text,
+                Country = ddlPermanentAddressCountry.Text,
+                State = ddlPermanentAddressState.SelectedItem.Text
             };
-            Business.Business.SubmitUser(user);
+            Business.Business business = new Business.Business();
+            business.AddUserAddress(user, presentAddress, permanentAddress);
             Response.Redirect("UserList.aspx");
         }
 
@@ -162,18 +237,29 @@ namespace DemoUserManagement.Web
                 IDType = ddlIdType.SelectedValue,
                 IDNo = txtIdNumber.Text,
                 Gender = GetSelectedGender(),
-                Hobbies = GetSelectedHobbies()
+                Hobbies = GetSelectedHobbies(),
+                PresentAddress = new AddressModel
+                {
+                    DoorNo = txtPresentAddressHouse.Text,
+                    Street = txtPresentAddressStreet.Text,
+                    City = txtPresentAddressCity.Text,
+                    PostalCode = txtPresentAddressPincode.Text,
+                    Country = ddlPresentAddressCountry.SelectedValue,
+                    State = ddlPresentAddressState.SelectedValue
+                },
+                PermanentAddress = new AddressModel
+                {
+                    DoorNo = txtPermanentAddressHouseNo.Text,
+                    Street = txtPermanentAddressStreet.Text,
+                    City = txtPermanentAddressCity.Text,
+                    PostalCode = txtPermanentAddressPincode.Text,
+                    Country = ddlPermanentAddressCountry.SelectedValue,
+                    State = ddlPermanentAddressState.SelectedValue
+                }
             };
             Business.Business.UpdateUser(userId, user);
-        }
-
-        protected void Delete_Click(object sender, EventArgs e)
-        {
-            int userId = int.Parse(Request.QueryString["ID"]);
-            Business.Business.DeleteUser(userId);
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Deleted User Successfully');", true);
             Response.Redirect("UserList.aspx");
-        }
+        }   
 
         private string GetSelectedGender()
         {

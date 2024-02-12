@@ -4,7 +4,6 @@
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
     <asp:Panel ID="pnlPersonalDetails" runat="server" GroupingText="Personal Details">
         <span class="title">Personal Details</span>
         <div class="fields">
@@ -106,10 +105,10 @@
                     <div class="idNo col-sm-4">
                         <asp:DropDownList ID="ddlIdType" runat="server" CssClass="selectIdType form-control" data-entry-label="ID Type" ToolTip="ID Type">
                             <asp:ListItem Text="ID type" Value="" />
-                            <asp:ListItem Text="Aadhar" Value="" />
-                            <asp:ListItem Text="Pan" Value="" />
-                            <asp:ListItem Text="DL" Value="" />
-                            <asp:ListItem Text="Voter" Value="" />
+                            <asp:ListItem Text="Aadhar" Value="Aadhar" />
+                            <asp:ListItem Text="Pan" Value="Pan" />
+                            <asp:ListItem Text="DL" Value="DL" />
+                            <asp:ListItem Text="Voter" Value="Voter" />
                         </asp:DropDownList>
                     </div>
                     <div class="col-sm-8">
@@ -123,13 +122,13 @@
                 <asp:Label ID="lblGender" runat="server" AssociatedControlID="rbMale">Gender</asp:Label>
                 <div id="radioGender">
                     <asp:RadioButton ID="rbMale" runat="server" CssClass="radio" GroupName="gender" data-entry-label="Gender" Text="Male" value="Male" />
-                    <label for="male">Male</label>
+                    <%--<label for="male">Male</label>--%>
 
                     <asp:RadioButton ID="rbFemale" runat="server" CssClass="radio" GroupName="gender" data-entry-label="Gender" Text="Female" value="Female" />
-                    <label for="female">Female</label>
+                    <%--<label for="female">Female</label>--%>
 
                     <asp:RadioButton ID="rbOthers" runat="server" CssClass="radio" GroupName="gender" data-entry-label="Gender" Text="Others" value="Others" />
-                    <label for="others">Others</label>
+                    <%--<label for="others">Others</label>--%>
                 </div>
             </div>
 
@@ -244,22 +243,12 @@
 
 
     </asp:Panel>
-    <uc1:Notes runat="server" ID="NotesUserControl" PageName="UserForm"/>
+    <uc1:Notes runat="server" ID="NotesUserControl" PageName ="UserForm"/>
     <div>
         <div class="input-field-group buttons">
             <div class="input-field">
-                <div>
                     <asp:Button runat="server" ID="bttnSubmit" class="btn btn-primary w-25" ClientIDMode="Static" Text="Submit" OnClick="Submit_Click" UseSubmitBehavior="false" />
-                </div>
-                <div>
-                    <input id="bttnReset" class="btn btn-primary w-25" type="reset" value="Reset" />
-                </div>
-                <div>
                     <asp:Button runat="server" ID="bttnEdit" class="btn btn-primary w-25" ClientIDMode="Static" Text="Update" OnClick="Update_Click" />
-                </div>
-                <div>
-                    <asp:Button runat="server" ID="bttnDelete" class="btn btn-primary w-25" ClientIDMode="Static" Text="Delete" OnClick="Delete_Click" />
-                </div>
             </div>
         </div>
     </div>

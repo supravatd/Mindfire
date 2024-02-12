@@ -11,6 +11,7 @@
         <div>
             <asp:GridView ID="DisplayUser" runat="server" AutoGenerateColumns="false" ClientIDMode="Static" OnSelectedIndexChanged="DisplayUser_Edit">
                 <Columns>
+                    <asp:BoundField DataField="UserId" HeaderText="User Id" SortExpression="UserId"/>
                     <asp:BoundField DataField="FirstName" HeaderText="First Name" SortExpression="FirstName" />
                     <asp:BoundField DataField="LastName" HeaderText="Last Name" SortExpression="LastName" />
                     <asp:BoundField DataField="FatherFirstName" HeaderText="Father Name" />

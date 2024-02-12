@@ -30,10 +30,10 @@
           <Key>
             <PropertyRef Name="NoteID" />
           </Key>
-          <Property Name="NoteID" Type="int" Nullable="false" />
-          <Property Name="NoteData" Type="varchar" MaxLength="255" />
+          <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" />
-          <Property Name="PageName" Type="varchar" MaxLength="255" />
+          <Property Name="NoteData" Type="varchar(max)" />
+          <Property Name="PageName" Type="varchar" MaxLength="30" />
           <Property Name="DateTimeAdded" Type="datetime" />
         </EntityType>
         <EntityType Name="State">
@@ -91,6 +91,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UserID">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UserManagementModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
@@ -105,54 +117,33 @@
             <End Role="Country" EntitySet="Country" />
             <End Role="State" EntitySet="State" />
           </AssociationSet>
+          <AssociationSet Name="UserID" Association="Self.UserID">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="CountryID" />
-          </Key>
-          <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <Property Name="CountryName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="States" Relationship="Self.FK__State__CountryID__398D8EEE" FromRole="Country" ToRole="State" />
-        </EntityType>
-        <EntityType Name="State">
-          <Key>
-            <PropertyRef Name="StateID" />
-          </Key>
-          <Property Name="StateID" Type="Int32" Nullable="false" />
-          <Property Name="StateName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CountryID" Type="Int32" />
-          <NavigationProperty Name="Country" Relationship="Self.FK__State__CountryID__398D8EEE" FromRole="State" ToRole="Country" />
-        </EntityType>
-        <Association Name="FK__State__CountryID__398D8EEE">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="State" Type="Self.State" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryID" />
-            </Principal>
-            <Dependent Role="State">
-              <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DemoUserManagementEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="States" EntityType="Self.State" />
-          <AssociationSet Name="FK__State__CountryID__398D8EEE" Association="Self.FK__State__CountryID__398D8EEE">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="State" EntitySet="States" />
-          </AssociationSet>
           <EntitySet Name="Addresses" EntityType="UserManagementModel.Address" />
+          <EntitySet Name="Countries" EntityType="UserManagementModel.Country" />
+          <EntitySet Name="States" EntityType="UserManagementModel.State" />
           <EntitySet Name="UserDetails" EntityType="UserManagementModel.UserDetail" />
           <AssociationSet Name="FK__Address__UserId__4BAC3F29" Association="UserManagementModel.FK__Address__UserId__4BAC3F29">
             <End Role="UserDetail" EntitySet="UserDetails" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
+          <AssociationSet Name="FK__State__CountryID__398D8EEE" Association="UserManagementModel.FK__State__CountryID__398D8EEE">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
           <EntitySet Name="Notes" EntityType="UserManagementModel.Note" />
+          <AssociationSet Name="UserID" Association="UserManagementModel.UserID">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -168,6 +159,23 @@
           <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.FK__Address__UserId__4BAC3F29" FromRole="Address" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="States" Relationship="UserManagementModel.FK__State__CountryID__398D8EEE" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CountryID" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="UserManagementModel.FK__State__CountryID__398D8EEE" FromRole="State" ToRole="Country" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -192,6 +200,7 @@
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Hobbies" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK__Address__UserId__4BAC3F29" FromRole="UserDetail" ToRole="Address" />
+          <NavigationProperty Name="Notes" Relationship="UserManagementModel.UserID" FromRole="UserDetail" ToRole="Note" />
         </EntityType>
         <Association Name="FK__Address__UserId__4BAC3F29">
           <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
@@ -205,39 +214,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__State__CountryID__398D8EEE">
+          <End Type="UserManagementModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="UserManagementModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Note">
           <Key>
             <PropertyRef Name="NoteID" />
           </Key>
-          <Property Name="NoteID" Type="Int32" Nullable="false" />
-          <Property Name="NoteData" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" />
-          <Property Name="PageName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NoteData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PageName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="DateTimeAdded" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.UserID" FromRole="Note" ToRole="UserDetail" />
         </EntityType>
-      </Schema>
+        <Association Name="UserID">
+          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <End Type="UserManagementModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UserManagementModelStoreContainer" CdmEntityContainer="DemoUserManagementEntities">
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="UserManagementModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="UserManagementModel.State">
-              <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="StateID" ColumnName="StateID" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="UserManagementModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -250,6 +267,23 @@
                 <ScalarProperty Name="DoorNo" ColumnName="DoorNo" />
                 <ScalarProperty Name="AddressType" ColumnName="AddressType" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="UserManagementModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="UserManagementModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -282,8 +316,8 @@
               <MappingFragment StoreEntitySet="Notes">
                 <ScalarProperty Name="DateTimeAdded" ColumnName="DateTimeAdded" />
                 <ScalarProperty Name="PageName" ColumnName="PageName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="NoteData" ColumnName="NoteData" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="NoteID" ColumnName="NoteID" />
               </MappingFragment>
             </EntityTypeMapping>

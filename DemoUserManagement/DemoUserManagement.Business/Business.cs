@@ -23,38 +23,57 @@ namespace DemoUserManagement.Business
             return countryList;
         }
 
-        public static List<StateModel> GetStateList(int countryId)
+        public static List<StateModel> GetStateList(string countryName)
         {
-            List<State> states = DAL.DAL.StateCountry(countryId);
+            List<State> states = DAL.DAL.GetState(countryName);
             List<StateModel> stateList = states.Select(state => new StateModel
             {
                 StateId = state.StateID,
-                StateName = state.StateName,
-                CountryId = (int)state.CountryID
+                StateName = state.StateName
             }).ToList();
 
             return stateList;
         }
 
-        public static void SubmitUser(UserModel userModel)
-        { 
-            DAL.DAL.SaveUser(userModel);
+
+        public void AddUserAddress(UserModel userModel, AddressModel presentAddress, AddressModel permanentAddress)
+        {
+            int userId = DAL.DAL.SaveUser(userModel);
+            presentAddress.UserId = userId;
+            DAL.DAL.SaveAddress(presentAddress);
+            permanentAddress.UserId = userId;
+            DAL.DAL.SaveAddress(permanentAddress);
         }
 
-        public static void UpdateUser(int userId,UserModel userModel)
+        public static void UpdateUser(int userId, UserModel userModel)
         {
             DAL.Update.UpdateUser(userId, userModel);
         }
 
-        public static void DeleteUser(int userId)
-        {
-            DAL.Update.DeleteUser(userId);
-        }
-
         public List<UserModel> GetAllUsers()
         {
-            DAL.GetAllUsers user=new DAL.GetAllUsers();
+            DAL.GetAllUsers user = new DAL.GetAllUsers();
             return user.Users();
+        }
+
+        public UserModel GetUserById(string userId)
+        {
+            DAL.GetAllUsers user = new DAL.GetAllUsers();
+            return user.GetUserById(userId);
+        }
+
+        public void AddNote(NoteModel note)
+        {
+            DAL.DAL noteDAL = new DAL.DAL();
+            noteDAL.AddNote(note);
+        }
+
+        public List<NoteModel> GetAllNotes()
+        {
+            List<NoteModel> notes = new List<NoteModel>();
+            DAL.DAL noteDAL = new DAL.DAL();
+            notes = noteDAL.GetAllNotes();
+            return notes;
         }
     }
 }

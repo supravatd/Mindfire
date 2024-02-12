@@ -18,6 +18,7 @@ namespace DemoUserManagement.DAL
         public UserDetail()
         {
             this.Addresses = new HashSet<Address>();
+            this.Notes = new HashSet<Note>();
         }
     
         public int UserId { get; set; }
@@ -41,5 +42,7 @@ namespace DemoUserManagement.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

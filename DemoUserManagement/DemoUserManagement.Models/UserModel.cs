@@ -26,5 +26,8 @@ namespace DemoUserManagement.Models
         public string IDNo { get; set; }
         public string Gender {  get; set; }
         public string Hobbies { get; set;}
+
+        public AddressModel PresentAddress { get; set; }
+        public AddressModel PermanentAddress { get; set; }
     }
 }

@@ -25,14 +25,14 @@ namespace DemoUserManagement.DAL
             return countryList;
         }
 
-        public static List<State> GetState()
+        public static List<State> GetState(string countryName)
         {
             List<State> stateList = new List<State>();
             try
             {
                 using (DemoUserManagementEntities context = new DemoUserManagementEntities())
                 {
-                    stateList = context.States.ToList();
+                    stateList = context.States.Where(s => s.Country.CountryName == countryName).ToList();
                 }
             }
             catch (Exception e)
@@ -59,11 +59,11 @@ namespace DemoUserManagement.DAL
             return stateList;
         }
 
-        public static void SaveUser(UserModel userModel)
+        public static int SaveUser(UserModel userModel)
         {
+            int userId = 0;
             using (DemoUserManagementEntities context = new DemoUserManagementEntities())
             {
-                // Create and save user entity
                 UserDetail user = new UserDetail
                 {
                     FirstName = userModel.FirstName,
@@ -76,17 +76,19 @@ namespace DemoUserManagement.DAL
                     MotherMiddleName = userModel.MotherMiddleName,
                     MotherLastName = userModel.MotherLastName,
                     Email = userModel.Email,
-                    Dob= DateTime.Parse(userModel.Dob),
-                    BloodGroup=userModel.BloodGroup,
-                    MobileNo=userModel.MobileNo,
-                    IDType=userModel.IDType,
-                    IDNo=userModel.IDNo,
-                    Gender=userModel.Gender,
-                    Hobbies=userModel.Hobbies
+                    Dob = DateTime.Parse(userModel.Dob),
+                    BloodGroup = userModel.BloodGroup,
+                    MobileNo = userModel.MobileNo,
+                    IDType = userModel.IDType,
+                    IDNo = userModel.IDNo,
+                    Gender = userModel.Gender,
+                    Hobbies = userModel.Hobbies
                 };
                 context.UserDetails.Add(user);
                 context.SaveChanges();
+                userId = user.UserId;
             }
+            return userId;
         }
         public static void SaveAddress(AddressModel address)
         {
@@ -101,53 +103,51 @@ namespace DemoUserManagement.DAL
                     PostalCode = address.PostalCode,
                     Country = address.Country,
                     State = address.State,
-                    
+                    UserId = address.UserId,
                 };
                 context.Addresses.Add(user);
                 context.SaveChanges();
             }
         }
-        public static void UpdateUser(int userId, UserModel userModel)
-        {
-            using (DemoUserManagementEntities context = new DemoUserManagementEntities())
-            {
-                UserDetail user = context.UserDetails.FirstOrDefault(x => x.UserId == userId);
-                if (user != null)
-                {
-                    // Manually map properties from UserModel to User entity
-                    user.FirstName = userModel.FirstName;
-                    user.MiddleName = userModel.MiddleName;
-                    user.LastName = userModel.LastName;
-                    user.FatherFirstName = userModel.FatherFirstName;
-                    user.FatherMiddleName = userModel.FatherMiddleName;
-                    user.FatherLastName = userModel.FatherLastName;
-                    user.MotherFirstName = userModel.MotherFirstName;
-                    user.MotherMiddleName = userModel.MotherMiddleName;
-                    user.MotherLastName = userModel.MotherLastName;
-                    user.Email = userModel.Email;
-                    user.Dob = DateTime.ParseExact(userModel.Dob, "D", null);
-                    user.BloodGroup = userModel.BloodGroup;
-                    user.MobileNo = userModel.MobileNo;
-                    user.IDType = userModel.IDType;
-                    user.IDNo = userModel.IDNo;
-                    user.Gender = userModel.Gender;
-                    user.Hobbies = userModel.Hobbies;
 
-                    context.SaveChanges();
-                }
+        public void AddNote(NoteModel note)
+        {
+            using (var context = new DemoUserManagementEntities())
+            {
+                Note noteEntity = new Note
+                {
+                    UserID=note.UserId,
+                    NoteData = note.NoteData,
+                    PageName = note.PageName,
+                    DateTimeAdded = DateTime.Now
+                };
+
+                context.Notes.Add(noteEntity);
+                context.SaveChanges();
             }
         }
 
-        public static void DeleteUser(int userId)
+        public List<NoteModel> GetAllNotes()
         {
-            using (DemoUserManagementEntities context = new DemoUserManagementEntities())
+            List<NoteModel> notes = new List<NoteModel>();
+
+            using (var context = new DemoUserManagementEntities())
             {
-                UserDetail user = context.UserDetails.FirstOrDefault(x => x.UserId == userId);
-                if (user != null)
+                var noteEntities = context.Notes.ToList();
+                foreach (var noteEntity in noteEntities)
                 {
-                    context.UserDetails.Remove(user);
-                    context.SaveChanges();
+                    NoteModel noteModel = new NoteModel
+                    {
+                        NoteId=noteEntity.NoteID,
+                        NoteData = noteEntity.NoteData,
+                        UserId = noteEntity.UserID != null ? (int)noteEntity.UserID : 0,
+                        PageName = noteEntity.PageName,
+                        DateTimeAdded = noteEntity.DateTimeAdded.ToString()
+                    };
+
+                    notes.Add(noteModel);
                 }
+                return notes;
             }
         }
     }
