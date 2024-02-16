@@ -395,7 +395,7 @@ textarea {
   resize: vertical;
 }
 
-fieldset {
+.body-content {
   min-width: 0;
   padding: 0;
   margin: 0;

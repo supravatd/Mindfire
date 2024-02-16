@@ -15,17 +15,17 @@ namespace DemoUserManagement.DAL
     public partial class Address
     {
         public int AddressId { get; set; }
-        public Nullable<int> AddressType { get; set; }
+        public int AddressType { get; set; }
         public string DoorNo { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> CountryId { get; set; }
-        public Nullable<int> StateId { get; set; }
+        public int UserId { get; set; }
+        public int CountryId { get; set; }
+        public int StateId { get; set; }
     
-        public virtual UserDetail UserDetail { get; set; }
         public virtual Country Country { get; set; }
         public virtual State State { get; set; }
+        public virtual UserDetail UserDetail { get; set; }
     }
 }

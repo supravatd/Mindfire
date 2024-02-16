@@ -20,5 +20,22 @@ namespace DemoUserManagement.Models
             public string StateName { get; set; }
             public int CountryId { get; set; }
         }
+
+        public class DocumentTypeModel
+        {
+            public string DocumentTypeName { get; set; }
+            public int DocumentTypeID { get; set; }
+        }
+
+        public class DocumentModel
+        {
+            public int DocumentID { get; set; }
+            public int ObjectID { get; set; }
+            public int ObjectType { get; set; }
+            public int DocumentType { get; set; }
+            public string DocumnetNameOnDisk { get; set; }
+            public string DocumentOriginalName { get; set; }
+            public string AddedOn { get; set; }
+        }
     }
 }

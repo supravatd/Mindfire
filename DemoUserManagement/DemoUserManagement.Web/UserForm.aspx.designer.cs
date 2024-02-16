@@ -627,6 +627,33 @@ namespace DemoUserManagement.Web
         protected global::System.Web.UI.WebControls.DropDownList ddlPermanentAddressState;
 
         /// <summary>
+        /// lblFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFileName;
+
+        /// <summary>
+        /// FileGuid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField FileGuid;
+
+        /// <summary>
+        /// FileUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadControl;
+
+        /// <summary>
         /// NotesUserControl control.
         /// </summary>
         /// <remarks>
@@ -634,6 +661,15 @@ namespace DemoUserManagement.Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DemoUserManagement.Web.User_Control.NotesUserControl NotesUserControl;
+
+        /// <summary>
+        /// DocumentUserControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DemoUserManagement.Web.User_Control.DocumentUserControl DocumentUserControl;
 
         /// <summary>
         /// bttnSubmit control.
@@ -652,5 +688,14 @@ namespace DemoUserManagement.Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnEdit;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
     }
 }

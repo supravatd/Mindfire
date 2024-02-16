@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentLayers.Utils;
 
 namespace DemoUserManagement.DAL
 {
@@ -57,6 +58,33 @@ namespace DemoUserManagement.DAL
             }
 
             return dataTable;
+        }
+        public int GetTotalNotes(int objectId)
+        {
+            int totalNotes = 0;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT COUNT(*) FROM Notes WHERE ObjectID = @ObjectId";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ObjectId", objectId);
+
+                        totalNotes = (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+
+            return totalNotes;
         }
     }
 }

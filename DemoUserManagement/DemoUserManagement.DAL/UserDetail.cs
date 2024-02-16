@@ -18,7 +18,9 @@ namespace DemoUserManagement.DAL
         public UserDetail()
         {
             this.Addresses = new HashSet<Address>();
+            this.Documents = new HashSet<Document>();
             this.Notes = new HashSet<Note>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int UserId { get; set; }
@@ -32,17 +34,23 @@ namespace DemoUserManagement.DAL
         public string MotherMiddleName { get; set; }
         public string MotherLastName { get; set; }
         public string Email { get; set; }
-        public Nullable<System.DateTime> Dob { get; set; }
+        public System.DateTime Dob { get; set; }
         public string BloodGroup { get; set; }
         public string MobileNo { get; set; }
         public string IDType { get; set; }
         public string IDNo { get; set; }
         public string Gender { get; set; }
         public string Hobbies { get; set; }
+        public string FileGuid { get; set; }
+        public string FileOriginal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Addresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Document> Documents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Notes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Web.UI.WebControls;
 
 namespace DemoUserManagement.Web
@@ -20,24 +23,38 @@ namespace DemoUserManagement.Web
         }
         private void BindGridView()
         {
-            Business.Business userBLL = new Business.Business();
-            List<UserModel> userList = userBLL.GetAllUsers();
+            int pageIndex = DisplayUser.PageIndex;
+            int pageSize = DisplayUser.PageSize;
+            string sortExpression = ViewState["SortExpression"] as string ?? "UserId";
+            string sortDirection = ViewState["SortDirection"] as string ?? "ASC";
+
+            int totalRecords = Business.Business.GetTotalUsers();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            DisplayUser.VirtualItemCount = totalRecords;
+            List<UserModel> userList = Business.Business.GetAllUsers(pageIndex, pageSize);
+
+            if (!string.IsNullOrEmpty(sortExpression))
+            {
+                if (sortDirection == "ASC")
+                {
+                    userList = userList.OrderBy(u => GetPropertyValue(u, sortExpression)).ToList();
+                }
+                else
+                {
+                    userList = userList.OrderByDescending(u => GetPropertyValue(u, sortExpression)).ToList();
+                }
+            }
 
             DisplayUser.DataSource = userList;
             DisplayUser.DataBind();
+            DisplayUser.PagerSettings.PageButtonCount = totalPages;
         }
-        protected void DisplayUser_Edit(object sender, EventArgs e)
-        {
-            id = DisplayUser.SelectedRow.Cells[0].Text;
-            LoadUserDetails(id);
-        }
-        private void LoadUserDetails(string userId)
-        {
-            Business.Business userBLL = new Business.Business();
-            UserModel user = userBLL.GetUserById(userId);
 
-            Session["UserDetails"] = user;
-            Response.Redirect($"UserForm.aspx?UserId={userId}");
+        protected void DisplayUser_Edit(object sender, GridViewEditEventArgs e)
+        {
+            string userId = DisplayUser.DataKeys[e.NewEditIndex].Values["UserId"].ToString();
+            Response.Redirect("UserForm.aspx?UserId=" + userId);
         }
         protected void NewUser_Click(object sender, EventArgs e)
         {
@@ -51,49 +68,55 @@ namespace DemoUserManagement.Web
 
         protected void DisplayUser_Sorting(object sender, GridViewSortEventArgs e)
         {
-            List<UserModel> userList = (List<UserModel>)DisplayUser.DataSource;
+            ViewState["SortExpression"] = e.SortExpression;
+            ViewState["SortDirection"] = GetSortDirection();
 
-            if (userList != null)
+            BindGridView();
+        }
+
+
+        private object GetPropertyValue(UserModel user, string propertyName)
+        {
+            Type userType = typeof(UserModel);
+            PropertyInfo property = userType.GetProperty(propertyName);
+
+            if (property != null)
             {
-                if (e.SortDirection == SortDirection.Ascending)
-                {
-                    userList = userList.OrderBy(u => u.GetType().GetProperty(e.SortExpression).GetValue(u, null)).ToList();
-                }
-                else
-                {
-                    userList = userList.OrderByDescending(u => u.GetType().GetProperty(e.SortExpression).GetValue(u, null)).ToList();
-                }
-
-                DisplayUser.DataSource = userList;
-                DisplayUser.DataBind();
+                return property.GetValue(user, null);
+            }
+            else
+            {
+                return null;
             }
         }
 
         private string GetSortDirection()
         {
-            if (ViewState["SortDirection"] == null)
+            // Toggle sorting direction between ASC and DESC
+            if (ViewState["SortDirection"] == null || ViewState["SortDirection"].ToString() == "ASC")
             {
-                ViewState["SortDirection"] = "ASC";
+                return "DESC";
             }
             else
             {
-                if (ViewState["SortDirection"].ToString() == "ASC")
-                {
-                    ViewState["SortDirection"] = "DESC";
-                }
-                else
-                {
-                    ViewState["SortDirection"] = "ASC";
-                }
+                return "ASC";
+            }
+        }
+
+        protected string GenerateDownloadLink(object fileGuid, object fileOriginal)
+        {
+            if (fileGuid == null || fileOriginal == null)
+            {
+                return string.Empty;
             }
 
-            return ViewState["SortDirection"].ToString();
+            string fileGuidStr = fileGuid.ToString();
+            string fileOriginalStr = fileOriginal.ToString();
+            string fileExtension = Path.GetExtension(fileOriginalStr);
+            string downloadLink = string.Format("{0}/{1}{2}", ResolveUrl("~/Uploads/"), fileGuidStr, fileExtension);
+            string encodedFileName = Server.UrlEncode(fileOriginalStr);
+            return string.Format("<a href='{0}' download='{1}'>{2}</a>", downloadLink, encodedFileName, fileOriginalStr);
         }
 
-        protected void DisplayUser_Paging(object sender, GridViewPageEventArgs e)
-        {
-            DisplayUser.PageIndex = e.NewPageIndex;
-            BindGridView();
-        }
     }
 }

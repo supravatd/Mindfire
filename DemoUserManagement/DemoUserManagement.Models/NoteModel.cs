@@ -8,10 +8,10 @@ namespace DemoUserManagement.Models
 {
     public class NoteModel
     {
-        public int NoteId { get; set; }
+        public int? NoteId { get; set; }
         public string NoteData { get; set; }
-        public int UserId { get; set; }
-        public string PageName { get; set; }
+        public int ObjectId { get; set; }
+        public int ObjectType { get; set; }
         public string DateTimeAdded { get; set; }
     }
 }

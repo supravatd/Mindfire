@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DemoUserManagement.Models\DemoUserManagement.Models.csproj">
+      <Project>{c116f981-6b39-4bc2-9319-07a485f45f07}</Project>
+      <Name>DemoUserManagement.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,10 +15,10 @@ namespace DemoUserManagement.DAL
     public partial class Note
     {
         public int NoteID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int ObjectID { get; set; }
+        public int ObjectType { get; set; }
         public string NoteData { get; set; }
-        public string PageName { get; set; }
-        public Nullable<System.DateTime> DateTimeAdded { get; set; }
+        public System.DateTime DateTimeAdded { get; set; }
     
         public virtual UserDetail UserDetail { get; set; }
     }

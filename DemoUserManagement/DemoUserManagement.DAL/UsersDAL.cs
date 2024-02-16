@@ -10,42 +10,55 @@ using System.Threading.Tasks;
 
 namespace DemoUserManagement.DAL
 {
-    public class GetAllUsers
+    public class UsersDAL
     {
         string conn = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
-        public List<UserModel> Users()
+        public List<UserModel> GetAllUsers(int pageIndex, int pageSize)
         {
-            List<UserModel> users;
+
 
             using (var context = new DemoUserManagementEntities())
             {
-                users = context.UserDetails.Select(u => new UserModel
-                {
-                    UserId = u.UserId,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    FatherFirstName = u.FatherFirstName,
-                    MotherFirstName = u.MotherFirstName,
-                    Email = u.Email,
-                    Dob = u.Dob,
-                    MobileNo = u.MobileNo,
-                    IDType = u.IDType,
-                    IDNo = u.IDNo,
-                    Gender = u.Gender,
-                    Hobbies = u.Hobbies
-                }).ToList();
+                var users = context.UserDetails
+                 .OrderBy(u => u.UserId)
+                 .Skip((pageIndex ) * pageSize) 
+                 .Take(pageSize)
+                 .Select(u => new UserModel
+                 {
+                     UserId = u.UserId,
+                     FirstName = u.FirstName,
+                     LastName = u.LastName,
+                     Email = u.Email,
+                     Dob = u.Dob,
+                     MobileNo = u.MobileNo,
+                     IDType = u.IDType,
+                     IDNo = u.IDNo,
+                     Gender = u.Gender,
+                     Hobbies = u.Hobbies,
+                     FileGuid = u.FileGuid,
+                     FileOriginal = u.FileOriginal,
+                 }).ToList();
+                return users;
             }
 
-            return users;
+           
         }
 
-        public UserModel GetUserById(string userId)
+        public int GetTotalUsers()
+        {
+            using (var context = new DemoUserManagementEntities())
+            {
+                return context.UserDetails.Count();
+            }
+        }
+
+        public UserModel GetUserById(int userId)
         {
             UserModel user = null;
 
             using (var context = new DemoUserManagementEntities())
             {
-                user = context.UserDetails.Where(u => u.UserId.ToString() == userId).Select(u => new UserModel
+                user = context.UserDetails.Where(u => u.UserId == userId).Select(u => new UserModel
                 {
                     UserId = u.UserId,
                     FirstName = u.FirstName,
@@ -64,6 +77,8 @@ namespace DemoUserManagement.DAL
                     Gender = u.Gender,
                     Hobbies = u.Hobbies,
                     Dob = u.Dob,
+                    FileGuid = u.FileGuid,
+                    FileOriginal = u.FileOriginal,
                     PresentAddress = u.Addresses.Where(a => a.AddressType == 0).Select(a => new AddressModel
                     {
                         DoorNo = a.DoorNo,
@@ -89,4 +104,5 @@ namespace DemoUserManagement.DAL
         }
     }
 }
+
 

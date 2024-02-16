@@ -1,19 +1,28 @@
-﻿function validateForm() {
+﻿$(document).ready(function () {
+    $("#bttnSubmit").click(function (e) {
+        e.preventDefault();
+        if (validateForm()) {
+            $("form").submit();
+        }
+    });
+});
+
+function validateForm() {
     $(".error").text("").removeClass("errorMessage");
 
-    $("fieldset input[type='text'][data-bs-toggle='tooltip'], fieldset input[type='email'][data-bs-toggle='tooltip']").each(function () {
+    $(".body-content input[type='text'][data-bs-toggle='tooltip'], .body-content input[type='email'][data-bs-toggle='tooltip']").each(function () {
         validateInput(this);
     });
 
-    $("fieldset select[data-bs-toggle='tooltip']").each(function () {
+    $(".body-content select[data-bs-toggle='tooltip']").each(function () {
         validateSelectInput(this);
     });
 
-    $("fieldset .radio-group[data-bs-toggle='tooltip']").each(function () {
+    $(".body-content .radio-group[data-bs-toggle='tooltip']").each(function () {
         validateRadioGroup(this);
     });
 
-    $("fieldset .checkbox-group[data-bs-toggle='tooltip']").each(function () {
+    $(".body-content .checkbox-group[data-bs-toggle='tooltip']").each(function () {
         validateCheckboxGroup(this);
     });
 
@@ -104,5 +113,5 @@
 }
 
 function hasErrors() {
-    return $("fieldset .error.errorMessage").length > 0;
+    return $(".body-content .error.errorMessage").length > 0;
 }

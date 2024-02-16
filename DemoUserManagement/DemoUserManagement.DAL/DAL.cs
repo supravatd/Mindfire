@@ -2,7 +2,10 @@
 using StudentLayers.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using static DemoUserManagement.Models.Model;
+using static DemoUserManagement.Utils.Utils;
 
 namespace DemoUserManagement.DAL
 {
@@ -76,13 +79,15 @@ namespace DemoUserManagement.DAL
                     MotherMiddleName = userModel.MotherMiddleName,
                     MotherLastName = userModel.MotherLastName,
                     Email = userModel.Email,
-                    Dob = userModel.Dob,
+                    Dob = (DateTime)userModel.Dob,
                     BloodGroup = userModel.BloodGroup,
                     MobileNo = userModel.MobileNo,
                     IDType = userModel.IDType,
                     IDNo = userModel.IDNo,
                     Gender = userModel.Gender,
-                    Hobbies = userModel.Hobbies
+                    Hobbies = userModel.Hobbies,
+                    FileGuid = userModel.FileGuid,
+                    FileOriginal = userModel.FileOriginal,
                 };
                 context.UserDetails.Add(user);
                 context.SaveChanges();
@@ -116,9 +121,9 @@ namespace DemoUserManagement.DAL
             {
                 Note noteEntity = new Note
                 {
-                    UserID=note.UserId,
+                    ObjectID = note.ObjectId,
                     NoteData = note.NoteData,
-                    PageName = note.PageName,
+                    ObjectType = note.ObjectType,
                     DateTimeAdded = DateTime.Now
                 };
 
@@ -126,29 +131,133 @@ namespace DemoUserManagement.DAL
                 context.SaveChanges();
             }
         }
-
-        public List<NoteModel> GetAllNotes()
+        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
         {
             List<NoteModel> notes = new List<NoteModel>();
 
             using (var context = new DemoUserManagementEntities())
             {
-                var noteEntities = context.Notes.ToList();
-                foreach (var noteEntity in noteEntities)
-                {
-                    NoteModel noteModel = new NoteModel
+                notes = context.Notes
+                    .Where(n => n.ObjectID == objectId)
+                    .OrderBy(n => n.NoteID)
+                    .Skip(pageIndex * pageSize)
+                    .Take(pageSize)
+                    .Select(n => new NoteModel
                     {
-                        NoteId=noteEntity.NoteID,
-                        NoteData = noteEntity.NoteData,
-                        UserId = noteEntity.UserID != null ? (int)noteEntity.UserID : 0,
-                        PageName = noteEntity.PageName,
-                        DateTimeAdded = noteEntity.DateTimeAdded.ToString()
-                    };
-
-                    notes.Add(noteModel);
-                }
-                return notes;
+                        NoteId = (int)n.NoteID,
+                        NoteData = n.NoteData,
+                        ObjectId = n.ObjectID,
+                        ObjectType = (int)n.ObjectType,
+                        DateTimeAdded = n.DateTimeAdded.ToString()
+                    })
+                    .ToList();
             }
+            return notes;
+        }
+        public static void SaveFileToDatabase(int userId, string filename, string guid)
+        {
+            using (var context = new DemoUserManagementEntities())
+            {
+                if (!Guid.TryParse(guid, out Guid guidValue))
+                {
+                    throw new ArgumentException("Invalid GUID format", nameof(guid));
+                }
+
+                var user = context.UserDetails.Find(userId);
+
+                if (user != null)
+                {
+                    user.FileGuid = guid;
+                    user.FileOriginal = filename;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new ArgumentException("User not found", nameof(userId));
+                }
+            }
+        }
+
+        public static List<DocumentType> GetDocumentType()
+        {
+            List<DocumentType> docTypeList = new List<DocumentType>();
+            try
+            {
+                using (DemoUserManagementEntities context = new DemoUserManagementEntities())
+                {
+                    docTypeList = context.DocumentTypes.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.AddData(e);
+            }
+            return docTypeList;
+        }
+
+        public static void AddDocuments(DocumentModel document)
+        {
+            using (var context = new DemoUserManagementEntities())
+            {
+                Document docEntity = new Document
+                {
+                    ObjectId = document.ObjectID,
+                    ObjectType = document.ObjectType,
+                    DocType = document.DocumentType,
+                    DocNameOnDisk = document.DocumnetNameOnDisk,
+                    DocOriginalName = document.DocumentOriginalName,
+                    Addedon = DateTime.Now
+                };
+
+                context.Documents.Add(docEntity);
+                context.SaveChanges();
+            }
+        }
+
+        public static List<DocumentModel> GetDocuments(int pageIndex, int pageSize, int objectId)
+        {
+            List<DocumentModel> documents = new List<DocumentModel>();
+
+            using (var context = new DemoUserManagementEntities())
+            {
+                documents = context.Documents
+                    .Where(n => n.ObjectId == objectId)
+                    .OrderBy(n => n.DocId)
+                    .Skip(pageIndex * pageSize)
+                    .Take(pageSize)
+                    .Select(n => new DocumentModel
+                    {
+                        DocumentID = n.DocId,
+                        ObjectID = n.ObjectId,
+                        ObjectType = n.ObjectType,
+                        DocumentType = n.DocType,
+                        DocumnetNameOnDisk=n.DocNameOnDisk,
+                        DocumentOriginalName = n.DocOriginalName,
+                        AddedOn = n.Addedon.ToString(),
+                    })
+                    .ToList();
+            }
+            return documents;
+        }
+
+        public static int GetTotalDocuments(int objectId)
+        {
+            int totalDoc = 0;
+
+            try
+            {
+                using (var context = new DemoUserManagementEntities())
+                {
+                    totalDoc = context.Documents.Count(n => n.ObjectId == objectId); ;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+
+            return totalDoc;
         }
     }
 }
+

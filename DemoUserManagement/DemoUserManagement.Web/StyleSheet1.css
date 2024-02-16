@@ -18,35 +18,38 @@ body {
     padding: 0;
 }
 
-.checkbox{
-    margin:0,2px,0,0;
+.checkbox {
+    margin: 0,2px,0,0;
 }
 
-#DisplayUser {
+#DisplayUser, #DocumentGrid, #NotesGrid {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-    #DisplayUser th, #DisplayUser td {
-        border: 1px solid #ddd;
+    #DisplayUser th, #DisplayUser td,
+    #DocumentGrid th, #DocumentGrid td,
+    #NotesGrid th, #NotesGrid td {
+        border: 1px solid #aaa;
         padding: 8px;
         text-align: left;
     }
 
-    #DisplayUser th {
-        background-color: #f2f2f2;
+    #DisplayUser th, #DocumentGrid th, #NotesGrid th {
+        background-color: #d9d9d9;
     }
 
-    #DisplayUser tr:nth-child(even) {
-        background-color: #f9f9f9;
+    #DisplayUser tr:nth-child(even),
+    #DocumentGrid tr:nth-child(even),
+    #NotesGrid tr:nth-child(even) {
+        background-color: #e6e6e6;
     }
 
-    #DisplayUser tr:hover {
-        background-color: #ddd;
+    #DisplayUser tr:hover, #DocumentGrid tr:hover, #NotesGrid tr:hover {
+        background-color: #bfbfbf;
     }
 
-/* Style for the "Add User" button */
 #NewUser {
     background-color: #4CAF50;
     color: white;
@@ -56,6 +59,36 @@ body {
     border-radius: 5px;
 }
 
-#NewUser:hover {
-    background-color: #45a049;
+    #NewUser:hover {
+        background-color: #45a049;
+    }
+
+
+.errorMessage {
+    position: absolute;
+    background-color: #ffdddd;
+    color: #8b0000;
+    padding: 7px;
+    border: 1px solid #8b0000;
+    border-radius: 5px;
+    font-size: 11px;
+    z-index: 1;
+    margin-bottom: -10px;
+}
+
+#errorMessageContainer {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 20px;
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    color: red;
+    font-weight: bold;
 }

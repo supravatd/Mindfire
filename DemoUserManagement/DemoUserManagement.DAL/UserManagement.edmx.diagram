@@ -4,17 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df597b44d4a140c995bb7ca0f6cd8805" Name="Diagram1" ZoomLevel="78">
-        <EntityTypeShape EntityType="UserManagementModel.Address" Width="1.5" PointX="6" PointY="3.375" />
-        <EntityTypeShape EntityType="UserManagementModel.Country" Width="1.5" PointX="3.75" PointY="7.5" />
-        <EntityTypeShape EntityType="UserManagementModel.Note" Width="1.5" PointX="3" PointY="3.875" />
+      <Diagram DiagramId="df597b44d4a140c995bb7ca0f6cd8805" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="UserManagementModel.Address" Width="1.5" PointX="6" PointY="7.375" />
+        <EntityTypeShape EntityType="UserManagementModel.Country" Width="1.5" PointX="3.75" PointY="14.5" />
+        <EntityTypeShape EntityType="UserManagementModel.Document" Width="1.5" PointX="6" PointY="3.625" />
+        <EntityTypeShape EntityType="UserManagementModel.DocumentType" Width="1.5" PointX="3.75" PointY="4.25" />
+        <EntityTypeShape EntityType="UserManagementModel.Note" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="UserManagementModel.Role" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="UserManagementModel.State" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="UserManagementModel.UserDetail" Width="1.5" PointX="0.75" PointY="2.625" />
-        <AssociationConnector Association="UserManagementModel.FK__Address__UserId__4BAC3F29" />
-        <AssociationConnector Association="UserManagementModel.FK_Address_Countries" />
-        <AssociationConnector Association="UserManagementModel.FK_Address_States" />
+        <EntityTypeShape EntityType="UserManagementModel.UserDetail" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="UserManagementModel.UserRole" Width="1.5" PointX="3" PointY="7" />
+        <AssociationConnector Association="UserManagementModel.FK_Address_Country" />
+        <AssociationConnector Association="UserManagementModel.FK_Address_State" />
+        <AssociationConnector Association="UserManagementModel.FK_Address_User" />
         <AssociationConnector Association="UserManagementModel.FK__State__CountryID__398D8EEE" />
+        <AssociationConnector Association="UserManagementModel.FK__Documents__Objec__123EB7A3" />
+        <AssociationConnector Association="UserManagementModel.FK_Document_DocumentType" />
         <AssociationConnector Association="UserManagementModel.UserID" />
+        <AssociationConnector Association="UserManagementModel.FK_RoleId" />
+        <AssociationConnector Association="UserManagementModel.FK_UserId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

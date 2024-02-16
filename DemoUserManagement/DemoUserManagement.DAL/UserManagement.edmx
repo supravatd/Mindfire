@@ -10,14 +10,14 @@
             <PropertyRef Name="AddressId" />
           </Key>
           <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AddressType" Type="int" />
-          <Property Name="DoorNo" Type="varchar" MaxLength="50" />
+          <Property Name="AddressType" Type="int" Nullable="false" />
+          <Property Name="DoorNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Street" Type="varchar" MaxLength="255" />
-          <Property Name="City" Type="varchar" MaxLength="100" />
-          <Property Name="PostalCode" Type="varchar" MaxLength="20" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="CountryId" Type="int" />
-          <Property Name="StateId" Type="int" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -26,15 +26,43 @@
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="CountryName" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="ObjectType" Type="int" Nullable="false" />
+          <Property Name="DocType" Type="int" Nullable="false" />
+          <Property Name="DocNameOnDisk" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DocOriginalName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Addedon" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="DocTypeId" />
+          </Key>
+          <Property Name="DocTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocTypeName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Notes">
           <Key>
             <PropertyRef Name="NoteID" />
           </Key>
           <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" />
+          <Property Name="ObjectID" Type="int" Nullable="false" />
+          <Property Name="ObjectType" Type="int" Nullable="false" />
           <Property Name="NoteData" Type="varchar(max)" />
-          <Property Name="PageName" Type="varchar" MaxLength="30" />
-          <Property Name="DateTimeAdded" Type="datetime" />
+          <Property Name="DateTimeAdded" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsDefault" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsAdmin" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -42,45 +70,55 @@
           </Key>
           <Property Name="StateID" Type="int" Nullable="false" />
           <Property Name="StateName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="CountryID" Type="int" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="MiddleName" Type="varchar" MaxLength="255" />
-          <Property Name="LastName" Type="varchar" MaxLength="255" />
-          <Property Name="FatherFirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FatherFirstName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="FatherMiddleName" Type="varchar" MaxLength="255" />
           <Property Name="FatherLastName" Type="varchar" MaxLength="255" />
-          <Property Name="MotherFirstName" Type="varchar" MaxLength="255" />
+          <Property Name="MotherFirstName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="MotherMiddleName" Type="varchar" MaxLength="255" />
           <Property Name="MotherLastName" Type="varchar" MaxLength="255" />
-          <Property Name="Email" Type="varchar" MaxLength="255" />
-          <Property Name="Dob" Type="date" />
-          <Property Name="BloodGroup" Type="varchar" MaxLength="10" />
-          <Property Name="MobileNo" Type="varchar" MaxLength="20" />
-          <Property Name="IDType" Type="varchar" MaxLength="50" />
-          <Property Name="IDNo" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Dob" Type="date" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="10" />
           <Property Name="Hobbies" Type="text" />
+          <Property Name="FileGuid" Type="nvarchar" MaxLength="255" />
+          <Property Name="FileOriginal" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__Address__UserId__4BAC3F29">
-          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Documents__Objec__123EB7A3">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserDetails">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Documents">
+              <PropertyRef Name="ObjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__State__CountryID__398D8EEE">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="State" Type="Self.State" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -91,8 +129,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Address_Countries">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+        <Association Name="FK_Address_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -103,8 +141,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Address_States">
-          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+        <Association Name="FK_Address_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
@@ -115,39 +153,107 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="UserID">
+        <Association Name="FK_Address_User">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_DocumentType">
+          <End Role="DocumentType" Type="Self.DocumentType" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="DocTypeId" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="DocType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleId">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserId">
           <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserID">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
           <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserDetails">
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Notes">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ObjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="UserManagementModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Address__UserId__4BAC3F29" Association="Self.FK__Address__UserId__4BAC3F29">
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Documents__Objec__123EB7A3" Association="Self.FK__Documents__Objec__123EB7A3">
             <End Role="UserDetails" EntitySet="UserDetails" />
-            <End Role="Address" EntitySet="Address" />
+            <End Role="Documents" EntitySet="Documents" />
           </AssociationSet>
           <AssociationSet Name="FK__State__CountryID__398D8EEE" Association="Self.FK__State__CountryID__398D8EEE">
             <End Role="Country" EntitySet="Country" />
             <End Role="State" EntitySet="State" />
           </AssociationSet>
-          <AssociationSet Name="FK_Address_Countries" Association="Self.FK_Address_Countries">
+          <AssociationSet Name="FK_Address_Country" Association="Self.FK_Address_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK_Address_States" Association="Self.FK_Address_States">
+          <AssociationSet Name="FK_Address_State" Association="Self.FK_Address_State">
             <End Role="State" EntitySet="State" />
             <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_User" Association="Self.FK_Address_User">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_DocumentType" Association="Self.FK_Document_DocumentType">
+            <End Role="DocumentType" EntitySet="DocumentType" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleId" Association="Self.FK_RoleId">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserId" Association="Self.FK_UserId">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
           <AssociationSet Name="UserID" Association="Self.UserID">
             <End Role="UserDetails" EntitySet="UserDetails" />
@@ -161,28 +267,48 @@
         <EntityContainer Name="DemoUserManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="UserManagementModel.Address" />
           <EntitySet Name="Countries" EntityType="UserManagementModel.Country" />
+          <EntitySet Name="Documents" EntityType="UserManagementModel.Document" />
+          <EntitySet Name="DocumentTypes" EntityType="UserManagementModel.DocumentType" />
           <EntitySet Name="Notes" EntityType="UserManagementModel.Note" />
+          <EntitySet Name="Roles" EntityType="UserManagementModel.Role" />
           <EntitySet Name="States" EntityType="UserManagementModel.State" />
           <EntitySet Name="UserDetails" EntityType="UserManagementModel.UserDetail" />
-          <AssociationSet Name="FK__Address__UserId__4BAC3F29" Association="UserManagementModel.FK__Address__UserId__4BAC3F29">
-            <End Role="UserDetail" EntitySet="UserDetails" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_Countries" Association="UserManagementModel.FK_Address_Countries">
+          <EntitySet Name="UserRoles" EntityType="UserManagementModel.UserRole" />
+          <AssociationSet Name="FK_Address_Country" Association="UserManagementModel.FK_Address_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Address_States" Association="UserManagementModel.FK_Address_States">
+          <AssociationSet Name="FK_Address_State" Association="UserManagementModel.FK_Address_State">
             <End Role="State" EntitySet="States" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Address_User" Association="UserManagementModel.FK_Address_User">
+            <End Role="UserDetail" EntitySet="UserDetails" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
           <AssociationSet Name="FK__State__CountryID__398D8EEE" Association="UserManagementModel.FK__State__CountryID__398D8EEE">
             <End Role="Country" EntitySet="Countries" />
             <End Role="State" EntitySet="States" />
           </AssociationSet>
+          <AssociationSet Name="FK__Documents__Objec__123EB7A3" Association="UserManagementModel.FK__Documents__Objec__123EB7A3">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_DocumentType" Association="UserManagementModel.FK_Document_DocumentType">
+            <End Role="DocumentType" EntitySet="DocumentTypes" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
           <AssociationSet Name="UserID" Association="UserManagementModel.UserID">
             <End Role="UserDetail" EntitySet="UserDetails" />
             <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleId" Association="UserManagementModel.FK_RoleId">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserId" Association="UserManagementModel.FK_UserId">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
@@ -190,17 +316,17 @@
             <PropertyRef Name="AddressId" />
           </Key>
           <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AddressType" Type="Int32" />
-          <Property Name="DoorNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddressType" Type="Int32" Nullable="false" />
+          <Property Name="DoorNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="StateId" Type="Int32" />
-          <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.FK__Address__UserId__4BAC3F29" FromRole="Address" ToRole="UserDetail" />
-          <NavigationProperty Name="Country" Relationship="UserManagementModel.FK_Address_Countries" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="State" Relationship="UserManagementModel.FK_Address_States" FromRole="Address" ToRole="State" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="UserManagementModel.FK_Address_Country" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="UserManagementModel.FK_Address_State" FromRole="Address" ToRole="State" />
+          <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.FK_Address_User" FromRole="Address" ToRole="UserDetail" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -208,19 +334,51 @@
           </Key>
           <Property Name="CountryID" Type="Int32" Nullable="false" />
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK_Address_Countries" FromRole="Country" ToRole="Address" />
+          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK_Address_Country" FromRole="Country" ToRole="Address" />
           <NavigationProperty Name="States" Relationship="UserManagementModel.FK__State__CountryID__398D8EEE" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectType" Type="Int32" Nullable="false" />
+          <Property Name="DocType" Type="Int32" Nullable="false" />
+          <Property Name="DocNameOnDisk" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DocOriginalName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Addedon" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.FK__Documents__Objec__123EB7A3" FromRole="Document" ToRole="UserDetail" />
+          <NavigationProperty Name="DocumentType" Relationship="UserManagementModel.FK_Document_DocumentType" FromRole="Document" ToRole="DocumentType" />
+        </EntityType>
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="DocTypeId" />
+          </Key>
+          <Property Name="DocTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocTypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Documents" Relationship="UserManagementModel.FK_Document_DocumentType" FromRole="DocumentType" ToRole="Document" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
             <PropertyRef Name="NoteID" />
           </Key>
           <Property Name="NoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
+          <Property Name="ObjectID" Type="Int32" Nullable="false" />
+          <Property Name="ObjectType" Type="Int32" Nullable="false" />
           <Property Name="NoteData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PageName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DateTimeAdded" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeAdded" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.UserID" FromRole="Note" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserRoles" Relationship="UserManagementModel.FK_RoleId" FromRole="Role" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -228,8 +386,8 @@
           </Key>
           <Property Name="StateID" Type="Int32" Nullable="false" />
           <Property Name="StateName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CountryID" Type="Int32" />
-          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK_Address_States" FromRole="State" ToRole="Address" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK_Address_State" FromRole="State" ToRole="Address" />
           <NavigationProperty Name="Country" Relationship="UserManagementModel.FK__State__CountryID__398D8EEE" FromRole="State" ToRole="Country" />
         </EntityType>
         <EntityType Name="UserDetail">
@@ -237,40 +395,42 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FatherFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FatherFirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="FatherMiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="FatherLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="MotherFirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MotherFirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MotherMiddleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="MotherLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Dob" Type="DateTime" Precision="0" />
-          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IDType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IDNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BloodGroup" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IDType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Hobbies" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK__Address__UserId__4BAC3F29" FromRole="UserDetail" ToRole="Address" />
+          <Property Name="FileGuid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FileOriginal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="UserManagementModel.FK_Address_User" FromRole="UserDetail" ToRole="Address" />
+          <NavigationProperty Name="Documents" Relationship="UserManagementModel.FK__Documents__Objec__123EB7A3" FromRole="UserDetail" ToRole="Document" />
           <NavigationProperty Name="Notes" Relationship="UserManagementModel.UserID" FromRole="UserDetail" ToRole="Note" />
+          <NavigationProperty Name="UserRoles" Relationship="UserManagementModel.FK_UserId" FromRole="UserDetail" ToRole="UserRole" />
         </EntityType>
-        <Association Name="FK__Address__UserId__4BAC3F29">
-          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
-          <End Type="UserManagementModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserDetail">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_Countries">
-          <End Type="UserManagementModel.Country" Role="Country" Multiplicity="0..1" />
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="UserManagementModel.FK_RoleId" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="UserDetail" Relationship="UserManagementModel.FK_UserId" FromRole="UserRole" ToRole="UserDetail" />
+        </EntityType>
+        <Association Name="FK_Address_Country">
+          <End Type="UserManagementModel.Country" Role="Country" Multiplicity="1" />
           <End Type="UserManagementModel.Address" Role="Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -281,8 +441,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Address_States">
-          <End Type="UserManagementModel.State" Role="State" Multiplicity="0..1" />
+        <Association Name="FK_Address_State">
+          <End Type="UserManagementModel.State" Role="State" Multiplicity="1" />
           <End Type="UserManagementModel.Address" Role="Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
@@ -293,8 +453,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Address_User">
+          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="UserManagementModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__State__CountryID__398D8EEE">
-          <End Type="UserManagementModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="UserManagementModel.Country" Role="Country" Multiplicity="1" />
           <End Type="UserManagementModel.State" Role="State" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -305,15 +477,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Documents__Objec__123EB7A3">
+          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="1" />
+          <End Type="UserManagementModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_DocumentType">
+          <End Type="UserManagementModel.DocumentType" Role="DocumentType" Multiplicity="1" />
+          <End Type="UserManagementModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="DocTypeId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="DocType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="UserID">
-          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="1" />
           <End Type="UserManagementModel.Note" Role="Note" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserDetail">
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Note">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ObjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleId">
+          <End Type="UserManagementModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="UserManagementModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserId">
+          <End Type="UserManagementModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <End Type="UserManagementModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -346,14 +566,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="UserManagementModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Addedon" ColumnName="Addedon" />
+                <ScalarProperty Name="DocOriginalName" ColumnName="DocOriginalName" />
+                <ScalarProperty Name="DocNameOnDisk" ColumnName="DocNameOnDisk" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentTypes">
+            <EntityTypeMapping TypeName="UserManagementModel.DocumentType">
+              <MappingFragment StoreEntitySet="DocumentType">
+                <ScalarProperty Name="DocTypeName" ColumnName="DocTypeName" />
+                <ScalarProperty Name="DocTypeId" ColumnName="DocTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Notes">
             <EntityTypeMapping TypeName="UserManagementModel.Note">
               <MappingFragment StoreEntitySet="Notes">
                 <ScalarProperty Name="DateTimeAdded" ColumnName="DateTimeAdded" />
-                <ScalarProperty Name="PageName" ColumnName="PageName" />
                 <ScalarProperty Name="NoteData" ColumnName="NoteData" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
                 <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="UserManagementModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -369,6 +620,8 @@
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="UserManagementModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="FileOriginal" ColumnName="FileOriginal" />
+                <ScalarProperty Name="FileGuid" ColumnName="FileGuid" />
                 <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="IDNo" ColumnName="IDNo" />
@@ -387,6 +640,15 @@
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="UserManagementModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

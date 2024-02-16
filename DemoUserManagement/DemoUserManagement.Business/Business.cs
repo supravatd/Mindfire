@@ -50,15 +50,27 @@ namespace DemoUserManagement.Business
             DAL.Update.UpdateUser(userId, userModel);
         }
 
-        public List<UserModel> GetAllUsers()
+        public static List<UserModel> GetAllUsers(int pageIndex, int pageSize)
         {
-            DAL.GetAllUsers user = new DAL.GetAllUsers();
-            return user.Users();
+            UsersDAL usersDAL = new UsersDAL();
+            return usersDAL.GetAllUsers(pageIndex, pageSize);
         }
 
-        public UserModel GetUserById(string userId)
+        public static int GetTotalUsers()
         {
-            DAL.GetAllUsers user = new DAL.GetAllUsers();
+            UsersDAL usersDAL = new UsersDAL();
+            return usersDAL.GetTotalUsers();
+        }
+
+        public int GetTotalNotes(int objectId)
+        {
+            DAL.NotesDAL notesDAL = new DAL.NotesDAL();
+            return notesDAL.GetTotalNotes(objectId);
+        }
+
+        public static UserModel GetUserById(int userId)
+        {
+            UsersDAL user = new UsersDAL();
             return user.GetUserById(userId);
         }
 
@@ -68,12 +80,54 @@ namespace DemoUserManagement.Business
             noteDAL.AddNote(note);
         }
 
-        public List<NoteModel> GetAllNotes()
+        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize,int objectId)
         {
             List<NoteModel> notes = new List<NoteModel>();
             DAL.DAL noteDAL = new DAL.DAL();
-            notes = noteDAL.GetAllNotes();
+            notes = noteDAL.GetAllNotes(pageIndex,pageSize,objectId);
             return notes;
+        }
+
+        public static void SaveFileToDatabase(int userId,string filename, string guid)
+        {
+            DAL.DAL.SaveFileToDatabase(userId,filename, guid);
+        }
+
+        public static List<DocumentTypeModel> GetDocumentType()
+        {
+            List<DocumentType> documentTypes = DAL.DAL.GetDocumentType();
+            List<DocumentTypeModel> docType = documentTypes.Select(doc => new DocumentTypeModel
+            {
+                DocumentTypeID = doc.DocTypeId,
+                DocumentTypeName = doc.DocTypeName
+            }).ToList();
+
+            return docType;
+        }
+
+        public static void AddDocument(DocumentModel doc)
+        {
+            DAL.DAL.AddDocuments(doc);
+        }
+
+        public static List<DocumentModel> GetUploadedDocuments(int pageIndex, int pageSize, int objectId)
+        {
+            return DAL.DAL.GetDocuments(pageIndex,pageSize,objectId);
+        }
+
+        public static int GetTotalDocuments(int objectId)
+        {
+            return DAL.DAL.GetTotalDocuments(objectId);
+        }
+
+        public static int IsUser(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool IsAdmin(int isuser)
+        {
+            throw new NotImplementedException();
         }
     }
 }

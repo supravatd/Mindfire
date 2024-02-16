@@ -1,0 +1,78 @@
+System.Data.Entity.Core.MetadataException: Schema specified is not valid. Errors: 
+The relationship 'UserManagementModel.FK_Address_Countries' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+The relationship 'UserManagementModel.objectId' was not loaded because the type 'UserManagementModel.UserDetail' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.UserDetail'.
+
+
+The relationship 'UserManagementModel.FK_Address_States' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+   at System.Data.Entity.Core.Metadata.Edm.ObjectItemCollection.LoadAssemblyFromCache(Assembly assembly, Boolean loadReferencedAssemblies, EdmItemCollection edmItemCollection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.ExplicitLoadFromAssembly(Assembly assembly, ObjectItemCollection collection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataOptimization.TryUpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.UpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DAL.DAL.GetCountry() in D:\Mindfire\DemoUserManagement\DemoUserManagement.DAL\DAL.cs:line 18
+System.Data.Entity.Core.MetadataException: Schema specified is not valid. Errors: 
+The relationship 'UserManagementModel.FK_Address_Countries' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+The relationship 'UserManagementModel.objectId' was not loaded because the type 'UserManagementModel.UserDetail' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.UserDetail'.
+
+
+The relationship 'UserManagementModel.FK_Address_States' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+   at System.Data.Entity.Core.Metadata.Edm.ObjectItemCollection.LoadAssemblyFromCache(Assembly assembly, Boolean loadReferencedAssemblies, EdmItemCollection edmItemCollection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.ExplicitLoadFromAssembly(Assembly assembly, ObjectItemCollection collection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataOptimization.TryUpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.UpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DAL.DAL.GetCountry() in D:\Mindfire\DemoUserManagement\DemoUserManagement.DAL\DAL.cs:line 18
+System.Data.Entity.Core.MetadataException: Schema specified is not valid. Errors: 
+The relationship 'UserManagementModel.FK_Address_Countries' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+The relationship 'UserManagementModel.objectId' was not loaded because the type 'UserManagementModel.UserDetail' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.UserDetail'.
+
+
+The relationship 'UserManagementModel.FK_Address_States' was not loaded because the type 'UserManagementModel.Address' is not available.
+The following information may be useful in resolving the previous error:
+The required property 'objectId' does not exist on the type 'DemoUserManagement.DAL.Address'.
+
+
+   at System.Data.Entity.Core.Metadata.Edm.ObjectItemCollection.LoadAssemblyFromCache(Assembly assembly, Boolean loadReferencedAssemblies, EdmItemCollection edmItemCollection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataWorkspace.ExplicitLoadFromAssembly(Assembly assembly, ObjectItemCollection collection, Action`1 logLoadMessage)
+   at System.Data.Entity.Core.Metadata.Edm.MetadataOptimization.TryUpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.UpdateEntitySetMappingsForType(Type entityType)
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetEnumerator()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DemoUserManagement.DAL.DAL.GetCountry() in D:\Mindfire\DemoUserManagement\DemoUserManagement.DAL\DAL.cs:line 18

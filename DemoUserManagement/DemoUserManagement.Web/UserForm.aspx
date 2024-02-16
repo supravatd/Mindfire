@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="User Form" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserForm.aspx.cs" Inherits="DemoUserManagement.Web.UserForm" %>
 
 <%@ Register Src="~/User_Control/NotesUserControl.ascx" TagPrefix="uc1" TagName="Notes" %>
+<%@ Register Src="~/User_Control/DocumentUserControl.ascx" TagPrefix="uc1" TagName="DocumentUserControl" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" ClientIDMode="Static">
     <link href="StyleSheet1.css" rel="stylesheet" cssclass="panel panel-default" />
     <asp:Panel ID="pnlPersonalDetails" runat="server" CssClass="panel panel-default">
         <div class="panel-heading">
@@ -12,7 +14,7 @@
             <div class="row">
                 <div class="name col-sm-4">
                     <asp:Label ID="lblFirstName" runat="server">First Name<sup>*</sup></asp:Label>
-                    <asp:TextBox ID="txtFirstName" runat="server" ClientIDMode="Static" CssClass="form-control" placeholder="First Name" ToolTip="First Name" data-entry-label="First Name" />
+                    <asp:TextBox ID="txtFirstName" runat="server" data-bs-toggle="tooltip" ClientIDMode="Static" CssClass="form-control" placeholder="First Name" ToolTip="First Name" data-entry-label="First Name" />
                     <div class="error"></div>
                 </div>
                 <div class="name col-sm-4">
@@ -21,7 +23,8 @@
                 </div>
                 <div class="name col-sm-4">
                     <asp:Label ID="lblLastName" runat="server">Last Name<sup>*</sup></asp:Label>
-                    <asp:TextBox ID="txtLastName" runat="server" ClientIDMode="Static" CssClass="form-control" placeholder="Last Name" ToolTip="Last Name" data-entry-label="Last Name" />
+                    <asp:TextBox ID="txtLastName" runat="server" data-bs-toggle="tooltip" ClientIDMode="Static" CssClass="form-control" placeholder="Last Name" ToolTip="Last Name" data-entry-label="Last Name" />
+                    <div class="error"></div>
                 </div>
             </div>
 
@@ -237,20 +240,37 @@
                 </div>
             </div>
         </div>
+        <br />
+        <div class="form-group">
+            <div class="d-flex align-items-center">
+                <h5 class="mr-3 mb-0">Upload Resume:</h5>
+                <div class="input-group">
+                    <asp:Label ID="lblFileName" runat="server" CssClass="form-control" Text="No file selected" />
+                    <asp:HiddenField ID="FileGuid" runat="server" />
+                    <div class="custom-file">
+                        <asp:FileUpload ID="FileUploadControl" runat="server" CssClass="custom-file-input" />
+                    </div>
 
-
-
-
+                </div>
+            </div>
+        </div>
     </asp:Panel>
     <br />
-    <uc1:Notes runat="server" ID="NotesUserControl" PageName="UserForm" />
+    <uc1:Notes runat="server" ID="NotesUserControl" />
+    <br />
+    <uc1:DocumentUserControl runat="server" ID="DocumentUserControl" />
     <br />
     <div>
         <div class="input-field-group buttons">
             <div class="input-field">
-                <asp:Button runat="server" ID="bttnSubmit" class="btn btn-primary w-25" ClientIDMode="Static" Text="Submit" OnClick="Submit_Click" UseSubmitBehavior="false" />
+                <asp:Button runat="server" ID="bttnSubmit" CssClass="btn btn-primary w-25" ClientIDMode="Static" Text="Submit" OnClick="Submit_Click" />
                 <asp:Button runat="server" ID="bttnEdit" class="btn btn-primary w-25" ClientIDMode="Static" Text="Update" OnClick="Update_Click" />
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <%--<script src="Scripts/JavaScript.js"></script>--%>
+
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First Name is required." ValidationGroup="ValidationGroup1"></asp:RequiredFieldValidator>
 </asp:Content>
