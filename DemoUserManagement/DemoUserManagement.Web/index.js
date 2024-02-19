@@ -51,8 +51,7 @@ function checkEmailAvailability() {
 
     // Configure the request
     xhr.open("GET", "CheckUserExists.aspx?email=" + email, true);
-
-    // Define a function to handle the response
+    
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
@@ -108,7 +107,6 @@ function sendFormData() {
             permanentAddress: getAddressData('#permanentAddress')
         }),
         success: function (response) {
-            // Handle success response
         },
         error: function (xhr, status, error) {
             console.error('Failed to send user details:', error);
@@ -129,7 +127,6 @@ function getObjectData(selector) {
     $(`${selector} [data-entry-label]`).each(function () {
         const fieldName = $(this).attr('data-entry-label');
         if ($(this).is('input[type="checkbox"]')) {
-            // Handle checkboxes
             if ($(this).is(':checked')) {
                 if (!data[fieldName]) {
                     data[fieldName] = '';
@@ -137,20 +134,16 @@ function getObjectData(selector) {
                 data[fieldName] += $(this).val() + ',';
             }
         } else if ($(this).is('input[type="radio"]')) {
-            // Handle radio buttons
             if ($(this).is(':checked')) {
                 data[fieldName] = $(this).val();
             }
         } else if ($(this).is('select')) {
-            // Handle dropdowns
             data[fieldName] = $(this).val();
         } else {
-            // Handle other input elements
             data[fieldName] = $(this).val();
         }
     });
-
-    // Remove the last comma for checkbox values
+    
     for (const fieldName in data) {
         if (Array.isArray(data[fieldName])) {
             data[fieldName] = data[fieldName].join(',');
@@ -239,14 +232,12 @@ function loadUserDetails(userId) {
         success: function (response) {
             var user = response.d;
             populateFormFields(user);
-
-            // Usage for present address
+            
             var presentCountryId = user.PresentAddress.CountryId;
             getAllCountries(presentCountryId, "#ddlPresentCountry", function () {
                 populateStates('#ddlPresentState', presentCountryId, user.PresentAddress.StateId);
             });
-
-            // Usage for permanent address
+            
             var permanentCountryId = user.PermanentAddress.CountryId;
             getAllCountries(permanentCountryId, "#ddlPermanentCountry", function () {
                 populateStates('#ddlPermanentState', permanentCountryId, user.PermanentAddress.StateId);
@@ -303,7 +294,6 @@ function populateStates(stateDropdownId, countryId, selectedStateId) {
 
 
 function populateFormFields(user) {
-    // Populate the form fields with user details
     $("#txtFirstName").val(user.FirstName);
     $("#txtLastName").val(user.LastName);
     $("#txtMiddleName").val(user.MiddleName);
@@ -314,13 +304,12 @@ function populateFormFields(user) {
     $("#txtMotherMiddleName").val(user.MotherMiddleName);
     $("#txtMotherLastName").val(user.MotherLastName);
     $("#txtEmail").val(user.Email);
-    $("#txtDateOfBirth").val(user.DateOfBirth); // Assuming DateOfBirth is the property name
+    $("#txtDateOfBirth").val(user.DateOfBirth);
     $("#ddlBloodGroup").val(user.BloodGroup);
     $("#txtMobile").val(user.MobileNo);
     $("#ddlIdType").val(user.IDType);
     $("#txtIdNumber").val(user.IDNo);
-
-    // Handle gender
+    
     if (user.Gender === "Male") {
         $("#rbMale").prop("checked", true);
     } else if (user.Gender === "Female") {
@@ -328,46 +317,37 @@ function populateFormFields(user) {
     } else if (user.Gender === "Others") {
         $("#rbOthers").prop("checked", true);
     }
-
-    // Handle hobbies
+    
     var hobbies = user.Hobbies.split(',');
     hobbies.forEach(function (hobby) {
-        $("#" + hobby.trim()).prop("checked", true); // Use trim() to remove whitespace
+        $("#" + hobby.trim()).prop("checked", true);
     });
-
-    // Handle file details (if applicable)
-    $("#lblFileName").text(user.FileOriginal); // Assuming lblFileName is a label to display the file name
-
-    // Handle present address
+    
+    $("#lblFileName").text(user.FileOriginal);
+    
     $("#txtPresentHouse").val(user.PresentAddress.DoorNo);
     $("#txtPresentStreet").val(user.PresentAddress.Street);
     $("#txtPresentCity").val(user.PresentAddress.City);
     $("#txtPresentPincode").val(user.PresentAddress.PostalCode);
     var presentCountryId = user.PresentAddress.CountryId;
-    populateCountries("#ddlPresentCountry", presentCountryId); // Populate present country dropdown
+    populateCountries("#ddlPresentCountry", presentCountryId);
     $("#ddlPresentCountry").val(user.PresentAddress.CountryId)
-    populateStates("#ddlPresentState", presentCountryId, user.PresentAddress.StateId); // Populate present state dropdown
-
-    // Usage for permanent address
-
-
-    // Handle permanent address (similar to present address)
+    populateStates("#ddlPresentState", presentCountryId, user.PresentAddress.StateId);
+    
     $("#txtPermanentHouseNo").val(user.PermanentAddress.DoorNo);
     $("#txtPermanentStreet").val(user.PermanentAddress.Street);
     $("#txtPermanentCity").val(user.PermanentAddress.City);
     $("#txtPermanentPincode").val(user.PermanentAddress.PostalCode);
 
-
-    // Usage for permanent address
+   
     var permanentCountryId = user.PermanentAddress.CountryId;
-    populateCountries("#ddlPermanentCountry", permanentCountryId); // Populate permanent country dropdown
-    populateStates("#ddlPermanentState", permanentCountryId, user.PermanentAddress.StateId); // Populate permanent state dropdown
+    populateCountries("#ddlPermanentCountry", permanentCountryId); 
+    populateStates("#ddlPermanentState", permanentCountryId, user.PermanentAddress.StateId);
     
     setSelectedState(user.PermanentAddress.StateId, user.PermanentAddress.CountryId, selectedCountryName, $("#ddlPermanentState"));
 }
 
 function setSelectedState(stateId, countryId, selectedCountryName, stateDropdown) {
-    // Call the web method to get the state name
     $.ajax({
         type: "POST",
         url: "RegisterForm.aspx/GetStateNameById",
@@ -393,7 +373,7 @@ function populateCountries(dropDownListId, selectedCountryId) {
         contentType: 'application/json',
         dataType: 'json',
         success: function (response) {
-            var countries = response.d; // Assuming response contains countries in the correct format
+            var countries = response.d;
             populateCountryDropdown('#ddlPresentCountry', countries);
             populateCountryDropdown('#ddlPermanentCountry', countries);
         },
@@ -411,13 +391,13 @@ function populateStates(dropDownListId, countryId, selectedStateId) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            var states = response.d; // Assuming response contains states for the selected country
+            var states = response.d; 
             var ddlStates = $(dropDownListId);
-            ddlStates.empty(); // Clear existing options
+            ddlStates.empty(); 
             $.each(states, function (index, state) {
                 ddlStates.append($("<option></option>").val(state.StateId).text(state.StateName));
             });
-            // Select the previously selected state if available
+            
             if (selectedStateId) {
                 ddlStates.val(selectedStateId);
             }
@@ -482,5 +462,3 @@ function populateCountryDropdown(countryDropdownId, countries, selectedCountryId
         $countryDropdown.append($newOption);
     });
 }
-
-// Usage for present address
