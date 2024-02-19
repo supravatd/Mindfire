@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,42 +11,27 @@ namespace DemoUserManagement.Web
 {
     public partial class _Default : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-        protected void Login(object sender, EventArgs e)
+        [WebMethod]
+        public static object Login_Click(string email, string password)
         {
             try
             {
-                string email = txtEmail.Text;
-                string password = txtPassword.Text;
-                int isUser = Business.Business.IsUser(email, password);
-
-                if (isUser != -1)
+                int userId = Business.Business.IsUser(email, password);
+                //Session["UserId"] = userId;
+                if (userId > 0)
                 {
-                    bool isadmin = Business.Business.IsAdmin(isUser);
-                    Session["id"] = isUser;
-                    if (isadmin == true)
-                    {
-                        Response.Redirect("UserForm.aspx?UserId=" + isUser, false);
-                    }
-                    else
-                    {
-                        Response.Redirect("UserList.aspx?UserId=" + isUser, false);
-                    }
-
+                    return new { success = true, user = userId };
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Wrong Credentials');", true);
+                    return new { success = false, message = "Invalid email or password." };
                 }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex);
+                return new { success = false, message = "An error occurred during login." };
             }
         }
-
     }
 }

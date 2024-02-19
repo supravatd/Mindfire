@@ -19,7 +19,7 @@ namespace DemoUserManagement.DAL
                     {
                         var user = dtContext.UserDetails.Single(x => x.Email == email);
                         var userroles = dtContext.UserRoles.Where(x => x.UserId == user.UserId).ToList();
-                        if (user.userpassword == password)
+                        if (user.Password == password)
                         {
                             return user.UserId;
                         }
@@ -47,7 +47,8 @@ namespace DemoUserManagement.DAL
                 using (var dtContext = new DemoUserManagementEntities())
                 {
 
-                    var user = dtContext.UserDetails.Single(x => x.Email == email);
+                    var user = dtContext.UserDetails.Single(x => x.Email == "fjfe");
+                    //TODO:Change
                     var userroles = dtContext.UserRoles.Where(x => x.UserId == user.UserId).ToList();
                     var isadmin = false;
                     foreach (var x in userroles)
@@ -62,7 +63,7 @@ namespace DemoUserManagement.DAL
             }
             catch (Exception ex)
             {
-                CommonFunctions.WriteLogFile(ex);
+                Logger.AddData(ex);
             }
             return false;
 

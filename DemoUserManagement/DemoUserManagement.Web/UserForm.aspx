@@ -88,25 +88,21 @@
             </div>
 
             <div class="row">
-                <div class="mobile col-sm-6 row">
-                    <asp:Label ID="lblMobile" runat="server" AssociatedControlID="ddlMobileCode">Mobile No.<sup>*</sup></asp:Label>
-                    <div class="mobileCode col-sm-3">
-                        <asp:DropDownList ID="ddlMobileCode" runat="server" ClientIDMode="Static" CssClass="country form-control" data-entry-label="Country Code" ToolTip="Country Code">
-                            <asp:ListItem Text="+91" Value="+91" />
-                            <asp:ListItem Text="+1" Value="+1" />
-                            <asp:ListItem Text="+44" Value="+44" />
-                            <asp:ListItem Text="+975" Value="+975" />
-                            <asp:ListItem Text="+39" Value="+39" />
-                        </asp:DropDownList>
-                    </div>
-                    <div class="col-sm-9">
+                <div class="col-sm-4">
+                    <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword">Password<sup>*</sup></asp:Label>
+                    <asp:TextBox ID="txtPassword" runat="server" ClientIDMode="Static" CssClass="password form-control" TextMode="Password" data-entry-label="Password" placeholder="Enter your password" ToolTip="Password" data-bs-toggle="tooltip" />
+                    <div class="error"></div>
+                </div>
+                <div class="mobile col-sm-4 row">
+                    <asp:Label ID="lblMobile" runat="server" AssociatedControlID="txtMobile">Mobile No.<sup>*</sup></asp:Label>
+                    <div class="col-sm-12">
                         <asp:TextBox ID="txtMobile" runat="server" ClientIDMode="Static" CssClass="no form-control" data-entry-label="Mobile No" placeholder="Enter your number" ToolTip="Mobile No" data-bs-toggle="tooltip" />
                         <div class="error"></div>
                     </div>
                 </div>
-                <div class="id col-sm-6 row">
+                <div class="id col-sm-4 row">
                     <asp:Label ID="lblId" runat="server" AssociatedControlID="ddlIdType">ID<sup>*</sup></asp:Label>
-                    <div class="idNo col-sm-4">
+                    <div class="col-sm-3">
                         <asp:DropDownList ID="ddlIdType" runat="server" ClientIDMode="Static" CssClass="selectIdType form-control" data-entry-label="ID Type" ToolTip="ID Type">
                             <asp:ListItem Text="ID type" Value="" />
                             <asp:ListItem Text="Aadhar" Value="Aadhar" />
@@ -115,11 +111,12 @@
                             <asp:ListItem Text="Voter" Value="Voter" />
                         </asp:DropDownList>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <asp:TextBox ID="txtIdNumber" runat="server" ClientIDMode="Static" CssClass="idNumber form-control" data-entry-label="ID No" placeholder="Select ID Type First" ToolTip="ID No" data-bs-toggle="tooltip" />
                         <div class="error"></div>
                     </div>
                 </div>
+
             </div>
 
             <div class="gender col-sm-4">
@@ -243,9 +240,9 @@
         <br />
         <div class="form-group">
             <div class="d-flex align-items-center">
-                <h5 class="mr-3 mb-0">Upload Resume:</h5>
+                <h5 class="mr-6 mb-1">Upload Resume:</h5>
                 <div class="input-group">
-                    <asp:Label ID="lblFileName" runat="server" CssClass="form-control" Text="No file selected" />
+                    <asp:Label ID="lblFileName" runat="server"></asp:Label>
                     <asp:HiddenField ID="FileGuid" runat="server" />
                     <div class="custom-file">
                         <asp:FileUpload ID="FileUploadControl" runat="server" CssClass="custom-file-input" />

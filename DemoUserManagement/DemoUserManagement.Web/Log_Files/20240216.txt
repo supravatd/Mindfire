@@ -1,0 +1,28 @@
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at DemoUserManagement.Web._Default.Login_Click(Object sender, EventArgs e) in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\Login.aspx.cs:line 27
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at DemoUserManagement.Web._Default.Login_Click(Object sender, EventArgs e) in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\Login.aspx.cs:line 27
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: value
+   at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
+   at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 128
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: value
+   at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
+   at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 128
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: value
+   at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
+   at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 128
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: value
+   at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
+   at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 128

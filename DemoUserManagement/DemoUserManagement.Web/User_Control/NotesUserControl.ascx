@@ -3,7 +3,7 @@
 <style>
     .notes {
         height: 100px;
-        width: 1000px;
+        width: 500px;
     }
 
     .notesDisplay {
@@ -27,16 +27,21 @@
             </div>
         </div>
         <div class="col-md-6">
-            <asp:GridView ID="NotesGrid" runat="server" AutoGenerateColumns="false" ClientIDMode="Static" AllowCustomPaging="true" AllowSorting="true" AllowPaging="true"
-                PageSize="3" OnSorting="NotesGrid_Sorting" OnPageIndexChanging="NotesGrid_PageIndexChanging" EnableViewState="true">
-                <Columns>
-                    <asp:BoundField HeaderText="Note ID" DataField="NoteID" ItemStyle-Width="150px" SortExpression="NoteID" />
-                    <asp:BoundField HeaderText="Note" DataField="NoteData" ItemStyle-Width="150px" SortExpression="NoteData" />
-                    <asp:BoundField HeaderText="Object ID" DataField="ObjectID" ItemStyle-Width="150px" SortExpression="ObjectID" />
-                    <asp:BoundField HeaderText="Object Type" DataField="ObjectType" ItemStyle-Width="150px" SortExpression="ObjectType" />
-                    <asp:BoundField HeaderText="Added On" DataField="DateTimeAdded" ItemStyle-Width="300px" SortExpression="DateTimeAdded" />
-                </Columns>
-            </asp:GridView>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                <ContentTemplate>
+                    <asp:GridView ID="NotesGrid" runat="server" AutoGenerateColumns="false" ClientIDMode="Static" AllowCustomPaging="true" AllowSorting="true" AllowPaging="true"
+                        PageSize="3" OnSorting="NotesGrid_Sorting" OnPageIndexChanging="NotesGrid_PageIndexChanging" EnableViewState="true">
+                        <Columns>
+                            <asp:BoundField HeaderText="Note ID" DataField="NoteID" ItemStyle-Width="150px" SortExpression="NoteID" />
+                            <asp:BoundField HeaderText="Note" DataField="NoteData" ItemStyle-Width="150px" SortExpression="NoteData" />
+                            <asp:BoundField HeaderText="Object ID" DataField="ObjectID" ItemStyle-Width="150px" SortExpression="ObjectID" />
+                            <asp:BoundField HeaderText="Object Type" DataField="ObjectType" ItemStyle-Width="150px" SortExpression="ObjectType" />
+                            <asp:BoundField HeaderText="Added On" DataField="DateTimeAdded" ItemStyle-Width="300px" SortExpression="DateTimeAdded" />
+                        </Columns>
+                    </asp:GridView>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
+
     </div>
 </div>

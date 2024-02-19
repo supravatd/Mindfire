@@ -35,10 +35,12 @@ namespace DemoUserManagement.Web
                 if (!string.IsNullOrEmpty(Request.QueryString["UserId"]))
                 {
                     NotesUserControl.Visible = true;
+                    DocumentUserControl.Visible= true;
                 }
                 else
                 {
                     NotesUserControl.Visible = false;
+                    DocumentUserControl.Visible= false;
                 }
             }
         }
@@ -249,6 +251,7 @@ namespace DemoUserManagement.Web
                 MotherLastName = txtMotherLastName.Text,
                 Email = txtEmail.Text,
                 Dob = ParseDateOfBirth(txtDateOfBirth.Text),
+                Password = txtPassword.Text,
                 BloodGroup = ddlBloodGroup.SelectedValue,
                 MobileNo = txtMobile.Text,
                 IDType = ddlIdType.SelectedValue,
@@ -280,9 +283,11 @@ namespace DemoUserManagement.Web
                 CountryId = int.Parse(ddlPermanentAddressCountry.SelectedValue),
                 StateId = int.Parse(ddlPermanentAddressState.SelectedValue)
             };
-            Business.Business business = new Business.Business();
-            business.AddUserAddress(user, presentAddress, permanentAddress);
-            Response.Redirect("UserList.aspx");
+            
+            Business.Business.AddUserAddress(user, presentAddress, permanentAddress);
+
+            int userId = Business.Business.GetUserId(user);
+            Response.Redirect("UserForm.aspx?UserId=" + userId);
         }
 
         private DateTime? ParseDateOfBirth(string text)
@@ -361,7 +366,7 @@ namespace DemoUserManagement.Web
                 }
             };
             Business.Business.UpdateUser(userId, user);
-            Response.Redirect("UserList.aspx");
+            Response.Redirect("UserForm.aspx?UserId=" + userId);
         }
 
         private string GetSelectedGender()
@@ -413,10 +418,7 @@ namespace DemoUserManagement.Web
 
                 fileUploadControl.SaveAs(filePath);
             }
-
             return (guid, filename);
         }
-
-
     }
 }

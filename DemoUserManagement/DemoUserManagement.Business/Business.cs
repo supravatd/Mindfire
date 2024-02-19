@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DemoUserManagement.DAL.DAL;
 using static DemoUserManagement.Models.Model;
 
 namespace DemoUserManagement.Business
@@ -36,13 +37,14 @@ namespace DemoUserManagement.Business
         }
 
 
-        public void AddUserAddress(UserModel userModel, AddressModel presentAddress, AddressModel permanentAddress)
+        public static void AddUserAddress(UserModel userModel, AddressModel presentAddress, AddressModel permanentAddress)
         {
             int userId = DAL.DAL.SaveUser(userModel);
             presentAddress.UserId = userId;
             DAL.DAL.SaveAddress(presentAddress);
             permanentAddress.UserId = userId;
             DAL.DAL.SaveAddress(permanentAddress);
+            DAL.DAL.AddRole(userId);
         }
 
         public static void UpdateUser(int userId, UserModel userModel)
@@ -50,10 +52,20 @@ namespace DemoUserManagement.Business
             DAL.Update.UpdateUser(userId, userModel);
         }
 
+        public static int GetUserId(UserModel userModel)
+        {
+            return DAL.DAL.SaveUser(userModel);
+        }
+
         public static List<UserModel> GetAllUsers(int pageIndex, int pageSize)
         {
             UsersDAL usersDAL = new UsersDAL();
             return usersDAL.GetAllUsers(pageIndex, pageSize);
+        }
+
+        public static bool IsAdmin(int userId)
+        {
+            return DAL.DAL.IsAdmin(userId);
         }
 
         public static int GetTotalUsers()
@@ -80,17 +92,17 @@ namespace DemoUserManagement.Business
             noteDAL.AddNote(note);
         }
 
-        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize,int objectId)
+        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
         {
             List<NoteModel> notes = new List<NoteModel>();
             DAL.DAL noteDAL = new DAL.DAL();
-            notes = noteDAL.GetAllNotes(pageIndex,pageSize,objectId);
+            notes = noteDAL.GetAllNotes(pageIndex, pageSize, objectId);
             return notes;
         }
 
-        public static void SaveFileToDatabase(int userId,string filename, string guid)
+        public static void SaveFileToDatabase(int userId, string filename, string guid)
         {
-            DAL.DAL.SaveFileToDatabase(userId,filename, guid);
+            DAL.DAL.SaveFileToDatabase(userId, filename, guid);
         }
 
         public static List<DocumentTypeModel> GetDocumentType()
@@ -112,7 +124,7 @@ namespace DemoUserManagement.Business
 
         public static List<DocumentModel> GetUploadedDocuments(int pageIndex, int pageSize, int objectId)
         {
-            return DAL.DAL.GetDocuments(pageIndex,pageSize,objectId);
+            return DAL.DAL.GetDocuments(pageIndex, pageSize, objectId);
         }
 
         public static int GetTotalDocuments(int objectId)
@@ -122,12 +134,12 @@ namespace DemoUserManagement.Business
 
         public static int IsUser(string email, string password)
         {
-            throw new NotImplementedException();
+            return DAL.DAL.IsUser(email, password);
         }
 
-        public static bool IsAdmin(int isuser)
+        public static bool UserExists(string email)
         {
-            throw new NotImplementedException();
+            return DAL.DAL.UserExists(email);
         }
     }
 }

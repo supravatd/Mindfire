@@ -34,6 +34,7 @@ namespace DemoUserManagement.DAL
         public string MotherMiddleName { get; set; }
         public string MotherLastName { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
         public System.DateTime Dob { get; set; }
         public string BloodGroup { get; set; }
         public string MobileNo { get; set; }

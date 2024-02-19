@@ -114,6 +114,24 @@ namespace DemoUserManagement.DAL
                 context.SaveChanges();
             }
         }
+        public static void AddRole(int userId)
+        {
+            using (DemoUserManagementEntities context = new DemoUserManagementEntities())
+            {
+                var defaultRole = context.Roles.FirstOrDefault(r => r.IsDefault == "True");
+
+                if (defaultRole != null)
+                {
+                    var userRole = new UserRole
+                    {
+                        UserId = userId,
+                        RoleID = defaultRole.RoleId
+                    };
+                    context.UserRoles.Add(userRole);
+                    context.SaveChanges();
+                }
+            }
+        }
 
         public void AddNote(NoteModel note)
         {
@@ -231,7 +249,7 @@ namespace DemoUserManagement.DAL
                         ObjectID = n.ObjectId,
                         ObjectType = n.ObjectType,
                         DocumentType = n.DocType,
-                        DocumnetNameOnDisk=n.DocNameOnDisk,
+                        DocumnetNameOnDisk = n.DocNameOnDisk,
                         DocumentOriginalName = n.DocOriginalName,
                         AddedOn = n.Addedon.ToString(),
                     })
@@ -258,6 +276,54 @@ namespace DemoUserManagement.DAL
 
             return totalDoc;
         }
+
+        public static int IsUser(string email, string password)
+        {
+            int userId = 0;
+            try
+            {
+                using (var context = new DemoUserManagementEntities())
+                {
+                    if ((email != "") && password != "")
+                    {
+                        var user = context.UserDetails.Single(x => x.Email == email);
+                        //var userroles = context.UserRoles.Where(x => x.UserId == user.UserId).ToList();
+                        if (user.Password == password)
+                        {
+                            userId = user.UserId;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
+            return userId;
+        }
+
+        public static bool IsAdmin(int userId)
+        {
+            using (var context = new DemoUserManagementEntities())
+            {
+                var isAdmin = (from ur in context.UserRoles
+                               join r in context.Roles on ur.RoleID equals r.RoleId
+                               where ur.UserId == userId && r.IsAdmin == "True"
+                               select r).Any();
+
+                return isAdmin;
+            }
+        }
+
+        public static bool UserExists(string email)
+        {
+
+            using (var context = new DemoUserManagementEntities())
+            {
+                return context.UserDetails.Any(u => u.Email == email);
+            }
+        }
+
     }
 }
 

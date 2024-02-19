@@ -19,16 +19,16 @@ namespace DemoUserManagement.Models
         public string MotherMiddleName { get; set; }
         public string MotherLastName { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
         public DateTime? Dob { get; set; }
         public string BloodGroup { get; set; }
         public string MobileNo { get; set; }
         public string IDType { get; set; }
         public string IDNo { get; set; }
-        public string Gender {  get; set; }
-        public string Hobbies { get; set;}
-        public string FileGuid {  get; set; }
-        public string FileOriginal {  get; set; }
-
+        public string Gender { get; set; }
+        public string Hobbies { get; set; }
+        public string FileGuid { get; set; }
+        public string FileOriginal { get; set; }
         public AddressModel PresentAddress { get; set; }
         public AddressModel PermanentAddress { get; set; }
     }

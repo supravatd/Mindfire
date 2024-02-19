@@ -17,11 +17,26 @@ namespace DemoUserManagement.Web
             PageNameLabel.InnerText = Page.Title;
             if (!IsPostBack)
             {
+                UserListNavItem.Visible = false;
+                LogoutLink.Visible = false;
                 string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath);
                 HtmlAnchor li = (HtmlAnchor)FindControl(pageName + "Link");
                 if (li != null)
                 {
                     li.Attributes.Add("class", "current");
+                }
+
+                if (!string.IsNullOrEmpty(Request.QueryString["UserId"]))
+                {
+                    LogoutLink.Visible=true;
+                    if (int.TryParse(Request.QueryString["UserId"], out int userId))
+                    {
+                        bool admin = Business.Business.IsAdmin(userId);
+                        if (admin)
+                        {
+                            UserListNavItem.Visible = true;
+                        }
+                    }
                 }
             }
         }

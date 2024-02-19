@@ -37,5 +37,13 @@ namespace DemoUserManagement.Models
             public string DocumentOriginalName { get; set; }
             public string AddedOn { get; set; }
         }
+
+        public class RoleModel
+        {
+            public int RoleId { get; set; }
+            public string RoleName { get; set; }
+            public string IsDefault { get; set; }
+            public string IsAdmin { get; set; }
+        }
     }
 }
