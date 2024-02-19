@@ -15,6 +15,15 @@ namespace DemoUserManagement.Web
     {
 
         /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
+
+        /// <summary>
         /// DisplayUser control.
         /// </summary>
         /// <remarks>

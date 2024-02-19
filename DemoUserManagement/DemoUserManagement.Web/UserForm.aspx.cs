@@ -10,11 +10,13 @@ using System.Linq;
 using System.Security.Policy;
 using System.Web.UI.WebControls;
 using static DemoUserManagement.Models.Model;
+using static DemoUserManagement.Utils.Utils;
 
 namespace DemoUserManagement.Web
 {
     public partial class UserForm : System.Web.UI.Page
     {
+        public AddressType Type { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -346,7 +348,7 @@ namespace DemoUserManagement.Web
                 FileOriginal = fileOriginal,
                 PresentAddress = new AddressModel
                 {
-                    Type=0,
+                    Type = (int)AddressType.Present,
                     DoorNo = txtPresentAddressHouse.Text,
                     Street = txtPresentAddressStreet.Text,
                     City = txtPresentAddressCity.Text,
@@ -356,7 +358,7 @@ namespace DemoUserManagement.Web
                 },
                 PermanentAddress = new AddressModel
                 {
-                    Type=1,
+                    Type = (int)AddressType.Present,
                     DoorNo = txtPermanentAddressHouseNo.Text,
                     Street = txtPermanentAddressStreet.Text,
                     City = txtPermanentAddressCity.Text,

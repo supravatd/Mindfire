@@ -158,3 +158,7 @@ System.ArgumentOutOfRangeException: Specified argument was out of the range of v
 Parameter name: value
    at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
    at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 132
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: value
+   at System.Web.UI.WebControls.PagerSettings.set_PageButtonCount(Int32 value)
+   at DemoUserManagement.Web.User_Control.DocumentUserControl.BindGridView() in D:\Mindfire\DemoUserManagement\DemoUserManagement.Web\User_Control\DocumentUserControl.ascx.cs:line 131

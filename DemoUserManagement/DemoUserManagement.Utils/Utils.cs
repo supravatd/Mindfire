@@ -19,5 +19,10 @@ namespace DemoUserManagement.Utils
             Ascending,
             Descending
         }
+        public enum AddressType
+        {
+            Present = 0,
+            Permanent = 1
+        }
     }    
 }
