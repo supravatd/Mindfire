@@ -3,19 +3,20 @@
 
 <div class="form-group">
     <label for="ddlDocumentType">Select Document Type:</label>
-    <asp:DropDownList ID="ddlDocumentType" runat="server" CssClass="form-control" DataTextField="DocumentTypeName" DataValueField="DocumentTypeID"></asp:DropDownList>
+    <select id="ddlDocumentType" class="form-control"></select>
 </div>
 <div class="form-group">
     <label for="fileUpload">Upload Document:</label>
     <div class="input-group">
         <div class="custom-file">
-            <asp:FileUpload ID="fileUpload" runat="server" CssClass="custom-file-input" />
+            <input type="file" id="fileUpload" class="custom-file-input" />
         </div>
         <div class="input-group-append">
-            <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary" OnClick="btnUpload_Click" />
+            <button type="button" id="btnUpload" class="btn btn-primary" onclick="">Upload</button>
         </div>
     </div>
 </div>
+
 <br />
 <div class="col-md-6">
     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">

@@ -6,10 +6,12 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static DemoUserManagement.Models.Model;
+using static DemoUserManagement.Utils.Utils;
 
 namespace DemoUserManagement.Web
 {
-    public partial class _Default : Page
+    public partial class _Default : BasePage
     {
         [WebMethod]
         public static object Login_Click(string email, string password)
@@ -17,9 +19,16 @@ namespace DemoUserManagement.Web
             try
             {
                 int userId = Business.Business.IsUser(email, password);
-                //Session["UserId"] = userId;
+                bool role = Business.Business.IsAdmin(userId);
                 if (userId > 0)
                 {
+                    SessionModel sessionModel = new SessionModel
+                    {
+                        UserId = userId,
+                        Role = role
+                    };
+
+                    SessionManager.SetSessionModel(sessionModel);
                     return new { success = true, user = userId };
                 }
                 else

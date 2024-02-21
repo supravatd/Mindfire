@@ -76,8 +76,8 @@
                         <div class="email col-sm-4">
                             <label for="email">Email<sup>*</sup></label>
                             <input id="txtEmail" class="form-control" display-all-data="data" type="email" data-entry-label="Email" name="email"
-                                placeholder="Enter your email" data-bs-toggle="tooltip" oninput="checkEmailAvailability()" />
-                            <div class="error"></div>
+                                placeholder="Enter your email" data-bs-toggle="tooltip" oninput="checkEmailAvailability()" required />
+                            <div id="lblEmailError" class="error"></div>
                         </div>
 
                         <div class="dateofBirth col-sm-4">
@@ -302,28 +302,35 @@
             </fieldset>
 
             <br />
-            <div class="form-group">
-                <div class="d-flex align-items-center">
-                    <h5 class="mr-6 mb-1">Upload Resume:</h5>
-                    <div class="input-group">
-                        <label id="lblFileName"></label>
-                        <input type="hidden" id="FileGuid" />
-                        <div class="custom-file">
-                            <input type="file" id="FileUploadControl" class="custom-file-input" />
+            <fieldset id="userFiles">
+                <div class="form-group">
+                    <div class="d-flex align-items-center">
+                        <h5 class="mr-6 mb-1">Upload Resume:</h5>
+                        <div class="input-group">
+                            <label id="lblFileName"></label>
+                            <input type="hidden" id="FileGuid" />
+                            <div class="custom-file">
+                                <input type="file" id="FileUploadControl" class="custom-file-input" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </fieldset>
             <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>--%>
             <br />
-            <uc1:Notes runat="server" ID="NotesUserControl" />
+            <fieldset id="notesuc">
+                <uc1:Notes runat="server" ID="NotesUserControl" />
+            </fieldset>
             <br />
-            <uc1:DocumentUserControl runat="server" ID="DocumentUserControl" />
+            <fieldset id="documentuc">
+                <uc1:DocumentUserControl runat="server" ID="DocumentUserControl" />
+            </fieldset>
             <br />
-            <div class="text-center">
+            <div class="text-center button">
                 <button id="bttnSubmit" type="button" class="btn btn-primary w-25" data-toggle="modal">Submit</button>
-                <button id="bttnUpdate" type="button" class="bttn bttn-primary w-25" data-toggle="modal">Update</button>
+                <button id="bttnUpdate" type="button" class="btn btn-primary w-25">Update</button>
                 <input id="bttnReset" class="reset btn btn-primary w-25" type="reset" value="Reset" />
+
             </div>
         </div>
 
@@ -337,5 +344,6 @@
         crossorigin="anonymous"></script>
 
     <script src="index.js"></script>
-
+    <script src="User_Control/Notes.js"></script>
+    <script src="FileUpload.js"></script>
 </asp:Content>

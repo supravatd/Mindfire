@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace DemoUserManagement.Web
 {
-    public partial class UserList : System.Web.UI.Page
+    public partial class UserList : BasePage
     {
         string id = "";
 

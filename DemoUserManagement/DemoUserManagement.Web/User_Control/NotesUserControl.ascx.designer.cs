@@ -15,22 +15,13 @@ namespace DemoUserManagement.Web.User_Control
     {
 
         /// <summary>
-        /// txtNotes control.
+        /// hfObjectId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNotes;
-
-        /// <summary>
-        /// bttnAddNotes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnAddNotes;
+        protected global::System.Web.UI.WebControls.HiddenField hfObjectId;
 
         /// <summary>
         /// UpdatePanel1 control.

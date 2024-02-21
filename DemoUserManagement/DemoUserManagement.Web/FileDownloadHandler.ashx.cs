@@ -21,7 +21,7 @@ namespace DemoUserManagement.Web
             if (file.Exists)
             { 
                 context.Response.Clear();  
-                context.Response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name);
+                context.Response.AddHeader("Content-Disposition", "inline; filename=" + file.Name);
                 context.Response.ContentType = "application/octet-stream";
                 context.Response.TransmitFile(file.FullName);
                 context.Response.Flush();

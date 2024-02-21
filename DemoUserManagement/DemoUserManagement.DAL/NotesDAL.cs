@@ -12,7 +12,7 @@ namespace DemoUserManagement.DAL
 {
     public class NotesDAL
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
+        public string connectionString = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
 
         public void AddNote(string note, string userId, string pageName, DateTime dateTime)
         {
@@ -59,13 +59,14 @@ namespace DemoUserManagement.DAL
 
             return dataTable;
         }
-        public int GetTotalNotes(int objectId)
+        public static int GetTotalNotes(int objectId)
         {
             int totalNotes = 0;
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                NotesDAL notesDal = new NotesDAL();
+                using (SqlConnection connection = new SqlConnection(notesDal.connectionString))
                 {
                     connection.Open();
 

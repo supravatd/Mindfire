@@ -45,5 +45,11 @@ namespace DemoUserManagement.Models
             public string IsDefault { get; set; }
             public string IsAdmin { get; set; }
         }
+
+        public class SessionModel
+        {
+            public int UserId { get; set; }
+            public bool Role { get; set; }
+        }
     }
 }

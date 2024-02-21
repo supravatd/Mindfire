@@ -22,49 +22,12 @@ namespace DemoUserManagement.Web.User_Control
         {
             if (!IsPostBack)
             {
-                ddlDocumentType.DataSource = Business.Business.GetDocumentType();
-                ddlDocumentType.DataBind();
+                //ddlDocumentType.DataSource = Business.Business.GetDocumentType();
+                //ddlDocumentType.DataBind();
 
                 if (Visible)
                 {
-                    ViewState["ObjectId"] = ObjectId;
                     BindGridView();
-                }
-            }
-        }
-
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
-            if (fileUpload.HasFile)
-            {
-                try
-                {
-                    string filename = Path.GetFileName(fileUpload.FileName);
-                    string fileExtension = Path.GetExtension(filename);
-                    string guid = Guid.NewGuid().ToString();
-                    string folderPath = Server.MapPath("~/UploadDocuments/");
-                    string filePath = Path.Combine(folderPath, guid + fileExtension);
-
-                    fileUpload.SaveAs(filePath);
-
-                    int documentTypeId = int.Parse(ddlDocumentType.SelectedValue);
-
-                    DocumentModel document = new DocumentModel
-                    {
-                        ObjectID = Convert.ToInt32(ViewState["ObjectId"]),
-                        ObjectType = (int)ObjectType.UserForm,
-                        DocumentType = documentTypeId,
-                        DocumentOriginalName = filename,
-                        DocumnetNameOnDisk = guid + fileExtension,
-                        AddedOn = DateTime.Now.ToString("d")
-                    };
-
-                    Business.Business.AddDocument(document);
-                    BindGridView();
-                }
-                catch (Exception ex)
-                {
-                    Logger.AddData(ex);
                 }
             }
         }

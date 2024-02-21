@@ -11,14 +11,7 @@ namespace DemoUserManagement.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = Request.QueryString["email"];
-
-            if (!string.IsNullOrEmpty(email))
-            {
-                bool userExists = Business.Business.UserExists(email);
-                Response.Write(userExists.ToString());
-                Response.End();
-            }
+            
         }
     }
 }

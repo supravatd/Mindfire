@@ -74,10 +74,9 @@ namespace DemoUserManagement.Business
             return usersDAL.GetTotalUsers();
         }
 
-        public int GetTotalNotes(int objectId)
+        public static int GetTotalNotes(int objectId)
         {
-            DAL.NotesDAL notesDAL = new DAL.NotesDAL();
-            return notesDAL.GetTotalNotes(objectId);
+            return NotesDAL.GetTotalNotes(objectId);
         }
 
         public static UserModel GetUserById(int userId)
@@ -92,11 +91,10 @@ namespace DemoUserManagement.Business
             noteDAL.AddNote(note);
         }
 
-        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
+        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
         {
             List<NoteModel> notes = new List<NoteModel>();
-            DAL.DAL noteDAL = new DAL.DAL();
-            notes = noteDAL.GetAllNotes(pageIndex, pageSize, objectId);
+            notes = DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId);
             return notes;
         }
 
@@ -137,9 +135,14 @@ namespace DemoUserManagement.Business
             return DAL.DAL.IsUser(email, password);
         }
 
-        public static bool UserExists(string email)
+        public static bool EmailExists(string email)
         {
-            return DAL.DAL.UserExists(email);
+            return DAL.DAL.EmailExists(email);
+        }
+
+        public static bool CheckUserEmail(string userId, string email)
+        {
+            return DAL.DAL.UserEmail(userId, email);
         }
     }
 }

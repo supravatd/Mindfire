@@ -18,15 +18,17 @@
         <div class="col-md-6">
             <div class="notesDisplay">
                 <div class="form-group">
-                    <asp:TextBox ID="txtNotes" runat="server" placeholder="Add Notes Here" CssClass="form-control notes" ClientIDMode="Static" BorderStyle="Groove"></asp:TextBox>
+                    <input type="text" id="txtNotes" placeholder="Add Notes Here" class="form-control notes" />
                 </div>
                 <br />
                 <div class="form-group">
-                    <asp:Button ID="bttnAddNotes" runat="server" Text="Add" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClick="bttnAddNotes_Click" />
+                    <button type="button" id="bttnAddNotes" class="btn btn-primary" onclick="addNotes()">Add</button>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
+            <asp:HiddenField ID="hfObjectId" runat="server" />
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                 <ContentTemplate>
                     <asp:GridView ID="NotesGrid" runat="server" AutoGenerateColumns="false" ClientIDMode="Static" AllowCustomPaging="true" AllowSorting="true" AllowPaging="true"
@@ -40,8 +42,10 @@
                         </Columns>
                     </asp:GridView>
                 </ContentTemplate>
+
             </asp:UpdatePanel>
         </div>
-
     </div>
 </div>
+
+

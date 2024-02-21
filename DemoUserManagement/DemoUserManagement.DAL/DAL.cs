@@ -149,7 +149,7 @@ namespace DemoUserManagement.DAL
                 context.SaveChanges();
             }
         }
-        public List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
+        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId)
         {
             List<NoteModel> notes = new List<NoteModel>();
 
@@ -315,13 +315,26 @@ namespace DemoUserManagement.DAL
             }
         }
 
-        public static bool UserExists(string email)
+        public static bool EmailExists(string email)
         {
 
             using (var context = new DemoUserManagementEntities())
             {
                 return context.UserDetails.Any(u => u.Email == email);
             }
+        }
+
+        public static bool UserEmail(string userId, string email)
+        {
+            bool emailExists=false;
+            using (var context = new DemoUserManagementEntities())
+            {
+                if (int.TryParse(userId, out int userIdInt))
+                {
+                    emailExists = context.UserDetails.Any(u => u.UserId == userIdInt && u.Email == email);
+                }
+            }
+            return emailExists;
         }
 
     }

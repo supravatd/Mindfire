@@ -1,4 +1,5 @@
 ﻿using DemoUserManagement.Models;
+using DemoUserManagement.Web.User_Control;
 using StudentLayers.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,13 +7,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static DemoUserManagement.Models.Model;
+using static DemoUserManagement.Utils.Utils;
 
 namespace DemoUserManagement.Web
 {
-    public partial class RegisterForm : System.Web.UI.Page
+    public partial class RegisterForm : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,19 +25,21 @@ namespace DemoUserManagement.Web
                 {
                     if (int.TryParse(Request.QueryString["UserId"], out int userId))
                     {
-                        UserModel user = Business.Business.GetUserById(userId);
-                        string userJson = Newtonsoft.Json.JsonConvert.SerializeObject(user);
+                        SessionModel session = SessionManager.GetSessionModel();
 
-                        string script = $"<script>populateFormFields({userJson});</script>";
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "populateFormScript", script);
-
-                        NotesUserControl.ObjectId = userId;
-                        DocumentUserControl.ObjectId = userId;
-
-                        if (CheckUserRole(userId) == "user")
+                        if (session.Role == false)
                         {
-                            RedirectIfUnauthorized(userId);
+
+                            NotesUserControl.ObjectId = session.UserId;
+                            DocumentUserControl.ObjectId = session.UserId;
+                            return;
                         }
+                        else if (session.Role == true)
+                        {
+                            NotesUserControl.ObjectId = userId;
+                            DocumentUserControl.ObjectId = userId;
+                        }
+
                     }
 
                     NotesUserControl.Visible = true;
@@ -48,34 +53,13 @@ namespace DemoUserManagement.Web
             }
         }
 
-        private string CheckUserRole(int userId)
-        {
-            bool isAdmin = Business.Business.IsAdmin(userId);
-            return isAdmin ? "admin" : "user";
-        }
-
-        private void RedirectIfUnauthorized(int userId)
-        {
-            string requestedUserId = Request.QueryString["UserId"];
-
-            if (!string.IsNullOrEmpty(requestedUserId) && int.TryParse(requestedUserId, out int requestedId))
-            {
-                if (userId != requestedId)
-                {
-                    Response.Redirect("RegisterForm.aspx?UserId=" + userId);
-                }
-            }
-        }
-
         [WebMethod]
         public static void SubmitFormData(UserModel user, AddressModel presentAddress, AddressModel permanentAddress)
         {
             try
             {
                 Business.Business.AddUserAddress(user, presentAddress, permanentAddress);
-
-                int userId = Business.Business.GetUserId(user);
-                HttpContext.Current.Response.Redirect("RegisterForm.aspx?UserId=" + userId, false);
+                HttpContext.Current.Response.Redirect("Login.aspx", false);
             }
             catch (Exception ex)
             {
@@ -94,28 +78,10 @@ namespace DemoUserManagement.Web
         public static string PopulateStates(int countryId)
         {
             List<StateModel> stateList = Business.Business.GetStateList(countryId);
-            return new JavaScriptSerializer().Serialize(stateList);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Serialize(stateList);
         }
 
-        [WebMethod]
-        public static void BindDropDownList<T>(string ddlId, List<T> list, string textField, string valueField)
-        {
-            var page = HttpContext.Current.CurrentHandler as Page;
-            var ddl = page.FindControl(ddlId) as DropDownList;
-
-            ddl.DataSource = list;
-            ddl.DataTextField = textField;
-            ddl.DataValueField = valueField;
-            ddl.DataBind();
-            ddl.Items.Insert(0, new ListItem("Select", ""));
-        }
-
-        [WebMethod]
-        public static void LoadUserDetails()
-        {
-
-        }
-        
         [WebMethod]
         public static UserModel GetUserDetails(int userId)
         {
@@ -126,23 +92,32 @@ namespace DemoUserManagement.Web
             catch (Exception ex)
             {
                 Logger.AddData(ex);
-                throw; 
+                throw;
             }
         }
 
         [WebMethod]
-        private string GetCountryNameById(int countryId)
+        public static void UpdateFormData(UserModel user)
         {
-            List<CountryModel> countryList = Business.Business.GetCountryList();
-            CountryModel country = countryList.FirstOrDefault(c => c.CountryId == countryId);
-            return country != null ? country.CountryName : null;
-        }
-        [WebMethod]
-        public string GetStateNameById(int stateId, int countryId)
-        {
-            List<StateModel> states = Business.Business.GetStateList(countryId);
-            StateModel state = states.FirstOrDefault(s => s.StateId == stateId);
-            return state != null ? state.StateName : null;
+            try
+            {
+                BasePage basePage = new BasePage();
+                if (basePage.IsSessionValid())
+                {
+                    SessionModel session = SessionManager.GetSessionModel();
+                    int userId = session.UserId;
+                    Business.Business.UpdateUser(userId, user);
+                    HttpContext.Current.Response.Redirect("Login.aspx", false);
+                }
+                else
+                {
+                    HttpContext.Current.Response.Write("Session expired or invalid.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.AddData(ex);
+            }
         }
     }
 }

@@ -45,6 +45,7 @@ namespace DemoUserManagement.Web
                     DocumentUserControl.Visible= false;
                 }
             }
+            
         }
 
         private void LoadUserDetails(int userId)

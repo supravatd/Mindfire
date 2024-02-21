@@ -50,6 +50,11 @@ body {
         background-color: #bfbfbf;
     }
 
+.button {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #NewUser {
     background-color: #4CAF50;
     color: white;

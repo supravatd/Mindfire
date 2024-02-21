@@ -1,13 +1,16 @@
 ﻿$(document).ready(function () {
+    showButton(true);
     const queryString = window.location.search;
     const url = new URLSearchParams(queryString);
     userId = url.get("UserId");
     if (userId) {
+        showButton(false);
         loadUserDetails(userId);
-    }
 
+    }
     const idTypes = ["Aadhar", "Pan", "DL", "Voter"];
     const selectIdType = $("[name='idType']");
+
     getCountry();
 
     $('#ddlPresentCountry').on('change', function () {
@@ -32,7 +35,21 @@
     });
 
     $("#bttnSubmit").on("click", function () {
+        var lblEmailError = document.getElementById("lblEmailError");
+        if (lblEmailError.textContent === "Email Already exists.") {
+            alert("Email already exists. Please choose a different email.");
+            return;
+        }
         sendFormData();
+    });
+
+    $("#bttnUpdate").on("click", function () {
+        var lblEmailError = document.getElementById("lblEmailError");
+        if (lblEmailError.textContent === "Email Already exists.") {
+            alert("Email already exists. Please choose a different email.");
+            return;
+        }
+        updateUser();
     });
 
     $(window).on("click", function (event) {
@@ -43,35 +60,64 @@
 });
 
 function checkEmailAvailability() {
-    var email = document.getElementById("txtEmail").value;
-    var errorMessageElement = document.querySelector(".email .error");
+    document.getElementById("txtEmail").addEventListener("focusout", function () {
+        var email = document.getElementById("txtEmail").value;
 
-    // Create a new XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
-
-    // Configure the request
-    xhr.open("GET", "CheckUserExists.aspx?email=" + email, true);
-    
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                var response = xhr.responseText;
-                if (response === "valid") {
-                    errorMessageElement.innerText = "Email is available.";
-                    errorMessageElement.style.color = "green";
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.d) {
+                        document.getElementById("lblEmailError").textContent = "Email Already exists.";
+                        document.getElementById("lblEmailError").style.color = "red";
+                    } else {
+                        document.getElementById("lblEmailError").textContent = "Valid Email.";
+                        document.getElementById("lblEmailError").style.color = "green";
+                    }
                 } else {
-                    errorMessageElement.innerText = "Email is not available.";
-                    errorMessageElement.style.color = "red";
+                    console.error(xhr.responseText);
+                    document.getElementById("lblEmailError").textContent = "Error checking email.";
                 }
-            } else {
-                errorMessageElement.innerText = "Error occurred while checking email availability.";
-                errorMessageElement.style.color = "red";
             }
-        }
-    };
 
-    // Send the request
-    xhr.send();
+        };
+        checkUserEmail();
+        xhr.open("POST", "RegisterForm.aspx/EmailExists", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({ email: email }));
+    });
+}
+
+function checkUserEmail() {
+    const user = new URLSearchParams(queryString);
+    let userId = url.get("UserId");
+    $.ajax({
+        type: "POST",
+        url: "RegisterForm.aspx/CheckUserEmail",
+        data: JSON.stringify({ userId: userId, email: email }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            document.getElementById("lblEmailError").textContent = "Valid Email.";
+            document.getElementById("lblEmailError").style.color = "green";
+        },
+        error: function (xhr, status, error) {
+            console.error("Error checking email:", error);
+        }
+    });
+}
+
+function showButton(button) {
+    var bttnSubmit = document.getElementById("bttnSubmit");
+    var bttnUpdate = document.getElementById("bttnUpdate");
+    if (button) {
+        bttnSubmit.style.display = "block";
+        bttnUpdate.style.display = "none";
+    } else {
+        bttnSubmit.style.display = "none";
+        bttnUpdate.style.display = "block";
+    }
 }
 
 function copyPresent(sameAsPresent) {
@@ -143,7 +189,7 @@ function getObjectData(selector) {
             data[fieldName] = $(this).val();
         }
     });
-    
+
     for (const fieldName in data) {
         if (Array.isArray(data[fieldName])) {
             data[fieldName] = data[fieldName].join(',');
@@ -152,8 +198,6 @@ function getObjectData(selector) {
 
     return data;
 }
-
-
 
 function selectList(selection, options) {
     $.each(options, function (key, value) {
@@ -186,9 +230,9 @@ function getCountry() {
         contentType: 'application/json',
         dataType: 'json',
         success: function (response) {
-            var countryData = JSON.parse(response.d);
-            populateCountryDropdown('#ddlPresentCountry', countryData);
-            populateCountryDropdown('#ddlPermanentCountry', countryData);
+            var countryData = response.d;
+            populateCountry('#ddlPresentCountry', JSON.parse(countryData));
+            populateCountry('#ddlPermanentCountry', JSON.parse(countryData));
         },
         error: function (xhr, status, error) {
             console.error('Failed to populate countries:', error);
@@ -196,18 +240,28 @@ function getCountry() {
     });
 }
 
-function populateCountryDropdown(selector, data) {
-    var dropdown = $(selector);
+function populateCountry(dropDownListId, countries) {
+    var dropdown = $(dropDownListId);
     dropdown.empty().append($('<option>').text('Select').val(''));
 
-    if (Array.isArray(data)) {
-        $.each(data, function (index, item) {
-            dropdown.append($('<option>').text(item.CountryName).val(item.CountryId));
+    if (Array.isArray(countries)) {
+        $.each(countries, function (index, country) {
+            var option = $('<option></option>').val(country.CountryId).text(country.CountryName);
+            dropdown.append(option);
         });
     } else {
-        console.error('Data is not an array:', data);
+        console.error('Data is not an array:', countries);
     }
 }
+
+function populateCountryDropdown(dropDownListId, selectedCountryId) {
+    var dropdown = $(dropDownListId);
+
+    dropdown.find('option').removeAttr('selected');
+    dropdown.find('option[value="' + selectedCountryId + '"]').attr('selected', 'selected');
+}
+
+
 
 function populateStateDropdown(selector, data) {
     var dropdown = $(selector);
@@ -231,63 +285,11 @@ function loadUserDetails(userId) {
         dataType: "json",
         success: function (response) {
             var user = response.d;
+            id = user.userId;
             populateFormFields(user);
-            
-            var presentCountryId = user.PresentAddress.CountryId;
-            getAllCountries(presentCountryId, "#ddlPresentCountry", function () {
-                populateStates('#ddlPresentState', presentCountryId, user.PresentAddress.StateId);
-            });
-            
-            var permanentCountryId = user.PermanentAddress.CountryId;
-            getAllCountries(permanentCountryId, "#ddlPermanentCountry", function () {
-                populateStates('#ddlPermanentState', permanentCountryId, user.PermanentAddress.StateId);
-            });
         },
         error: function (xhr, status, error) {
             console.error("Error loading user details:", error);
-        }
-    });
-}
-
-function getAllCountries(selectedCountryId, countryDropdownId, callback) {
-    $.ajax({
-        type: "POST",
-        url: "Dashboard.aspx/GetAllCountries",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var countries = response.d;
-            populateCountryDropdown(countryDropdownId, countries, selectedCountryId);
-            if (callback && typeof callback === 'function') {
-                callback();
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error retrieving countries:", error);
-        }
-    });
-}
-
-function populateStates(stateDropdownId, countryId, selectedStateId) {
-    $.ajax({
-        type: "POST",
-        url: "RegisterForm.aspx/PopulateStates",
-        data: JSON.stringify({ countryId: countryId }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var states = response.d;
-            var ddlStates = $(stateDropdownId);
-            ddlStates.empty();
-            $.each(states, function (index, state) {
-                ddlStates.append($("<option></option>").val(state.StateId).text(state.StateName));
-            });
-            if (selectedStateId) {
-                ddlStates.val(selectedStateId);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error populating states:", error);
         }
     });
 }
@@ -304,12 +306,18 @@ function populateFormFields(user) {
     $("#txtMotherMiddleName").val(user.MotherMiddleName);
     $("#txtMotherLastName").val(user.MotherLastName);
     $("#txtEmail").val(user.Email);
-    $("#txtDateOfBirth").val(user.DateOfBirth);
+
+    var dobMilliseconds = parseInt(user.Dob.match(/\d+/)[0]);
+    var dobDate = new Date(dobMilliseconds);
+    var formattedDate = dobDate.toISOString().split('T')[0];
+
+    $("#txtDateOfBirth").val(formattedDate);
+
     $("#ddlBloodGroup").val(user.BloodGroup);
     $("#txtMobile").val(user.MobileNo);
     $("#ddlIdType").val(user.IDType);
     $("#txtIdNumber").val(user.IDNo);
-    
+
     if (user.Gender === "Male") {
         $("#rbMale").prop("checked", true);
     } else if (user.Gender === "Female") {
@@ -317,73 +325,58 @@ function populateFormFields(user) {
     } else if (user.Gender === "Others") {
         $("#rbOthers").prop("checked", true);
     }
-    
+
     var hobbies = user.Hobbies.split(',');
     hobbies.forEach(function (hobby) {
-        $("#" + hobby.trim()).prop("checked", true);
+        switch (hobby.trim()) {
+            case "Reading":
+                $("#chkReading").prop("checked", true);
+                break;
+            case "Singing":
+                $("#chkSinging").prop("checked", true);
+                break;
+            case "Dancing":
+                $("#chkDancing").prop("checked", true);
+                break;
+            case "Traveling":
+                $("#chkTraveling").prop("checked", true);
+                break;
+            case "Gaming":
+                $("#chkGaming").prop("checked", true);
+                break;
+            case "Coding":
+                $("#chkCoding").prop("checked", true);
+                break;
+            default:
+                break;
+        }
     });
-    
+
+
     $("#lblFileName").text(user.FileOriginal);
-    
-    $("#txtPresentHouse").val(user.PresentAddress.DoorNo);
-    $("#txtPresentStreet").val(user.PresentAddress.Street);
-    $("#txtPresentCity").val(user.PresentAddress.City);
-    $("#txtPresentPincode").val(user.PresentAddress.PostalCode);
-    var presentCountryId = user.PresentAddress.CountryId;
-    populateCountries("#ddlPresentCountry", presentCountryId);
-    $("#ddlPresentCountry").val(user.PresentAddress.CountryId)
-    populateStates("#ddlPresentState", presentCountryId, user.PresentAddress.StateId);
-    
-    $("#txtPermanentHouseNo").val(user.PermanentAddress.DoorNo);
-    $("#txtPermanentStreet").val(user.PermanentAddress.Street);
-    $("#txtPermanentCity").val(user.PermanentAddress.City);
-    $("#txtPermanentPincode").val(user.PermanentAddress.PostalCode);
 
-   
-    var permanentCountryId = user.PermanentAddress.CountryId;
-    populateCountries("#ddlPermanentCountry", permanentCountryId); 
-    populateStates("#ddlPermanentState", permanentCountryId, user.PermanentAddress.StateId);
-    
-    setSelectedState(user.PermanentAddress.StateId, user.PermanentAddress.CountryId, selectedCountryName, $("#ddlPermanentState"));
+    if (user.PresentAddress !== null) {
+        $("#txtPresentHouse").val(user.PresentAddress.DoorNo);
+        $("#txtPresentStreet").val(user.PresentAddress.Street);
+        $("#txtPresentCity").val(user.PresentAddress.City);
+        $("#txtPresentPincode").val(user.PresentAddress.PostalCode);
+
+        populateCountryDropdown("#ddlPresentCountry", user.PresentAddress.CountryId);
+        populateStatesSelected("#ddlPresentState", user.PresentAddress.CountryId, user.PresentAddress.StateId);
+    }
+
+    if (user.PermanentAddress !== null) {
+        $("#txtPermanentHouseNo").val(user.PermanentAddress.DoorNo);
+        $("#txtPermanentStreet").val(user.PermanentAddress.Street);
+        $("#txtPermanentCity").val(user.PermanentAddress.City);
+        $("#txtPermanentPincode").val(user.PermanentAddress.PostalCode);
+
+        populateCountryDropdown("#ddlPermanentCountry", user.PermanentAddress.CountryId);
+        populateStatesSelected("#ddlPermanentState", user.PermanentAddress.CountryId, user.PermanentAddress.StateId);
+    }
 }
 
-function setSelectedState(stateId, countryId, selectedCountryName, stateDropdown) {
-    $.ajax({
-        type: "POST",
-        url: "RegisterForm.aspx/GetStateNameById",
-        data: JSON.stringify({ stateId: stateId, countryId: countryId }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var selectedStateName = response.d;
-            if (selectedStateName) {
-                stateDropdown.val(stateId.toString());
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Error retrieving state name:", error);
-        }
-    });
-}
-
-function populateCountries(dropDownListId, selectedCountryId) {
-    $.ajax({
-        url: 'RegisterForm.aspx/PopulateCountries',
-        type: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        success: function (response) {
-            var countries = response.d;
-            populateCountryDropdown('#ddlPresentCountry', countries);
-            populateCountryDropdown('#ddlPermanentCountry', countries);
-        },
-        error: function (xhr, status, error) {
-            console.error('Failed to populate countries:', error);
-        }
-    });
-}
-
-function populateStates(dropDownListId, countryId, selectedStateId) {
+function populateStatesSelected(dropDownListId, countryId, selectedStateId) {
     $.ajax({
         type: "POST",
         url: "RegisterForm.aspx/PopulateStates",
@@ -391,15 +384,21 @@ function populateStates(dropDownListId, countryId, selectedStateId) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            var states = response.d; 
+            var states = response.d;
             var ddlStates = $(dropDownListId);
-            ddlStates.empty(); 
-            $.each(states, function (index, state) {
-                ddlStates.append($("<option></option>").val(state.StateId).text(state.StateName));
-            });
-            
-            if (selectedStateId) {
-                ddlStates.val(selectedStateId);
+
+            ddlStates.empty().append($('<option>').text('Select').val(''));
+
+            if (Array.isArray(states)) {
+                states.forEach(function (state) {
+                    var option = $("<option>").val(state.StateId).text(state.StateName);
+                    if (state.StateId === selectedStateId) {
+                        option.prop('selected', true);
+                    }
+                    ddlStates.append(option);
+                });
+            } else {
+                console.error('Data is not an array:', states);
             }
         },
         error: function (xhr, status, error) {
@@ -408,57 +407,20 @@ function populateStates(dropDownListId, countryId, selectedStateId) {
     });
 }
 
-function getAllStates(countryId, stateDropdownId, stateid = -1) {
-    var arr = { countryid: countryId };
+function updateUser() {
     $.ajax({
-        type: "POST",
-        url: "Dashboard.aspx/GetStates",
-        data: JSON.stringify(arr),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        async: "false",
+        url: 'RegisterForm.aspx/UpdateFormData',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            user: getUserData(),
+            presentAddress: getAddressData('#presentAddress'),
+            permanentAddress: getAddressData('#permanentAddress')
+        }),
         success: function (response) {
-            var $stateDropdown = $(stateDropdownId);
-            $stateDropdown.empty();
-            response.d.forEach((item) => {
-                var $newOption = `<option value="${item.StateId}">${item.StateName}</option>`;
-                $stateDropdown.append($newOption);
-            });
-            if (stateid != -1) {
-                $stateDropdown.val(stateid);
-            }
         },
         error: function (xhr, status, error) {
-            console.error("Error retrieving states:", error);
+            console.error('Failed to send user details:', error);
         }
-    });
-}
-
-
-function getAllCountries(selectedCountryId, countryDropdownId) {
-    $.ajax({
-        type: "POST",
-        url: "Dashboard.aspx/GetAllCountries",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var countries = response.d;
-            populateCountryDropdown(countryDropdownId, countries, selectedCountryId);
-        },
-        error: function (xhr, status, error) {
-            console.error("Error retrieving countries:", error);
-        }
-    });
-}
-
-function populateCountryDropdown(countryDropdownId, countries, selectedCountryId) {
-    var $countryDropdown = $(countryDropdownId);
-    $countryDropdown.empty();
-    countries.forEach(function (country) {
-        var $newOption = $("<option></option>").val(country.CountryId).text(country.CountryName);
-        if (country.CountryId === selectedCountryId) {
-            $newOption.attr("selected", true);
-        }
-        $countryDropdown.append($newOption);
     });
 }

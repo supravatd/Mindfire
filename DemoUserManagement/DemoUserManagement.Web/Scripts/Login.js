@@ -22,7 +22,7 @@ function login() {
             }
         },
         error: function (xhr, textStatus, errorThrown) {
-            
+
             console.error(xhr.responseText);
         }
     });
