@@ -49,7 +49,7 @@ namespace DemoUserManagement.Models
         public class SessionModel
         {
             public int UserId { get; set; }
-            public bool Role { get; set; }
+            public bool IsAdmin { get; set; }
         }
     }
 }

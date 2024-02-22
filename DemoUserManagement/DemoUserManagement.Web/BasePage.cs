@@ -20,10 +20,10 @@ namespace DemoUserManagement.Web
             SessionModel session = SessionManager.GetSessionModel();
             if (session != null && session.UserId != 0)
             {
-                bool role = session.Role;
+                bool isAdmin = session.IsAdmin;
                 if (IsLoginPage())
                 {
-                    if (role)
+                    if (isAdmin)
                     {
                         Response.Redirect("UserList.aspx");
                     }
@@ -34,7 +34,7 @@ namespace DemoUserManagement.Web
                 }
                 else if (IsUserListPage())
                 {
-                    if (!role)
+                    if (!isAdmin)
                     {
                         Response.Redirect("RegisterForm.aspx?UserId=" + session.UserId);
                     }
@@ -99,7 +99,7 @@ namespace DemoUserManagement.Web
         public bool IsUserFile(int objectId)
         {
             SessionModel session = SessionManager.GetSessionModel();
-            if (!session.Role)
+            if (!session.IsAdmin)
             {
                 if (session.UserId != objectId)
                 {

@@ -28,13 +28,13 @@ namespace DemoUserManagement.Web
                     {
                         SessionModel session = SessionManager.GetSessionModel();
 
-                        if (session.Role == false)
+                        if (session.IsAdmin == false)
                         {
 
                             NotesUserControl.ObjectId = session.UserId;
                             DocumentUserControl.ObjectId = session.UserId;
                         }
-                        else if (session.Role == true)
+                        else if (session.IsAdmin == true)
                         {
                             NotesUserControl.ObjectId = userId;
                             DocumentUserControl.ObjectId = userId;

@@ -25,7 +25,7 @@ namespace DemoUserManagement.Web
                     SessionModel sessionModel = new SessionModel
                     {
                         UserId = userId,
-                        Role = isAdmin
+                        IsAdmin = isAdmin
                     };
 
                     SessionManager.SetSessionModel(sessionModel);

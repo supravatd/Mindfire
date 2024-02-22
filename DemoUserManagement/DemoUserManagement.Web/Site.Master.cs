@@ -31,7 +31,7 @@ namespace DemoUserManagement.Web
                 if (session.UserId != 0)
                 {
                     LogoutLink.Visible = true;
-                    if (session.Role)
+                    if (session.IsAdmin)
                     {
                         UserListNavItem.Visible = true;
                     }
