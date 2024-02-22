@@ -19,24 +19,23 @@ namespace DemoUserManagement.Web
             PageNameLabel.InnerText = Page.Title;
             if (!IsPostBack)
             {
-                //UserListNavItem.Visible = false;
-                //LogoutLink.Visible = false;
+                UserListNavItem.Visible = false;
+                LogoutLink.Visible = false;
                 string pageName = Path.GetFileNameWithoutExtension(Page.AppRelativeVirtualPath);
                 HtmlAnchor li = (HtmlAnchor)FindControl(pageName + "Link");
                 if (li != null)
                 {
                     li.Attributes.Add("class", "current");
-                }  
-                //SessionModel session = SessionManager.GetSessionModel();
-                //if(session != null)
-                //{
-                //    LogoutLink.Visible = false;
-                //    if (session.Role)
-                //    {
-                //        UserListNavItem.Visible = true;
-                //    }
-                    
-                //}
+                }
+                SessionModel session = SessionManager.GetSessionModel();
+                if (session.UserId != 0)
+                {
+                    LogoutLink.Visible = true;
+                    if (session.Role)
+                    {
+                        UserListNavItem.Visible = true;
+                    }
+                }
             }
         }
     }

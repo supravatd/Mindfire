@@ -19,13 +19,13 @@ namespace DemoUserManagement.Web
             try
             {
                 int userId = Business.Business.IsUser(email, password);
-                bool role = Business.Business.IsAdmin(userId);
+                bool isAdmin = Business.Business.IsAdmin(userId);
                 if (userId > 0)
                 {
                     SessionModel sessionModel = new SessionModel
                     {
                         UserId = userId,
-                        Role = role
+                        Role = isAdmin
                     };
 
                     SessionManager.SetSessionModel(sessionModel);

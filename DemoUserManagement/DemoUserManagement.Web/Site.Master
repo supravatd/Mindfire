@@ -14,16 +14,6 @@
     </asp:PlaceHolder>
 
     <style>
-        .current {
-            border: 1px solid white;
-            background-color: #343a40;
-            border-radius: 3px;
-        }
-
-        .nav-link:focus {
-            outline: none;
-        }
-
         #LogoutLink {
             margin-left: 10px;
         }
@@ -82,7 +72,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-
+            <hr />
         </div>
     </form>
     <asp:PlaceHolder runat="server">

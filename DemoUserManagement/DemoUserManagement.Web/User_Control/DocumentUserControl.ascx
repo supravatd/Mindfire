@@ -19,6 +19,8 @@
 
 <br />
 <div class="col-md-6">
+    <asp:HiddenField ID="hfDocObjectId" runat="server" />
+    <asp:HiddenField ID="hfDocumentObjectType" runat="server" />
     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:GridView ID="DocumentGrid" runat="server" AutoGenerateColumns="False" ClientIDMode="Static" AllowCustomPaging="true"
@@ -31,7 +33,7 @@
                     <asp:BoundField DataField="DocumentOriginalName" HeaderText="Document Original Name" SortExpression="DocumentOriginalName" />
                     <asp:TemplateField HeaderText="Download File">
                         <ItemTemplate>
-                            <asp:HyperLink ID="hypDownload" runat="server" Text="Download" NavigateUrl='<%# $"FileDownloadHandler.ashx?fileName="+Eval("DocumnetNameonDisk") %>' />
+                            <asp:HyperLink ID="hypDownload" runat="server" Text="Download" NavigateUrl='<%# $"FileDownloadHandler.ashx?fileName="+Eval("DocumnetNameonDisk")+"ObjectId="+Eval("ObjectID") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="AddedOn" HeaderText="Added On" SortExpression="AddedOn" />

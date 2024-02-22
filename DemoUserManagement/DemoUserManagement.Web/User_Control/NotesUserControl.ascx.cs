@@ -18,18 +18,19 @@ namespace DemoUserManagement.Web.User_Control
     {
         public int ObjectId { get; set; }
 
-        public Utils.Utils.ObjectType ObjectTypeName { get; set; }
+        public int ObjectType { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 hfObjectId.Value = ObjectId.ToString();
+                hfNoteObjType.Value = ObjectType.ToString();
                 BindNotesGrid();
             }
         }
 
-        public void AddNote(string noteData, string objectId)
+        public void AddNote(string noteData, string objectId, string objectType)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace DemoUserManagement.Web.User_Control
                 {
                     ObjectId = int.Parse(objectId),
                     NoteData = noteData,
-                    ObjectType = (int)ObjectType.UserForm,
+                    ObjectType = int.Parse(objectType),
                     DateTimeAdded = DateTime.Now.ToString("d"),
                 };
 
@@ -89,11 +90,11 @@ namespace DemoUserManagement.Web.User_Control
                 string sortExpression = ViewState["SortExpression"] as string ?? "NoteId";
                 string sortDirection = ViewState["SortDirection"] as string ?? "ASC";
 
-                int totalNotes = Business.Business.GetTotalNotes(Convert.ToInt32(ViewState["ObjectId"]));
+                int totalNotes = Business.Business.GetTotalNotes(Convert.ToInt32(hfObjectId.Value));
                 int totalPages = (int)Math.Ceiling((double)totalNotes / pageSize);
 
                 NotesGrid.VirtualItemCount = totalNotes;
-                List<NoteModel> notes = Business.Business.GetAllNotes(pageIndex, pageSize, Convert.ToInt32(ViewState["ObjectId"]));
+                List<NoteModel> notes = Business.Business.GetAllNotes(pageIndex, pageSize, Convert.ToInt32(hfObjectId.Value));
 
                 if (!string.IsNullOrEmpty(sortExpression))
                 {

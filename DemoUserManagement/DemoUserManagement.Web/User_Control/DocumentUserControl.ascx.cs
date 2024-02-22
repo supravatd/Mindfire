@@ -16,19 +16,15 @@ namespace DemoUserManagement.Web.User_Control
     public partial class DocumentUserControl : System.Web.UI.UserControl
     {
         public int ObjectId { get; set; }
-        public Utils.Utils.ObjectType ObjectTypeName { get; set; }
+        public int ObjectType { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                //ddlDocumentType.DataSource = Business.Business.GetDocumentType();
-                //ddlDocumentType.DataBind();
-
-                if (Visible)
-                {
-                    BindGridView();
-                }
+                hfDocObjectId.Value = ObjectId.ToString();
+                hfDocumentObjectType.Value = ObjectType.ToString();
+                BindGridView();
             }
         }
 
@@ -71,11 +67,11 @@ namespace DemoUserManagement.Web.User_Control
                 string sortExpression = ViewState["SortExpression"] as string ?? "DocumentId";
                 string sortDirection = ViewState["SortDirection"] as string ?? "ASC";
 
-                int totalDocuments = Business.Business.GetTotalDocuments(Convert.ToInt32(ViewState["ObjectId"]));
+                int totalDocuments = Business.Business.GetTotalDocuments(Convert.ToInt32(hfDocObjectId.Value));
                 int totalPages = (int)Math.Ceiling((double)totalDocuments / pageSize);
 
                 DocumentGrid.VirtualItemCount = totalDocuments;
-                List<DocumentModel> documents = Business.Business.GetUploadedDocuments(pageIndex, pageSize, Convert.ToInt32(ViewState["ObjectId"]));
+                List<DocumentModel> documents = Business.Business.GetUploadedDocuments(pageIndex, pageSize, Convert.ToInt32(hfDocObjectId.Value));
 
                 if (!string.IsNullOrEmpty(sortExpression))
                 {

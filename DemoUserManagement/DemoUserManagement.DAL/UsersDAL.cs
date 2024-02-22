@@ -15,13 +15,11 @@ namespace DemoUserManagement.DAL
         string conn = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
         public List<UserModel> GetAllUsers(int pageIndex, int pageSize)
         {
-
-
             using (var context = new DemoUserManagementEntities())
             {
                 var users = context.UserDetails
                  .OrderBy(u => u.UserId)
-                 .Skip((pageIndex ) * pageSize) 
+                 .Skip((pageIndex) * pageSize)
                  .Take(pageSize)
                  .Select(u => new UserModel
                  {
@@ -40,8 +38,6 @@ namespace DemoUserManagement.DAL
                  }).ToList();
                 return users;
             }
-
-           
         }
 
         public int GetTotalUsers()
@@ -70,6 +66,7 @@ namespace DemoUserManagement.DAL
                     MotherMiddleName = u.MotherMiddleName,
                     MotherLastName = u.MotherLastName,
                     Email = u.Email,
+                    Password = u.Password,
                     BloodGroup = u.BloodGroup,
                     MobileNo = u.MobileNo,
                     IDType = u.IDType,

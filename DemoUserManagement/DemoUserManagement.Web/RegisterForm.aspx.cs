@@ -17,6 +17,7 @@ namespace DemoUserManagement.Web
 {
     public partial class RegisterForm : BasePage
     {
+        public Utils.Utils.ObjectType ObjectTypeName { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,15 +33,15 @@ namespace DemoUserManagement.Web
 
                             NotesUserControl.ObjectId = session.UserId;
                             DocumentUserControl.ObjectId = session.UserId;
-                            return;
                         }
                         else if (session.Role == true)
                         {
                             NotesUserControl.ObjectId = userId;
                             DocumentUserControl.ObjectId = userId;
                         }
-
                     }
+                    DocumentUserControl.ObjectType = (int)ObjectType.UserForm;
+                    NotesUserControl.ObjectType = (int)ObjectType.UserForm;
 
                     NotesUserControl.Visible = true;
                     DocumentUserControl.Visible = true;

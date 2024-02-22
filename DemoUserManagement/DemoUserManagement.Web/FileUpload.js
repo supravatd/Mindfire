@@ -1,6 +1,8 @@
 ﻿document.getElementById('btnUpload').addEventListener('click', function () {
     var fileInput = document.getElementById('fileUpload');
     var file = fileInput.files[0];
+    var objectId = document.getElementById('hfDocObjectId').value;
+    var objectType = document.getElementById('hfDocumentObjectType').value;
 
     if (!file) {
         alert("Please select a file.");
@@ -12,6 +14,8 @@
     var formData = new FormData();
     formData.append('file', file);
     formData.append('documentTypeId', documentTypeId);
+    formData.append('objectId', objectId);
+    formData.append('objectType', objectType);
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'FileUploadHandler.ashx', true);

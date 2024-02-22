@@ -44,6 +44,13 @@ namespace DemoUserManagement.Web
                     RedirectIfUnauthorized(session.UserId);
                 }
             }
+            string requestedUser = Request.QueryString["UserId"];
+
+            if (!string.IsNullOrEmpty(requestedUser) && int.TryParse(requestedUser, out int requestedId) && session.UserId==0)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            
         }
 
         private void RedirectIfUnauthorized(int userId)
@@ -61,7 +68,7 @@ namespace DemoUserManagement.Web
 
         private bool IsLoginPage()
         {
-            if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("Login.aspx"))
+            if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("login.aspx"))
                 return true;
             else
                 return false;
@@ -69,7 +76,7 @@ namespace DemoUserManagement.Web
 
         private bool IsRegisterForm()
         {
-            if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("RegisterForm.aspx"))
+            if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("registerform.aspx"))
                 return true;
             else
                 return false;
@@ -77,7 +84,7 @@ namespace DemoUserManagement.Web
 
         private bool IsUserListPage()
         {
-            if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("UserList.aspx"))
+            if (HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("userlist.aspx"))
                 return true;
             else
                 return false;
@@ -89,11 +96,24 @@ namespace DemoUserManagement.Web
             return session.UserId.ToString() != null;
         }
 
+        public bool IsUserFile(int objectId)
+        {
+            SessionModel session = SessionManager.GetSessionModel();
+            if (!session.Role)
+            {
+                if (session.UserId != objectId)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         [WebMethod]
-        public static void AddNotes(string noteData, string objectId)
+        public static void AddNotes(string noteData, string objectId, string objectType)
         {
             NotesUserControl notes = new NotesUserControl();
-            notes.AddNote(noteData, objectId);
+            notes.AddNote(noteData, objectId, objectType);
         }
 
         [WebMethod]

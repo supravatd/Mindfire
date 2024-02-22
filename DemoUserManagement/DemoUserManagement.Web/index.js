@@ -3,11 +3,12 @@
     const queryString = window.location.search;
     const url = new URLSearchParams(queryString);
     userId = url.get("UserId");
+
     if (userId) {
         showButton(false);
         loadUserDetails(userId);
-
     }
+
     const idTypes = ["Aadhar", "Pan", "DL", "Voter"];
     const selectIdType = $("[name='idType']");
 
@@ -82,15 +83,16 @@ function checkEmailAvailability() {
             }
 
         };
-        checkUserEmail();
         xhr.open("POST", "RegisterForm.aspx/EmailExists", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify({ email: email }));
+        checkUserEmail(email);
     });
 }
 
-function checkUserEmail() {
-    const user = new URLSearchParams(queryString);
+function checkUserEmail(email) {
+    const queryString = window.location.search;
+    const url = new URLSearchParams(queryString);
     let userId = url.get("UserId");
     $.ajax({
         type: "POST",
@@ -99,8 +101,11 @@ function checkUserEmail() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            document.getElementById("lblEmailError").textContent = "Valid Email.";
-            document.getElementById("lblEmailError").style.color = "green";
+            if (response.d) {
+                document.getElementById("lblEmailError").textContent = "Valid Email.";
+                document.getElementById("lblEmailError").style.color = "green";
+            }
+
         },
         error: function (xhr, status, error) {
             console.error("Error checking email:", error);
@@ -261,8 +266,6 @@ function populateCountryDropdown(dropDownListId, selectedCountryId) {
     dropdown.find('option[value="' + selectedCountryId + '"]').attr('selected', 'selected');
 }
 
-
-
 function populateStateDropdown(selector, data) {
     var dropdown = $(selector);
     dropdown.empty().append($('<option>').text('Select').val(''));
@@ -287,6 +290,14 @@ function loadUserDetails(userId) {
             var user = response.d;
             id = user.userId;
             populateFormFields(user);
+            if (user.PresentAddress !== null) {
+                populateCountryDropdown("#ddlPresentCountry", user.PresentAddress.CountryId);
+                getStates(user.PresentAddress.CountryId, '#ddlPresentState');
+            }
+            if (user.PermanentAddress !== null) {
+                populateCountryDropdown("#ddlPermanentCountry", user.PermanentAddress.CountryId);
+                getStates(user.PermanentAddress.CountryId, '#ddlPermanentState');
+            }
         },
         error: function (xhr, status, error) {
             console.error("Error loading user details:", error);
@@ -306,6 +317,7 @@ function populateFormFields(user) {
     $("#txtMotherMiddleName").val(user.MotherMiddleName);
     $("#txtMotherLastName").val(user.MotherLastName);
     $("#txtEmail").val(user.Email);
+    $("#txtPassword").val(user.Password);
 
     var dobMilliseconds = parseInt(user.Dob.match(/\d+/)[0]);
     var dobDate = new Date(dobMilliseconds);
@@ -361,8 +373,6 @@ function populateFormFields(user) {
         $("#txtPresentCity").val(user.PresentAddress.City);
         $("#txtPresentPincode").val(user.PresentAddress.PostalCode);
 
-        populateCountryDropdown("#ddlPresentCountry", user.PresentAddress.CountryId);
-        populateStatesSelected("#ddlPresentState", user.PresentAddress.CountryId, user.PresentAddress.StateId);
     }
 
     if (user.PermanentAddress !== null) {
@@ -371,8 +381,6 @@ function populateFormFields(user) {
         $("#txtPermanentCity").val(user.PermanentAddress.City);
         $("#txtPermanentPincode").val(user.PermanentAddress.PostalCode);
 
-        populateCountryDropdown("#ddlPermanentCountry", user.PermanentAddress.CountryId);
-        populateStatesSelected("#ddlPermanentState", user.PermanentAddress.CountryId, user.PermanentAddress.StateId);
     }
 }
 

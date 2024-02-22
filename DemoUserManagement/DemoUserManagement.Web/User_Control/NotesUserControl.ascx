@@ -1,14 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NotesUserControl.ascx.cs" Inherits="DemoUserManagement.Web.User_Control.NotesUserControl" %>
 
 <style>
-    .notes {
-        height: 100px;
-        width: 500px;
-    }
-
     .notesDisplay {
         height: 200px;
-        width: 100vw;
+        width: 10vw;
     }
 </style>
 
@@ -28,7 +23,7 @@
         </div>
         <div class="col-md-6">
             <asp:HiddenField ID="hfObjectId" runat="server" />
-
+            <asp:HiddenField ID="hfNoteObjType" runat="server" />
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                 <ContentTemplate>
                     <asp:GridView ID="NotesGrid" runat="server" AutoGenerateColumns="false" ClientIDMode="Static" AllowCustomPaging="true" AllowSorting="true" AllowPaging="true"

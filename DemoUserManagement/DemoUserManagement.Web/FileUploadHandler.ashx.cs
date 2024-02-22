@@ -28,6 +28,8 @@ namespace DemoUserManagement.Web
                     try
                     {
                         string documentTypeIdString = context.Request.Form["documentTypeId"];
+                        int objectId = Convert.ToInt32(context.Request.Form["objectId"]);
+                        int objectType = Convert.ToInt32(context.Request.Form["objectType"]);
                         string guid = Guid.NewGuid().ToString();
                         string fileExtension = Path.GetExtension(file.FileName);
                         string fileNameOnDisk = guid + fileExtension;
@@ -45,7 +47,7 @@ namespace DemoUserManagement.Web
                         context.Response.Write(fileInfoJson);
                         if (int.TryParse(documentTypeIdString, out int documentTypeId))
                         {
-                            AddDocumentToDatabase(fileNameOriginal, documentTypeId, fileNameOnDisk);
+                            AddDocumentToDatabase(objectId, objectType, fileNameOriginal, documentTypeId, fileNameOnDisk);
                         }
 
                     }
@@ -73,7 +75,7 @@ namespace DemoUserManagement.Web
             }
         }
 
-        protected void AddDocumentToDatabase(string fileName, int documentTypeId, string guid)
+        protected void AddDocumentToDatabase(int objectId, int objectType, string fileName, int documentTypeId, string guid)
         {
             try
             {
@@ -81,8 +83,8 @@ namespace DemoUserManagement.Web
 
                 var document = new DocumentModel
                 {
-                    ObjectID = session.UserId,
-                    ObjectType = (int)ObjectType.UserForm,
+                    ObjectID = objectId,
+                    ObjectType = objectType,
                     DocumentType = documentTypeId,
                     DocumentOriginalName = fileName,
                     DocumnetNameOnDisk = guid,

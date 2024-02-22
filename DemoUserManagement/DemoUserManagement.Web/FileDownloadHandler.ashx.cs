@@ -14,22 +14,27 @@ namespace DemoUserManagement.Web
 
         public void ProcessRequest(HttpContext context)
         {
-            string filename = context.Request.Params["fileName"];
-            string filePath = HttpContext.Current.Server.MapPath("~/UploadDocuments") + "\\" + filename;
-            FileInfo file = new FileInfo(filePath);
-
-            if (file.Exists)
-            { 
-                context.Response.Clear();  
-                context.Response.AddHeader("Content-Disposition", "inline; filename=" + file.Name);
-                context.Response.ContentType = "application/octet-stream";
-                context.Response.TransmitFile(file.FullName);
-                context.Response.Flush();
-            }
-            else
+            BasePage basePage = new BasePage();
+            int objectId = int.Parse(context.Request.Params["ObjectId"]);
+            if (basePage.IsUserFile(objectId))
             {
-                context.Response.ContentType = "text/plain";
-                context.Response.Write("File not be found!");
+                string filename = context.Request.Params["fileName"];
+                string filePath = HttpContext.Current.Server.MapPath("~/UploadDocuments") + "\\" + filename;
+                FileInfo file = new FileInfo(filePath);
+
+                if (file.Exists)
+                {
+                    context.Response.Clear();
+                    context.Response.AddHeader("Content-Disposition", "inline; filename=" + file.Name);
+                    context.Response.ContentType = "application/octet-stream";
+                    context.Response.TransmitFile(file.FullName);
+                    context.Response.Flush();
+                }
+                else
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.Write("File not be found!");
+                }
             }
         }
 
