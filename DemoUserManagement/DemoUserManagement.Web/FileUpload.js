@@ -1,4 +1,23 @@
-﻿document.getElementById('btnUpload').addEventListener('click', function () {
+﻿$(document).ready(function () {
+    $.ajax({
+        type: "POST",
+        url: "RegisterForm.aspx/GetDocumentTypes",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            var ddlDocumentType = $('#ddlDocumentType');
+            ddlDocumentType.empty();
+            $.each(response.d, function (key, value) {
+                ddlDocumentType.append($("<option></option>").val(value.DocumentTypeID).text(value.DocumentTypeName));
+            });
+        },
+        failure: function (response) {
+            alert(response.d);
+        }
+    });
+});
+
+document.getElementById('btnUpload').addEventListener('click', function () {
     var fileInput = document.getElementById('fileUpload');
     var file = fileInput.files[0];
     var objectId = document.getElementById('hfDocObjectId').value;
@@ -31,23 +50,4 @@
     };
 
     xhr.send(formData);
-});
-
-$(document).ready(function () {
-    $.ajax({
-        type: "POST",
-        url: "RegisterForm.aspx/GetDocumentTypes",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            var ddlDocumentType = $('#ddlDocumentType');
-            ddlDocumentType.empty();
-            $.each(response.d, function (key, value) {
-                ddlDocumentType.append($("<option></option>").val(value.DocumentTypeID).text(value.DocumentTypeName));
-            });
-        },
-        failure: function (response) {
-            alert(response.d);
-        }
-    });
 });

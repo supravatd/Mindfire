@@ -25,7 +25,7 @@ namespace DemoUserManagement.Web
                 HtmlAnchor li = (HtmlAnchor)FindControl(pageName + "Link");
                 if (li != null)
                 {
-                    li.Attributes.Add("class", "current");
+                    li.Attributes.Add("class", "active");
                 }
                 SessionModel session = SessionManager.GetSessionModel();
                 if (session.UserId != 0)

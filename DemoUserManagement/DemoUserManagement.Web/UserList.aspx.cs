@@ -12,8 +12,6 @@ namespace DemoUserManagement.Web
 {
     public partial class UserList : BasePage
     {
-        string id = "";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

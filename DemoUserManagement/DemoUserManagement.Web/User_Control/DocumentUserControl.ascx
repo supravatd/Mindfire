@@ -33,7 +33,7 @@
                     <asp:BoundField DataField="DocumentOriginalName" HeaderText="Document Original Name" SortExpression="DocumentOriginalName" />
                     <asp:TemplateField HeaderText="Download File">
                         <ItemTemplate>
-                            <asp:HyperLink ID="hypDownload" runat="server" Text="Download" NavigateUrl='<%# $"FileDownloadHandler.ashx?fileName="+Eval("DocumnetNameonDisk")+"ObjectId="+Eval("ObjectID") %>' />
+                            <asp:HyperLink ID="hypDownload" runat="server" Text="Download" NavigateUrl='<%# $"FileDownloadHandler.ashx?fileName={Eval("DocumnetNameonDisk")}&ObjectId={Eval("ObjectID")}" %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="AddedOn" HeaderText="Added On" SortExpression="AddedOn" />

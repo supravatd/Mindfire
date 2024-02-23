@@ -28,7 +28,7 @@ namespace DemoUserManagement.Utils
             Permanent = 1
         }
 
-        public static class SessionManager
+        public class SessionManager
         {
             public static SessionModel GetSessionModel()
             {
