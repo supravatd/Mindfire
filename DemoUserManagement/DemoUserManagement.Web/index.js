@@ -158,6 +158,9 @@ function sendFormData() {
             permanentAddress: getAddressData('#permanentAddress')
         }),
         success: function (response) {
+            if (response && response.d === "Success") {
+                window.location.href = "Login.aspx";
+            }
         },
         error: function (xhr, status, error) {
             console.error('Failed to send user details:', error);
@@ -198,6 +201,16 @@ function getObjectData(selector) {
     for (const fieldName in data) {
         if (Array.isArray(data[fieldName])) {
             data[fieldName] = data[fieldName].join(',');
+        }
+    }
+
+    if (FileUploadControl.HasFile) {
+        try {
+            var uploadResult = HandleFileUpload(FileUploadControl);
+            data["FileGuid"] = uploadResult.Guid;
+            data["FileOriginal"] = uploadResult.Filename;
+        } catch (ex) {
+            Logger.AddData(ex);
         }
     }
 

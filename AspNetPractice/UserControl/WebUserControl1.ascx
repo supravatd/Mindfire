@@ -18,6 +18,6 @@
         <asp:BoundField HeaderText="Added On" DataField="DateTimeAdded" ItemStyle-Width="300px" SortExpression="DateTimeAdded"/>
     </Columns>
 </asp:GridView>
-//<asp:DropDownList ID="ddlPageNumber" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageNumber_Changed" />
+<asp:DropDownList ID="ddlPageNumber" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageNumber_Changed" />
         
 
