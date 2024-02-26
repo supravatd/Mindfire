@@ -1,0 +1,43 @@
+﻿@model List<Mvc_Practice.Models.Employee>
+
+@{
+    ViewBag.Title = "Employee List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Employee List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Employee_ID</td>
+                <td>@(employee.First_Name + " " + employee.Last_Name)</td>
+                <td>@employee.Email_Address</td>
+                <td>@employee.Salary</td>
+                <td>@employee.Department.Department_Name</td>
+                <td>
+                    @* Edit *@
+                    @Html.ActionLink("Update", "Update", new { id = employee.Employee_ID }, new { @class = "btn btn-primary btn-sm" })
+                    <br />
+                    @* Delete *@
+                    @using (Html.BeginForm("Delete", "Employee", new { id = employee.Employee_ID }, FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this employee?');" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

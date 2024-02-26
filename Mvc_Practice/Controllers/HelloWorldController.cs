@@ -9,11 +9,12 @@ namespace Mvc_Practice.Controllers
     public class HelloWorldController : Controller
     {
         // GET: HelloWorld
+        //[Route("Home/test1")]
         public ActionResult Index()
         {
             return View();
         }
-
+        //[Route("Home/test1")]
         public ActionResult Welcome(string name, int numTimes = 1)
         {
             ViewData["Message"] = "Hello " + name;
