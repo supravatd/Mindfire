@@ -18,7 +18,7 @@ namespace DemoUserManagement.Controllers
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             var prevSortOrder = Request.QueryString["sortOrder"];
-            List<UserModel> userList = Business.Business.GetAllUsers(pageNumber, pageSize,sortBy);
+            List<UserModel> userList = Business.Business.GetAllUsers(pageNumber, pageSize, sortBy, prevSortOrder);
 
 
             ViewBag.SortBy = sortBy;

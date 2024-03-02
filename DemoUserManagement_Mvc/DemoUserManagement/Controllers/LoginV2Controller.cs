@@ -35,8 +35,14 @@ namespace DemoUserManagement.Controllers
                     };
                     SessionManager.SetSessionModel(sessionValue);
 
-
-                    return RedirectToAction("EditUserV2", "UserFormV2", new { id = sessionValue.UserId });
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("UserListV2", "UserListV2");
+                    }
+                    else
+                    {
+                        return RedirectToAction("EditUserV2", "UserFormV2", new { id = sessionValue.UserId });
+                    }
 
                 }
             }

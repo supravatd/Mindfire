@@ -12,29 +12,30 @@ namespace DemoUserManagement.Controllers
     public class UserListV2Controller : Controller
     {
         // GET: UserListV2
-        public ActionResult UserListV2()
+        public ActionResult UserListV2(int? page, string sortBy, string sortOrder)
         {
-            return View();
-        }
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+            List<UserModel> userList = Business.Business.GetAllUsers(pageNumber, pageSize, sortBy, sortOrder);
+            int totalUsers = Business.Business.GetTotalUsers();
+            int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
 
-        [HttpPost]
-        public ActionResult GetUserListData(int draw, int start, int length)
-        {
-            int pageSize = length;
-            int pageNumber = (start / length) + 1;
-            var sortBy = Request.QueryString["sortOrder"];
-            List<UserModel> userList = Business.Business.GetAllUsers(pageNumber, pageSize, sortBy);
-
-            int totalRecords = Business.Business.GetTotalUsers();
-            int filteredRecords = totalRecords;
-
-            return Json(new
+            if (Request.IsAjaxRequest())
             {
-                draw = draw,
-                recordsTotal = totalRecords,
-                recordsFiltered = filteredRecords,
-                data = userList
-            }, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    draw = pageNumber, 
+                    recordsTotal = Business.Business.GetTotalUsers(),
+                    recordsFiltered = userList.Count,
+                    data = userList,
+                    totalPages = totalPages
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return View();
+            }
         }
+
     }
 }

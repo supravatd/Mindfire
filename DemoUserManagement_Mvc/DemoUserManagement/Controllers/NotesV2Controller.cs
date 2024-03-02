@@ -12,9 +12,11 @@ namespace DemoUserManagement.Controllers
     public class NotesV2Controller : Controller
     {
         // GET: NotesV2
-        public ActionResult _NotesPartialV2(int objectId, int page = 1, int pageSize = 3, string sortBy = "NoteId")
+        public ActionResult _NotesPartialV2(int objectId, int? page, string sortBy, string sortOrder)
         {
-            List<NoteModel> notes = Business.Business.GetAllNotes(page, pageSize, objectId, sortBy);
+            int pageSize = 5;
+            int pageNumber = page ?? 1;
+            List<NoteModel> notes = Business.Business.GetAllNotes(pageNumber, pageSize, objectId, sortBy, sortOrder);
             int totalNotes = Business.Business.GetTotalNotes(objectId);
             int totalPages = (int)Math.Ceiling((double)totalNotes / pageSize);
 

@@ -1,15 +1,16 @@
 ﻿$(document).ready(function () {
-    var currentPage = 1;
-    var pageSize = 3;
+    var page = 3;
+    var sortBy = "NoteId";
+    var sortOrder = "asc";
     var objectId = $('#objectId').val();
 
-    loadNotes(currentPage, pageSize);
+    loadNotes(objectId, page, sortBy, sortOrder);
 
-    function loadNotes(objectId, page, size) {
+    function loadNotes(objectId, page, sortBy, sortOrder) {
         $.ajax({
             url: "/NotesV2/_NotesPartialV2",
             type: "GET",
-            data: { objectId: objectId, page: page, pageSize: size },
+            data: { objectId: objectId, page: page, sortBy: sortBy, sortOrder: sortOrder },
             success: function (response) {
                 renderNotes(response.notes);
                 renderPagination(response.totalPages, page);
@@ -20,7 +21,6 @@
         });
     }
 
-    // Function to render notes table
     function renderNotes(notes) {
         var notesTable = $("#notesGrid tbody");
         notesTable.empty();
@@ -36,7 +36,6 @@
         });
     }
 
-    // Function to render pagination
     function renderPagination(totalPages, currentPage) {
         var pagination = $(".pagination");
         pagination.empty();
@@ -51,11 +50,24 @@
             pagination.append(pageItem);
         }
 
-        // Add click event listener to pagination links
-        $(".page-link").click(function (e) {
+        //$(".page-link").click(function (e) {
+        //    e.preventDefault();
+        //    var page = $(this).text();
+        //    loadNotes(page, pageSize);
+        //});
+
+        $(".sort-link").click(function (e) {
+            e.preventDefault();
+            var column = $(this).data("sortby");
+            sortOrder = (sortOrder === "asc") ? "desc" : "asc";
+            sortBy = column;
+            loadNotes(currentPage, sortBy, sortOrder);
+        });
+
+        $(".pagination").on("click", ".page-link", function (e) {
             e.preventDefault();
             var page = $(this).text();
-            loadNotes(page, pageSize);
+            loadNotes(page, sortBy, sortOrder);
         });
     }
 });

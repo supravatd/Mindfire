@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutV2.cshtml";
 }
 
 
@@ -9,19 +9,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-
 </head>
 <body>
     <div class="container">
         <table id="userTable" class="table table-striped">
             <thead>
                 <tr>
-                    <th>User Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th><a href="#" class="sort-link" data-sortby="UserId">User Id</a></th>
+                    <th><a href="#" class="sort-link" data-sortby="Name">Name</a></th>
+                    <th><a href="#" class="sort-link" data-sortby="Email">Email</a></th>
+
                     <th>Date of Birth</th>
                     <th>Mobile</th>
                     <th>Gender</th>
@@ -33,16 +30,14 @@
             <tbody></tbody>
         </table>
     </div>
+
+    <div class="pagination-container">
+        <ul class="pagination"></ul>
+    </div>
 </body>
 </html>
 
 
 @section scripts {
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Include jQuery DataTables -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-
     @Scripts.Render("~/Scripts/UserListV2.js")
 }

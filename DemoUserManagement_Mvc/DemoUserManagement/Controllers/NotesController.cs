@@ -18,8 +18,8 @@ namespace DemoUserManagement.Controllers
 
             ViewBag.PageSize = pageSize;
             ViewBag.ObjectId = objectId;
-
-            List<NoteModel> notes = Business.Business.GetAllNotes(pageNumber, pageSize, objectId,sortBy);
+            var sortOrder = Request.QueryString["sortOrder"];
+            List<NoteModel> notes = Business.Business.GetAllNotes(pageNumber, pageSize, objectId, sortBy, sortOrder);
             var prevSortOrder = Request.QueryString["sortOrder"];
 
             ViewBag.SortBy = sortBy;

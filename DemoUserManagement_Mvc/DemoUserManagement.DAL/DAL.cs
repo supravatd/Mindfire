@@ -151,7 +151,7 @@ namespace DemoUserManagement.DAL
                 context.SaveChanges();
             }
         }
-        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId, string sortBy)
+        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId, string sortBy, string sortOrder)
         {
             List<NoteModel> notes = new List<NoteModel>();
 
@@ -162,16 +162,16 @@ namespace DemoUserManagement.DAL
                 switch (sortBy)
                 {
                     case "NoteId":
-                        query = query.OrderBy(n => n.NoteID);
+                        query = sortOrder == "desc" ? query.OrderByDescending(n => n.NoteID) : query.OrderBy(n => n.NoteID);
                         break;
                     case "NoteData":
-                        query = query.OrderBy(n => n.NoteData);
+                        query = sortOrder == "desc" ? query.OrderByDescending(n => n.NoteData) : query.OrderBy(n => n.NoteData);
                         break;
                     case "DateTimeAdded":
-                        query = query.OrderBy(n => n.DateTimeAdded);
+                        query = sortOrder == "desc" ? query.OrderByDescending(n => n.DateTimeAdded) : query.OrderBy(n => n.DateTimeAdded);
                         break;
                     default:
-                        query = query.OrderBy(n => n.NoteID);
+                        query = sortOrder == "desc" ? query.OrderByDescending(n => n.NoteID) : query.OrderBy(n => n.NoteID);
                         break;
                 }
 
@@ -190,6 +190,7 @@ namespace DemoUserManagement.DAL
             }
             return notes;
         }
+
         public static void SaveFileToDatabase(int userId, string filename, string guid)
         {
             using (var context = new DemoUserManagementEntities())
@@ -250,7 +251,7 @@ namespace DemoUserManagement.DAL
             }
         }
 
-        public static List<DocumentModel> GetDocuments(int pageIndex, int pageSize, int objectId, string sortBy)
+        public static List<DocumentModel> GetDocuments(int objectId, int pageIndex, int pageSize, string sortBy)
         {
             using (var context = new DemoUserManagementEntities())
             {

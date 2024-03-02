@@ -2,6 +2,7 @@
 using DemoUserManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,10 +58,10 @@ namespace DemoUserManagement.Business
             return DAL.DAL.SaveUser(userModel);
         }
 
-        public static List<UserModel> GetAllUsers(int pageIndex, int pageSize, string sortBy)
+        public static List<UserModel> GetAllUsers(int pageIndex, int pageSize, string sortBy, string sordOrder)
         {
             UsersDAL usersDAL = new UsersDAL();
-            return usersDAL.GetAllUsers(pageIndex, pageSize, sortBy);
+            return usersDAL.GetAllUsers(pageIndex, pageSize, sortBy, sordOrder);
         }
 
         public static bool IsAdmin(int userId)
@@ -91,10 +92,10 @@ namespace DemoUserManagement.Business
             noteDAL.AddNote(note);
         }
 
-        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId, string sortBy)
+        public static List<NoteModel> GetAllNotes(int pageIndex, int pageSize, int objectId, string sortBy, string sortOrder)
         {
             List<NoteModel> notes = new List<NoteModel>();
-            notes = DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId, sortBy);
+            notes = DAL.DAL.GetAllNotes(pageIndex, pageSize, objectId, sortBy, sortOrder);
             return notes;
         }
 
@@ -120,9 +121,9 @@ namespace DemoUserManagement.Business
             DAL.DAL.AddDocuments(doc);
         }
 
-        public static List<DocumentModel> GetUploadedDocuments(int pageIndex, int pageSize, int objectId, string sortBy)
+        public static List<DocumentModel> GetUploadedDocuments(int objectId, int pageIndex, int pageSize, string sortBy)
         {
-            return DAL.DAL.GetDocuments(pageIndex, pageSize, objectId, sortBy);
+            return DAL.DAL.GetDocuments(objectId, pageIndex, pageSize, sortBy);
         }
 
         public static int GetTotalDocuments(int objectId)

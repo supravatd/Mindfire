@@ -13,7 +13,7 @@ namespace DemoUserManagement.DAL
     public class UsersDAL
     {
         string conn = ConfigurationManager.ConnectionStrings["users"].ConnectionString;
-        public List<UserModel> GetAllUsers(int pageIndex, int pageSize, string sortBy)
+        public List<UserModel> GetAllUsers(int pageIndex, int pageSize, string sortBy, string sortOrder)
         {
             using (var context = new DemoUserManagementEntities())
             {
@@ -22,19 +22,20 @@ namespace DemoUserManagement.DAL
                 switch (sortBy)
                 {
                     case "UserId":
-                        query = query.OrderBy(u => u.UserId);
+                        query = sortOrder == "desc" ? query.OrderByDescending(u => u.UserId) : query.OrderBy(u => u.UserId);
                         break;
                     case "FirstName":
-                        query = query.OrderBy(u => u.FirstName);
+                        query = sortOrder == "desc" ? query.OrderByDescending(u => u.FirstName) : query.OrderBy(u => u.FirstName);
                         break;
                     case "LastName":
-                        query = query.OrderBy(u => u.LastName);
+                        query = sortOrder == "desc" ? query.OrderByDescending(u => u.LastName) : query.OrderBy(u => u.LastName);
                         break;
                     case "Email":
-                        query = query.OrderBy(u => u.Email);
+                        query = sortOrder == "desc" ? query.OrderByDescending(u => u.Email) : query.OrderBy(u => u.Email);
                         break;
+                    // Add other sorting options as needed
                     default:
-                        query = query.OrderBy(u => u.UserId);
+                        query = sortOrder == "desc" ? query.OrderByDescending(u => u.UserId) : query.OrderBy(u => u.UserId);
                         break;
                 }
 
@@ -58,7 +59,6 @@ namespace DemoUserManagement.DAL
                 return users;
             }
         }
-
 
         public int GetTotalUsers()
         {
