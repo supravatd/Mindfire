@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="434afadb86bb4a5cb485ad5f7fa95efc" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="DemoUserManagementModel.Address" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.Country" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.Document" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.DocumentType" Width="1.5" PointX="3.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.Note" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.Role" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.State" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.UserDetail" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemoUserManagementModel.UserRole" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_Address_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_Address_State" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_Address_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK__State__CountryID__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK__Documents__Objec__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_Document_DocumentType" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="DemoUserManagementModel.FK_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

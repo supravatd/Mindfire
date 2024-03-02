@@ -1,0 +1,301 @@
+﻿@model DemoUserManagement.Models.UserModel
+
+@using DemoUserManagement.Utils
+
+@{
+    //ViewBag.Title = "Mindfire Solutions Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> hobbies = new List<string> { "Reading", "Singing", "Dancing", "Traveling", "Gaming", "Coding" };
+}
+
+@Styles.Render("~/Content/UserForm.css")
+
+
+<div class="container">
+    <header>Mindfire Solutions Form</header>
+
+    <form action="@Url.Action("UserForm", "UserForm")" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Personal Details Field -->
+            <fieldset id="personalDetails">
+                <span class="title">Personal Details</span>
+                <div class="fields" id="userDetails">
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.FirstName)
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.MiddleName)
+                            @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.LastName)
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.FatherFirstName)
+                            @Html.TextBoxFor(model => model.FatherFirstName, new { @class = "form-control", placeholder = "First Name" })
+                            @Html.ValidationMessageFor(model => model.FatherFirstName)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.FatherMiddleName)
+                            @Html.TextBoxFor(model => model.FatherMiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.FatherLastName)
+                            @Html.TextBoxFor(model => model.FatherLastName, new { @class = "form-control", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(model => model.FatherLastName)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.MotherFirstName)
+                            @Html.TextBoxFor(model => model.MotherFirstName, new { @class = "form-control", placeholder = "First Name" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.MotherMiddleName)
+                            @Html.TextBoxFor(model => model.MotherMiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.MotherLastName)
+                            @Html.TextBoxFor(model => model.MotherLastName, new { @class = "form-control", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(model => model.MotherLastName)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="email col-sm-4">
+                            <label for="txtEmail">Email<sup>*</sup></label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+
+                        <div class="dateofBirth col-sm-4">
+                            <label for="txtDateOfBirth">Date of Birth<sup>*</sup></label>
+                            @Html.TextBoxFor(model => model.Dob, new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(model => model.Dob)
+                        </div>
+
+                        <div class="name col-sm-4">
+                            <label>Blood Group<sup>*</sup></label>
+                            @Html.DropDownListFor(model => model.BloodGroup, new SelectList(new[] { "A+", "B+", "AB+", "O+" }), "Select", new { @class = "form-control" })
+                            <div class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="txtPassword">Password<sup>*</sup></label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "password form-control", placeholder = "Enter your password", title = "Password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+                        </div>
+                        <div class="mobile col-sm-4 row">
+                            <label for="txtMobile">Mobile No.<sup>*</sup></label>
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "no form-control", placeholder = "Enter your number", title = "Mobile No" })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "error" })
+                            </div>
+                        </div>
+                        <div class="id col-sm-4 row">
+                            <label for="ddlIdType">ID<sup>*</sup></label>
+                            <div class="col-sm-3">
+                                @Html.DropDownListFor(model => model.IDType, new SelectList(new[] { "Aadhar", "Pan", "DL", "Voter" }, "IDType"), "ID type", new { @class = "selectIdType form-control", title = "IDType", data_entry_label = "IDType" })
+                                @Html.ValidationMessageFor(model => model.IDType, "", new { @class = "error" })
+                            </div>
+                            <div class="col-sm-5">
+                                @Html.TextBoxFor(model => model.IDNo, new { @class = "idNumber form-control", placeholder = "Select ID Type First", title = "ID No", data_entry_label = "IDNo" })
+                                @Html.ValidationMessageFor(model => model.IDNo, "", new { @class = "error" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="gender col-sm-4">
+                            <label for="gender">Gender</label>
+                            <div id="radioGender">
+                                @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "radio" })
+                                <label for="male">Male</label>
+
+                                @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "radio" })
+                                <label for="female">Female</label>
+
+                                @Html.RadioButtonFor(model => model.Gender, "Others", new { @class = "radio" })
+                                <label for="others">Others</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <label for="hobbies">Hobbies</label>
+                            <div id="checkHobbies" class="hobbies">
+                                @foreach (var hobby in hobbies)
+                                {
+                                    <div class="hobby-item">
+                                        <input type="checkbox" id="@("chk" + hobby)" name="Hobbies" value="@hobby" class="checkbox" data_entry_label="Hobbies" />
+                                        <label for="@("chk" + hobby)">@hobby</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </fieldset>
+
+            <fieldset id="addressDetails">
+                <span class="title">Address Details</span>
+
+                <h3>Present Address</h3>
+                <div id="presentAddress" class="fields">
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.DoorNo, "House/Flat No.")
+                            @Html.TextBoxFor(model => model.PresentAddress.DoorNo, new { @class = "form-control", placeholder = "Door No" })
+                            @Html.ValidationMessageFor(model => model.PresentAddress.DoorNo)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.Street, "Street")
+                            @Html.TextBoxFor(model => model.PresentAddress.Street, new { @class = "form-control", placeholder = "Street" })
+                            @Html.ValidationMessageFor(model => model.PresentAddress.Street)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.City, "City")
+                            @Html.TextBoxFor(model => model.PresentAddress.City, new { @class = "form-control", placeholder = "City" })
+                            @Html.ValidationMessageFor(model => model.PresentAddress.City)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.PostalCode, "Pincode")
+                            @Html.TextBoxFor(model => model.PresentAddress.PostalCode, new { @class = "form-control", data_entry_label = "PostalCode", placeholder = "Enter area code", data_bs_toggle = "tooltip" })
+                            @Html.ValidationMessageFor(model => model.PresentAddress.PostalCode)
+                        </div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.PresentAddress.CountryId, ViewBag.CountryList as SelectList, "Select Country", new { @class = "form-control", id = "presentAddressCountry" })
+
+                                @Html.ValidationMessageFor(model => model.PresentAddress.CountryId, "", new { @class = "error" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(model => model.PresentAddress.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.PresentAddress.StateId, Enumerable.Empty<SelectListItem>(), "Select State", new { @class = "form-control", id = "presentAddressState" })
+                                @Html.ValidationMessageFor(model => model.PresentAddress.StateId, "", new { @class = "error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (ViewBag.IsEditMode)
+                {
+                    @Html.HiddenFor(model => model.PresentAddress.StateId, new { id = "presentAddress_StateId", value = Model.PresentAddress.StateId })
+                    @Html.HiddenFor(model => model.UserId, new { id = "objectId", value = Model.UserId })
+                    @Html.HiddenFor(model => model.UserId, new { id = "objectType", value = Utils.ObjectType.UserForm })
+
+                }
+
+                <!-- Permanent Address -->
+                <h3>Permanent Address</h3>
+                <div id="permanentAddress" class="fields">
+                    @Html.CheckBox("chkSameAsPresent", false, new { @class = "sameAsPresentAdd", onchange = "SameAsPresent_Check()" })
+                    <label for="chkSameAsPresent">Same as current address</label>
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.DoorNo, "House/Flat No.")
+                            @Html.TextBoxFor(model => model.PermanentAddress.DoorNo, new { @class = "form-control", placeholder = "Door No", data_entry_label = "DoorNo", permanentaddress = "permanentAddrHouseNo", display_all_data = "data", data_bs_toggle = "tooltip" })
+                            @Html.ValidationMessageFor(model => model.PermanentAddress.DoorNo)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.Street, "Street")
+                            @Html.TextBoxFor(model => model.PermanentAddress.Street, new { @class = "form-control", placeholder = "Street" })
+                            @Html.ValidationMessageFor(model => model.PermanentAddress.Street)
+                        </div>
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.City, "City")
+                            @Html.TextBoxFor(model => model.PermanentAddress.City, new { @class = "form-control", placeholder = "City" })
+                            @Html.ValidationMessageFor(model => model.PermanentAddress.City)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.PostalCode, "Pincode")
+                            @Html.TextBoxFor(model => model.PermanentAddress.PostalCode, new { @class = "form-control", data_entry_label = "PostalCode", placeholder = "Enter area code", data_bs_toggle = "tooltip" })
+                            @Html.ValidationMessageFor(model => model.PermanentAddress.PostalCode)
+                        </div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.PermanentAddress.CountryId, ViewBag.CountryList as SelectList, "Select Country", new { @class = "form-control", id = "permanentAddressCountry", name = "permanentAddressCountry" })
+                                @Html.ValidationMessageFor(model => model.PermanentAddress.CountryId, "", new { @class = "error" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(model => model.PermanentAddress.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.PermanentAddress.StateId, Enumerable.Empty<SelectListItem>(), "Select State", new { @class = "form-control", id = "permanentAddressState", name = "permanentAddressState" })
+                                @Html.ValidationMessageFor(model => model.PermanentAddress.StateId, "", new { @class = "error" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                <div class="d-flex align-items-center">
+                    <h5 class="mr-6 mb-1">Upload Resume:</h5>
+                    <div class="input-group">
+                        <label id="lblFileName" class="control-label"></label>
+                        @Html.HiddenFor(model => model.FileGuid, new { id = "FileGuid" })
+                        <div class="custom-file">
+                            <input type="file" id="FileUploadControl" name="file" class="custom-file-input" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @if (ViewBag.IsEditMode)
+        {
+            <hr />
+            @Html.Action("_NotesPartial", "Notes", new { objectId = Model.UserId })
+            <hr />
+            @Html.Action("_DocumentPartial", "Document", new { objectId = Model.UserId })
+            <hr />
+        }
+        <div class="input-field-group buttons">
+            <div class="input-field">
+                @if (ViewBag.IsEditMode)
+                {
+                    <input type="submit" id="bttnUpdate" class="btn btn-primary w-25" value="Update" />
+                }
+                else
+                {
+                    <input type="submit" id="bttnSubmit" class="btn btn-primary w-25" value="Submit" />
+                }
+                <input type="reset" class="btn btn-secondary w-25" value="Reset" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/UserForm.js")
+    @Scripts.Render("~/Scripts/Notes.js")
+    @Scripts.Render("~/Scripts/Document.js")
+}

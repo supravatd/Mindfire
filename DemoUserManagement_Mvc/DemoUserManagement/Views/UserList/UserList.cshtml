@@ -1,0 +1,71 @@
+﻿@model List<DemoUserManagement.Models.UserModel>
+
+@{
+    ViewBag.Title = "User List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><a href="?sortBy=UserId&sortOrder=@ViewBag.SortOrder">User Id</a></th>
+            <th><a href="?sortBy=FirstName&sortOrder=@ViewBag.SortOrder">Name</a></th>
+            <th><a href="?sortBy=Email&sortOrder=@ViewBag.SortOrder">Email</a></th>
+            <th>Date of Birth</th>
+            <th>Mobile</th>
+            <th><a href="?sortBy=Gender&sortOrder=@ViewBag.SortOrder">Gender</a></th>
+            <th>Hobbies</th>
+            <th>File</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@(user.FirstName + " "+user.LastName)</td>
+                <td>@user.Email</td>
+                <td>@user.Dob</td>
+                <td>@user.MobileNo</td>
+                <td>@user.Gender</td>
+                <td>@user.Hobbies</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(user.FileGuid) && !string.IsNullOrEmpty(user.FileOriginal))
+                    {
+                        string filePath = Url.Content("~/Uploads/") + user.FileGuid;
+                        string encodedFileName = Server.UrlEncode(user.FileOriginal);
+                        <a href="@filePath" class="btn btn-link" download="@encodedFileName">@user.FileOriginal</a>
+                    }
+                    else
+                    {
+                        @user.FileOriginal
+                    }
+                </td>
+                <td>
+                    @* Edit *@
+                    @Html.ActionLink("Edit", "EditUser", "UserForm", new { id = user.UserId }, new { @class = "btn btn-primary btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@{
+    var currentPage = ViewBag.Page ?? 0;
+    var sortBy = ViewBag.SortBy ?? "UserId";
+    var pageSize = ViewBag.PageSize ?? 5;
+    var totalUsersCount = DemoUserManagement.Business.Business.GetTotalUsers(); // Implement this method to get total users count
+    var totalPages = (int)Math.Ceiling((double)totalUsersCount / pageSize);
+}
+
+<ul class="pagination">
+
+    @for (int i = 1; i <= totalPages; i++)
+    {
+        <li class="page-item @(i == currentPage ? "active" : "")">
+            <a class="page-link" href="?page=@i&sortBy=@sortBy">@i</a>
+        </li>
+    }
+</ul>

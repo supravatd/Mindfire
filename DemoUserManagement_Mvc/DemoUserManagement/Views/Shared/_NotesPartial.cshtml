@@ -1,0 +1,70 @@
+﻿@model List<DemoUserManagement.Models.NoteModel>
+
+<h5>Add Notes:</h5>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="notesDisplay">
+                <div class="form-group">
+                    <input type="text" class="form-control notes" placeholder="Add Notes Here" id="txtNotes" name="NoteData">
+                </div>
+                <br />
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="addNotes()">Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <table id="notesGrid" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" class="notes-sort-link" data-sortby="NoteId">Note ID</a>
+                            </th>
+                            <th>
+                                <a href="#" class="notes-sort-link" data-sortby="ObjectId">Object ID</a>
+                            </th>
+                            <th>
+                                <a href="#" class="notes-sort-link" data-sortby="ObjectType">Object Type</a>
+                            </th>
+                            <th>Note Data</th>
+                            <th>Date Time Added</th>
+                        </tr>
+                    </thead>
+                    @foreach (var note in Model)
+                    {
+                        <tr>
+                            <td>@note.NoteId</td>
+                            <td>@note.ObjectId</td>
+                            <td>@note.ObjectType</td>
+                            <td>@note.NoteData</td>
+                            <td>@note.DateTimeAdded</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var currentPage = ViewBag.Page ?? 0;
+    var notesSortBy = ViewBag.SortBy ?? "NoteId";
+    var pageSize = ViewBag.PageSize ?? 3;
+    var objectId = ViewBag.ObjectId;
+    var totalDoc = DemoUserManagement.Business.Business.GetTotalNotes(objectId);
+    var totalPages = (int)Math.Ceiling((double)totalDoc / pageSize);
+
+}
+
+<ul class="pagination">
+
+    @for (int i = 1; i <= totalPages - 1; i++)
+    {
+        <li class="page-item @(i == currentPage ? "active" : "")">
+            <a class="page-link" href="?page=@i&sortBy=@notesSortBy">@i</a>
+        </li>
+    }
+</ul>
+

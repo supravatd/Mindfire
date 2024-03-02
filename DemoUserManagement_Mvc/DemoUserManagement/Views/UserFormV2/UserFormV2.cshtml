@@ -1,0 +1,328 @@
+﻿
+
+@{
+    ViewBag.Title = "UserFormV2";
+}
+
+<link href="/Content/UserForm.css" rel="stylesheet">
+
+<div class="container">
+    <header>Mindfire Solutions Form</header>
+
+    <form action="/UserFormV2/UserFormV2" method="post" enctype="multipart/form-data">
+        <div>
+            <!-- Personal Details Field -->
+            <fieldset id="personalDetails">
+                <span class="title">Personal Details</span>
+                <div class="fields" id="userDetails">
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtFirstName">First Name</label>
+                            <input class="form-control" id="txtFirstName" name="FirstName" placeholder="First Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtMiddleName">Middle Name</label>
+                            <input class="form-control" id="txtMiddleName" name="MiddleName" placeholder="Middle Name" type="text" value="">
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtLastName">Last Name</label>
+                            <input class="form-control" id="txtLastName" name="LastName" placeholder="Last Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtFatherFirstName">Father First Name</label>
+                            <input class="form-control" id="txtFatherFirstName" name="FatherFirstName" placeholder="First Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="FatherFirstName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtFatherMiddleName">Father Middle Name</label>
+                            <input class="form-control" id="txtFatherMiddleName" name="FatherMiddleName" placeholder="Middle Name" type="text" value="">
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtFatherLastName">Father Last Name</label>
+                            <input class="form-control" id="txtFatherLastName" name="FatherLastName" placeholder="Last Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="FatherLastName" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtMotherFirstName">Mother First Name</label>
+                            <input class="form-control" id="txtMotherFirstName" name="MotherFirstName" placeholder="First Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="MotherFirstName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtMotherMiddleName">Mother Middle Name</label>
+                            <input class="form-control" id="txtMotherMiddleName" name="MotherMiddleName" placeholder="Middle Name" type="text" value="">
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtMotherLastName">Mother Last Name</label>
+                            <input class="form-control" id="txtMotherLastName" name="MotherLastName" placeholder="Last Name" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="MotherLastName" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="email col-sm-4">
+                            <label for="txtEmail">Email<sup>*</sup></label>
+                            <input class="form-control" id="txtEmail" name="Email" placeholder="Enter your email" type="text" value="">
+                            <span class="lblEmailError"></span>
+                        </div>
+
+                        <div class="dateofBirth col-sm-4">
+                            <label for="txtDateOfBirth">Date of Birth<sup>*</sup></label>
+                            <input class="form-control" data-val="true" data-val-date="The field Dob must be a date." id="txtDateOfBirth" name="Dob" type="date" value="">
+                            <span class="field-validation-valid" data-valmsg-for="Dob" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="name col-sm-4">
+                            <label for="ddlBloodGroup">Blood Group<sup>*</sup></label>
+                            <select class="form-control" id="ddlBloodGroup" name="BloodGroup">
+                                <option value="">Select</option>
+                                <option>A+</option>
+                                <option>B+</option>
+                                <option>AB+</option>
+                                <option>O+</option>
+                            </select>
+                            <div class="error"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="txtPassword">Password<sup>*</sup></label>
+                            <input class="password form-control" id="Password" name="Password" placeholder="Enter your password" title="Password" type="password">
+                            <span class="field-validation-valid error" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="mobile col-sm-4 row">
+                            <label for="txtMobile">Mobile No.<sup>*</sup></label>
+                            <div class="col-sm-12">
+                                <input class="no form-control" id="txtMobile" name="MobileNo" placeholder="Enter your number" title="Mobile No" type="text" value="">
+                                <span class="field-validation-valid error" data-valmsg-for="MobileNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="id col-sm-4 row">
+                            <label for="ddlIdType">ID<sup>*</sup></label>
+                            <div class="col-sm-3">
+                                <select class="selectIdType form-control" data-entry-label="IDType" id="ddlIDType" name="IDType" title="IDType">
+                                    <option value="">ID type</option>
+                                    <option>Aadhar</option>
+                                    <option>Pan</option>
+                                    <option>DL</option>
+                                    <option>Voter</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+                                <input class="idNumber form-control" data-entry-label="IDNo" id="ddlIDNumber" name="IDNo" placeholder="Select ID Type First" title="ID No" type="text" value="">
+                                <span class="field-validation-valid error" data-valmsg-for="IDNo" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="gender col-sm-4">
+                            <label for="Male">Gender</label>
+                            <div id="radioGender">
+                                <input class="radio" id="rbMale" name="Gender" type="radio" value="Male">
+                                <label for="Male">Male</label>
+
+                                <input class="radio" id="rbFemale" name="Gender" type="radio" value="Female">
+                                <label for="Female">Female</label>
+
+                                <input class="radio" id="rbOthers" name="Gender" type="radio" value="Others">
+                                <label for="Others">Others</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <label for="checkHobbies">Hobbies</label>
+                            <div id="checkHobbies" class="hobbies">
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkReading" name="Hobbies" value="Reading" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkReading">Reading</label>
+                                </div>
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkSinging" name="Hobbies" value="Singing" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkSinging">Singing</label>
+                                </div>
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkDancing" name="Hobbies" value="Dancing" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkDancing">Dancing</label>
+                                </div>
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkTraveling" name="Hobbies" value="Traveling" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkTraveling">Traveling</label>
+                                </div>
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkGaming" name="Hobbies" value="Gaming" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkGaming">Gaming</label>
+                                </div>
+                                <div class="hobby-item">
+                                    <input type="checkbox" id="chkCoding" name="Hobbies" value="Coding" class="checkbox" data_entry_label="Hobbies">
+                                    <label for="chkCoding">Coding</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </fieldset>
+
+            <fieldset id="addressDetails">
+                <span class="title">Address Details</span>
+
+                <h3>Present Address</h3>
+                <div id="presentAddress" class="fields">
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtPresentHouse">House/Flat No.</label>
+                            <input class="form-control" id="txtPresentHouse" name="PresentAddress.DoorNo" placeholder="Door No" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PresentAddress.DoorNo" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtPresentStreet">Street</label>
+                            <input class="form-control" id="txtPresentStreet" name="PresentAddress.Street" placeholder="Street" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PresentAddress.Street" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtPresentCity">City</label>
+                            <input class="form-control" id="txtPresentCity" name="PresentAddress.City" placeholder="City" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PresentAddress.City" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="objectType" name="objectType" value="1" />
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtPresentPinCode">Pincode</label>
+                            <input class="form-control" data-bs-toggle="tooltip" data-entry-label="PostalCode" id="txtPresentPinCode" name="PresentAddress.PostalCode" placeholder="Enter area code" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PresentAddress.PostalCode" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label class="control-label col-md-2" for="ddlPresentCountry">CountryId</label>
+                            <div class="col-md-10">
+                                <select class="form-control" data-val="true" data-val-number="The field CountryId must be a number." data-val-required="The CountryId field is required." id="ddlPresentCountry" name="PresentAddress.CountryId">
+                                </select>
+
+                                <span class="field-validation-valid error" data-valmsg-for="PresentAddress.CountryId" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label class="control-label col-md-2" for="ddlPresentState">StateId</label>
+                            <div class="col-md-10">
+                                <select class="form-control" data-val="true" data-val-number="The field StateId must be a number." data-val-required="The StateId field is required." id="ddlPresentState" name="PresentAddress.StateId">
+                                    <option value="">Select State</option>
+                                </select>
+                                <span class="field-validation-valid error" data-valmsg-for="PresentAddress.StateId" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Permanent Address -->
+                <h3>Permanent Address</h3>
+                <div id="permanentAddress" class="fields">
+                    <input class="sameAsPresentAdd" id="chkSameAsPresent" name="chkSameAsPresent" onchange="SameAsPresent_Check()" type="checkbox" value="true"><input name="chkSameAsPresent" type="hidden" value="false">
+                    <label for="chkSameAsPresent">Same as current address</label>
+
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtPermanentHouseNo">House/Flat No.</label>
+                            <input class="form-control" data-bs-toggle="tooltip" data-entry-label="DoorNo" display-all-data="data" id="txtPermanentHouseNo" name="PermanentAddress.DoorNo" permanentaddress="permanentAddrHouseNo" placeholder="Door No" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PermanentAddress.DoorNo" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtPermanentAddress_Street">Street</label>
+                            <input class="form-control" id="txtPermanentStreet" name="PermanentAddress.Street" placeholder="Street" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PermanentAddress.Street" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="name col-sm-4">
+                            <label for="txtPermanentAddress_City">City</label>
+                            <input class="form-control" id="txtPermanentCity" name="PermanentAddress.City" placeholder="City" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PermanentAddress.City" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-sm-4">
+                            <label for="txtPermanentAddress_PostalCode">Pincode</label>
+                            <input class="form-control" data-bs-toggle="tooltip" data-entry-label="PostalCode" id="txtPermanentPinCode" name="PermanentAddress.PostalCode" placeholder="Enter area code" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="PermanentAddress.PostalCode" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label class="control-label col-md-2" for="ddlPermanentCountry">CountryId</label>
+                            <div class="col-md-10">
+                                <select class="form-control" data-val="true" data-val-number="The field CountryId must be a number." data-val-required="The CountryId field is required." id="ddlPermanentCountry" name="PermanentAddress.CountryId">
+                                </select>
+                                <span class="field-validation-valid error" data-valmsg-for="PermanentAddress.CountryId" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label class="control-label col-md-2" for="ddlPermanentState">StateId</label>
+                            <div class="col-md-10">
+                                <select class="form-control" data-val="true" data-val-number="The field StateId must be a number." data-val-required="The StateId field is required." id="ddlPermanentState" name="PermanentAddress.StateId">
+                                    <option value="">Select State</option>
+                                </select>
+                                <span class="field-validation-valid error" data-valmsg-for="PermanentAddress.StateId" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                <div class="d-flex align-items-center">
+                    <h5 class="mr-6 mb-1">Upload Resume:</h5>
+                    <div class="input-group">
+                        <label id="lblFileName" class="control-label"></label>
+                        <input id="fileGuid" name="FileGuid" type="hidden" value="">
+                        <div class="custom-file">
+                            <input type="file" id="fileUploadControl" name="file" class="custom-file-input">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @if (ViewBag.IsEditMode)
+        {
+            <input type="hidden" id="objectId" name="objectId" />
+            <hr />
+            @Html.Action("_NotesPartialV2", "NotesV2", new { objectId = ViewBag.UserId })
+            <hr />
+            @Html.Action("_DocumentPartialV2", "DocumentV2", new { objectId = ViewBag.UserId })
+            <hr />
+        }
+
+        <div class="input-field-group buttons">
+            <div class="input-field">
+                @if (ViewBag.IsEditMode)
+                {
+                    <input type="submit" id="bttnUpdate" class="btn btn-primary w-25" value="Update" />
+                }
+                else
+                {
+                    <input type="submit" id="bttnSubmit" class="btn btn-primary w-25" value="Submit" />
+                }
+                <input type="reset" class="btn btn-secondary w-25" value="Reset">
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @Scripts.Render("~/Scripts/UserFormV2.js")
+    @Scripts.Render("~/Scripts/NotesV2.js")
+
+    @Scripts.Render("~/Scripts/DocumentV2.js")
+}

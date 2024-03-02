@@ -1,0 +1,36 @@
+﻿
+<h5>Add Notes:</h5>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="notesDisplay">
+                <div class="form-group">
+                    <input type="text" class="form-control notes" placeholder="Add Notes Here" id="txtNotes" name="NoteData">
+                </div>
+                <br />
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="addNotes()">Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <table id="notesGrid" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Note ID</th>
+                            <th>Object ID</th>
+                            <th>Object Type</th>
+                            <th>Note Data</th>
+                            <th>Date Time Added</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pagination-container">
+    <ul class="pagination"></ul>
+</div>
