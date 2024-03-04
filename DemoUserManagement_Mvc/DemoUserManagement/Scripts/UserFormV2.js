@@ -32,6 +32,8 @@
         populateStates(countryId, targetDropdownId);
     });
 
+    checkEmailAvailability();
+
     var url = window.location.pathname;
     var parts = url.split('/');
     var userIdIndex = parts.indexOf('EditUserV2') + 1;

@@ -23,7 +23,7 @@
             "type": "POST",
             "data": function (d) {
                 d.objectId = $('#objectId').val();
-                d.sortBy="DocumentID"
+                d.sortBy = "DocumentID"
             }
         },
         "columns": [

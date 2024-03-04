@@ -10,6 +10,8 @@ namespace DemoUserManagement
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new CustomAuthorizeAttribute());
+            filters.Add(new CustomAuthorizeV2Attribute());
+
         }
     }
 }

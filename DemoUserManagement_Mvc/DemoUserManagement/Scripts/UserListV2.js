@@ -70,7 +70,7 @@
         var date = new Date(parseInt(ticks.substr(6)));
         return date.toLocaleDateString();
     }
-
+     
 
     $(".sort-link").click(function (e) {
         e.preventDefault();
