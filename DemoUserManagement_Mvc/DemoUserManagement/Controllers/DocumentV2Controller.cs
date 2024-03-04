@@ -19,7 +19,7 @@ namespace DemoUserManagement.Controllers
             int pageSize = (int)length;
             int pageNumber = (int)(start / length) + 1;
 
-            List<DocumentModel> docList = Business.Business.GetUploadedDocuments(pageNumber, pageSize, objectId, sortBy);
+            List<DocumentModel> docList = Business.Business.GetUploadedDocuments(objectId, pageNumber, pageSize, sortBy);
 
             int totalRecords = Business.Business.GetTotalDocuments(objectId);
             int filteredRecords = totalRecords;

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var page = 3;
+    var page = 1;
     var sortBy = "NoteId";
     var sortOrder = "asc";
     var objectId = $('#objectId').val();
@@ -61,13 +61,15 @@
             var column = $(this).data("sortby");
             sortOrder = (sortOrder === "asc") ? "desc" : "asc";
             sortBy = column;
-            loadNotes(currentPage, sortBy, sortOrder);
+            var objectId = $('#objectId').val();
+            loadNotes(objectId, currentPage, sortBy, sortOrder);
         });
 
         $(".pagination").on("click", ".page-link", function (e) {
             e.preventDefault();
             var page = $(this).text();
-            loadNotes(page, sortBy, sortOrder);
+            var objectId = $('#objectId').val();
+            loadNotes(objectId, page, sortBy, sortOrder);
         });
     }
 });

@@ -22,7 +22,11 @@ namespace DemoUserManagement.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return Json(new { notes = notes, totalPages = totalPages }, JsonRequestBehavior.AllowGet);
+                return Json(new 
+                {
+                    notes, 
+                    totalPages = totalPages 
+                }, JsonRequestBehavior.AllowGet);
             }
             else
             {
