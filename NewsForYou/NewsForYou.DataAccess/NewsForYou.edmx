@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NewsForYouModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="AgencyId" />
+          </Key>
+          <Property Name="AgencyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgencyName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AgencyLogoPath" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="AgencyFeed">
+          <Key>
+            <PropertyRef Name="AgencyFeedId" />
+          </Key>
+          <Property Name="AgencyFeedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgencyFeedUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AgencyId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryTitle" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsTitle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NewsDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="NewsPublishDateTime" Type="datetime" Nullable="false" />
+          <Property Name="NewsLink" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ClickCount" Type="int" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="AgencyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AgencyFee__Agenc__3E52440B">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="AgencyFeed" Type="Self.AgencyFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="AgencyId" />
+            </Principal>
+            <Dependent Role="AgencyFeed">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AgencyFee__Categ__3F466844">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="AgencyFeed" Type="Self.AgencyFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AgencyFeed">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__AgencyId__44FF419A">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="AgencyId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__CategoryId__440B1D61">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsForYouModelStoreContainer">
+          <EntitySet Name="Agency" EntityType="Self.Agency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgencyFeed" EntityType="Self.AgencyFeed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AgencyFee__Agenc__3E52440B" Association="Self.FK__AgencyFee__Agenc__3E52440B">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="AgencyFeed" EntitySet="AgencyFeed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AgencyFee__Categ__3F466844" Association="Self.FK__AgencyFee__Categ__3F466844">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="AgencyFeed" EntitySet="AgencyFeed" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__AgencyId__44FF419A" Association="Self.FK__News__AgencyId__44FF419A">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__CategoryId__440B1D61" Association="Self.FK__News__CategoryId__440B1D61">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewsForYouModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="AgencyId" />
+          </Key>
+          <Property Name="AgencyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgencyName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AgencyLogoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgencyFeeds" Relationship="Self.FK__AgencyFee__Agenc__3E52440B" FromRole="Agency" ToRole="AgencyFeed" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__AgencyId__44FF419A" FromRole="Agency" ToRole="News" />
+        </EntityType>
+        <EntityType Name="AgencyFeed">
+          <Key>
+            <PropertyRef Name="AgencyFeedId" />
+          </Key>
+          <Property Name="AgencyFeedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgencyFeedUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AgencyId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agency" Relationship="Self.FK__AgencyFee__Agenc__3E52440B" FromRole="AgencyFeed" ToRole="Agency" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__AgencyFee__Categ__3F466844" FromRole="AgencyFeed" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AgencyFeeds" Relationship="Self.FK__AgencyFee__Categ__3F466844" FromRole="Category" ToRole="AgencyFeed" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News__CategoryId__440B1D61" FromRole="Category" ToRole="News" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsPublishDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NewsLink" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClickCount" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="AgencyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agency" Relationship="Self.FK__News__AgencyId__44FF419A" FromRole="News" ToRole="Agency" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__News__CategoryId__440B1D61" FromRole="News" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AgencyFee__Agenc__3E52440B">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="AgencyFeed" Type="Self.AgencyFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="AgencyId" />
+            </Principal>
+            <Dependent Role="AgencyFeed">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__AgencyId__44FF419A">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="AgencyId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AgencyFee__Categ__3F466844">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="AgencyFeed" Type="Self.AgencyFeed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AgencyFeed">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News__CategoryId__440B1D61">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsForYouEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agencies" EntityType="Self.Agency" />
+          <EntitySet Name="AgencyFeeds" EntityType="Self.AgencyFeed" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__AgencyFee__Agenc__3E52440B" Association="Self.FK__AgencyFee__Agenc__3E52440B">
+            <End Role="Agency" EntitySet="Agencies" />
+            <End Role="AgencyFeed" EntitySet="AgencyFeeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__AgencyId__44FF419A" Association="Self.FK__News__AgencyId__44FF419A">
+            <End Role="Agency" EntitySet="Agencies" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AgencyFee__Categ__3F466844" Association="Self.FK__AgencyFee__Categ__3F466844">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="AgencyFeed" EntitySet="AgencyFeeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News__CategoryId__440B1D61" Association="Self.FK__News__CategoryId__440B1D61">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewsForYouModelStoreContainer" CdmEntityContainer="NewsForYouEntities">
+          <EntitySetMapping Name="Agencies">
+            <EntityTypeMapping TypeName="NewsForYouModel.Agency">
+              <MappingFragment StoreEntitySet="Agency">
+                <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+                <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+                <ScalarProperty Name="AgencyLogoPath" ColumnName="AgencyLogoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgencyFeeds">
+            <EntityTypeMapping TypeName="NewsForYouModel.AgencyFeed">
+              <MappingFragment StoreEntitySet="AgencyFeed">
+                <ScalarProperty Name="AgencyFeedId" ColumnName="AgencyFeedId" />
+                <ScalarProperty Name="AgencyFeedUrl" ColumnName="AgencyFeedUrl" />
+                <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="NewsForYouModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="NewsForYouModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
+                <ScalarProperty Name="NewsDescription" ColumnName="NewsDescription" />
+                <ScalarProperty Name="NewsPublishDateTime" ColumnName="NewsPublishDateTime" />
+                <ScalarProperty Name="NewsLink" ColumnName="NewsLink" />
+                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NewsForYouModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

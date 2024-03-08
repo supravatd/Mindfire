@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="@Url.Content("~/Content/NewsFeed.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-lg-3">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Categories</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="categoryTitle" data-id="@item.CategoryId" href="">@item.CategoryTitle</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-9">
+            <div class="row top-buffer" id="newsDisplay"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/NewsFeed.js")
+}

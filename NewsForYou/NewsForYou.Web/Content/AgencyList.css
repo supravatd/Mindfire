@@ -1,0 +1,19 @@
+﻿.agency-box {
+    margin: 20px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius:5px;
+}
+
+img {
+    width: 150px !important;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.agency-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration:none;
+}
