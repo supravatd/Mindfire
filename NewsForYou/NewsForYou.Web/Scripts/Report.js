@@ -97,7 +97,7 @@
                     <td>${news.AgencyName}</td>
                     <td>${news.CategoryTitle}</td>
                     <td>${news.NewsTitle}</td>
-                    <td>${news.ClickCount}</td>
+                    <td>${news.ClickCount !== null ? news.ClickCount : 0}</td>
                 </tr>`;
                 }
 
@@ -105,7 +105,7 @@
 
                 var reportElement = document.createElement('div');
                 reportElement.innerHTML = report;
-                
+
                 html2pdf().from(reportElement).save('exported_report.pdf');
             },
             error: function (error) {
