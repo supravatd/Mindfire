@@ -1,0 +1,15 @@
+[11-03-2024 14:42:01]
+System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at NewsForYou.DataAccess.DataAccess.IsUser(String email, String password) in D:\Mindfire\NewsForYou\NewsForYou.DataAccess\DataAccess.cs:line 24
+--------------------------------------------------
+[11-03-2024 14:48:07]
+System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at NewsForYou.DataAccess.DataAccess.IsUser(String email, String password) in D:\Mindfire\NewsForYou\NewsForYou.DataAccess\DataAccess.cs:line 24
+--------------------------------------------------
+[11-03-2024 15:01:14]
+System.InvalidOperationException: Sequence contains no elements
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at NewsForYou.DataAccess.DataAccess.IsUser(String email, String password) in D:\Mindfire\NewsForYou\NewsForYou.DataAccess\DataAccess.cs:line 24
+--------------------------------------------------

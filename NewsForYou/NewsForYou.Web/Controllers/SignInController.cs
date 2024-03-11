@@ -16,6 +16,7 @@ namespace NewsForYou.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult SignIn(SignInModel model)
         {
@@ -27,10 +28,15 @@ namespace NewsForYou.Web.Controllers
                     SessionManager.SetSessionModel(true);
                     return RedirectToAction("Agency", "AgencyList");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid email or password.");
+                }
             }
             catch (Exception ex)
             {
                 Logger.AddData(ex);
+                ModelState.AddModelError("", "An error occurred. Please try again.");
             }
             return View(model);
         }
