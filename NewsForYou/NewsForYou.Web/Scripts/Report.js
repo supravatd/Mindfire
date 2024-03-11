@@ -1,10 +1,8 @@
 ﻿$(document).ready(function () {
     var currentPage = 1;
     var pageSize = 5;
-    var sortBy = "AgencyName";
-    var sortOrder = "asc";
 
-    function loadNewsReport(page, sortBy, sortOrder) {
+    function loadNewsReport(page) {
         $.ajax({
             url: '/Report/ClickCountReport',
             type: 'POST',
@@ -12,13 +10,16 @@
                 startDate: $('#startDate').val(),
                 endDate: $('#endDate').val(),
                 page: page,
-                sortBy: sortBy,
                 pageSize: pageSize
             },
             success: function (response) {
-                renderNewsReport(response.data);
-                renderPagination(response.totalPages, page);
-                allData = response.data;
+                if (response.data.length === 0) {
+                    $('#newsTable tbody').html('<p>No data available.</p>');
+                } else {
+                    renderNewsReport(response.data);
+                    renderPagination(response.totalPages, page);
+                    allData = response.data;
+                }
             },
             error: function (xhr, status, error) {
                 console.error("Error generating report:", error);
@@ -56,13 +57,13 @@
         $(".page-link").click(function (e) {
             e.preventDefault();
             var page = $(this).text();
-            loadNewsReport(page, sortBy, sortOrder);
+            loadNewsReport(page);
         });
     }
 
     $('#bttnGenerateReport').click(function (event) {
         event.preventDefault();
-        loadNewsReport(currentPage, sortBy, sortOrder);
+        loadNewsReport(currentPage);
     });
 
     $(".sort-link").click(function (e) {
@@ -70,7 +71,7 @@
         var column = $(this).data("sortby");
         sortOrder = (sortOrder === "asc") ? "desc" : "asc";
         sortBy = column;
-        loadNewsReport(currentPage, sortBy, sortOrder);
+        loadNewsReport(currentPage);
     });
 
     $('#bttnGeneratePdf').on('click', function () {
@@ -82,18 +83,18 @@
             data: { startDate: startDate, endDate: endDate },
             dataType: 'json',
             success: function (response) {
-                var report = `<h3 style="text-align: center; color: #333;">Click Count Report</h3>`;
-                report += `<div><table id="reportTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-            <tr style="background-color: #f2f2f2;">
-                <th style="border: 1px solid #ddd; padding: 8px;">Agency</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">Category</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">News Title</th>
-                <th style="border: 1px solid #ddd; padding: 8px;"># of Click</th>
+                var report = `<h3>Click Count Report</h3>`;
+                report += `<div><table id="reportTable">
+            <tr>
+                <th>Agency</th>
+                <th>Category</th>
+                <th>News Title</th>
+                <th># of Click</th>
             </tr>`;
 
                 for (var i = 0; i < response.data.length; i++) {
                     var news = response.data[i];
-                    report += `<tr style="border: 1px solid #ddd; padding: 8px;">
+                    report += `<tr>
                     <td>${news.AgencyName}</td>
                     <td>${news.CategoryTitle}</td>
                     <td>${news.NewsTitle}</td>

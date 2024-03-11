@@ -138,6 +138,7 @@
     <Content Include="AgencyLogo\The_Hindu.png" />
     <Content Include="AgencyLogo\The_Times_Of_India.png" />
     <Content Include="Content\AgencyList.css" />
+    <Content Include="Content\ClickCount.css" />
     <Content Include="Content\Hindustan_Times.png" />
     <Content Include="Content\NewsFeed.css" />
     <Content Include="Content\The_Hindu.png" />

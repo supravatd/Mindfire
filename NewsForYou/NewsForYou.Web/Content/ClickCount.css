@@ -1,0 +1,24 @@
+﻿h3 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead tr {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tbody tr{
+
+}

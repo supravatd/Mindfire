@@ -1,4 +1,5 @@
-﻿<h2 class="text-center mb-4">News Click Count Report</h2>
+﻿<link href="@Url.Content("~/Content/ClickCount.css")" rel="stylesheet" type="text/css" />
+<h2 class="text-center mb-4">News Click Count Report</h2>
 
 @using (Html.BeginForm("ClickCountReport", "Report", FormMethod.Post))
 {
@@ -20,10 +21,10 @@
 <table class="table table-striped" id="newsTable">
     <thead>
         <tr>
-            <th><a href="#" class="sort-link" data-sortBy="AgencyName">Agency</a></th>
-            <th><a href="#" class="sort-link" data-sortBy="CategoryTitle">Category</a></th>
+            <th>Agency</th>
+            <th>Category</th>
             <th>News Title</th>
-            <th><a href="#" class="sort-link" data-sortBy="ClickCount">No. of Clicks</a></th>
+            <th>No. of Clicks</th>
         </tr>
     </thead>
     <tbody>

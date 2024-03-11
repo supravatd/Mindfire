@@ -224,7 +224,7 @@ namespace NewsForYou.DataAccess
                     context.SaveChanges();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logger.AddData(e);
             }
@@ -302,31 +302,17 @@ namespace NewsForYou.DataAccess
             }
         }
 
-        public static List<ClickCountReportModel> GenerateClickCountReport(DateTime startDate, DateTime endDate, int page, int pageSize, string sortColumn, string sortDirection)
+        public static List<ClickCountReportModel> GenerateClickCountReport(DateTime startDate, DateTime endDate, int page, int pageSize)
         {
             using (var context = new NewsForYouEntities())
             {
                 var query = context.News.AsQueryable();
 
-                switch (sortColumn)
-                {
-                    case "AgencyName":
-                        query = sortDirection == "desc" ? query.OrderByDescending(n => n.Agency.AgencyName) : query.OrderBy(n => n.Agency.AgencyName);
-                        break;
-                    case "CategoryTitle":
-                        query = sortDirection == "desc" ? query.OrderByDescending(n => n.Category.CategoryTitle) : query.OrderBy(n => n.Category.CategoryTitle);
-                        break;
-                    case "ClickCount":
-                        query = sortDirection == "desc" ? query.OrderByDescending(n => n.ClickCount) : query.OrderBy(n => n.ClickCount);
-                        break;
-                    default:
-                        query = sortDirection == "desc" ? query.OrderBy(n => n.ClickCount) : query.OrderByDescending(n => n.ClickCount);
-                        break;
-                }
-
                 var paginatedData = query.Where(n => n.NewsPublishDateTime >= startDate && n.NewsPublishDateTime <= endDate)
+                                        .OrderByDescending(n => n.ClickCount)
                                         .Skip((page - 1) * pageSize)
                                         .Take(pageSize)
+
                                         .Select(n => new ClickCountReportModel
                                         {
                                             AgencyName = n.Agency.AgencyName,

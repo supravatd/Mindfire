@@ -18,7 +18,7 @@ namespace NewsForYou.Web.Authorize
                 {
                     if (IsReportPage(filterContext.HttpContext.Request.Url.AbsoluteUri.ToLower()))
                     {
-                        filterContext.Result = new RedirectResult("~/Report/ClickCountReport");
+                        filterContext.Result = new RedirectResult("~/Report/ClickCount");
                         filterContext.HttpContext.Session["Redirected"] = true;
                     }
                     else if (IsAddCategoryPage(filterContext.HttpContext.Request.Url.AbsoluteUri.ToLower()))
@@ -43,7 +43,7 @@ namespace NewsForYou.Web.Authorize
 
         private bool IsReportPage(string url)
         {
-            return url.Contains("report/clickcountreport");
+            return url.Contains("report/clickcount");
         }
 
         private bool IsAddCategoryPage(string url)

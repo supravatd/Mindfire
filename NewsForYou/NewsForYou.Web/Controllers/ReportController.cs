@@ -17,9 +17,9 @@ namespace NewsForYou.Web.Controllers
             return View();
         }
 
-        public ActionResult ClickCountReport(DateTime startDate, DateTime endDate, int page = 1, int pageSize = 5, string sortBy = "AgencyName", string sortOrder = "asc")
+        public ActionResult ClickCountReport(DateTime startDate, DateTime endDate, int page = 1, int pageSize = 5)
         {
-            var (reportData, totalPages) = Business.Business.GenerateClickCountReport(startDate, endDate, page, pageSize, sortBy, sortOrder);
+            var (reportData, totalPages) = Business.Business.GenerateClickCountReport(startDate, endDate, page, pageSize);
 
             if (Request.IsAjaxRequest())
             {

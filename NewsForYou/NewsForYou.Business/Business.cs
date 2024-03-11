@@ -165,9 +165,9 @@ namespace NewsForYou.Business
             DataAccess.DataAccess.IncrementNewsClickCount(newsId);
         }
 
-        public static (List<ClickCountReportModel> ReportData, int TotalPages) GenerateClickCountReport(DateTime startDate, DateTime endDate, int page, int pageSize, string sortColumn, string sortDirection)
+        public static (List<ClickCountReportModel> ReportData, int TotalPages) GenerateClickCountReport(DateTime startDate, DateTime endDate, int page, int pageSize)
         {
-            var reportData = DataAccess.DataAccess.GenerateClickCountReport(startDate, endDate, page, pageSize, sortColumn, sortDirection);
+            var reportData = DataAccess.DataAccess.GenerateClickCountReport(startDate, endDate, page, pageSize);
             var totalCount = DataAccess.DataAccess.GetTotalNewsCount(startDate, endDate); 
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
