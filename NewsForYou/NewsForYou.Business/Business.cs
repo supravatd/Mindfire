@@ -50,19 +50,19 @@ namespace NewsForYou.Business
             return allCategories;
         }
 
-        public static void AddAgency(AgencyModel agency)
+        public static int AddAgency(AgencyModel agency)
         {
-            DataAccess.DataAccess.AddAgency(agency);
+            return DataAccess.DataAccess.AddAgency(agency);
         }
 
-        public static void AddCategory(CategoryModel category)
+        public static int AddCategory(CategoryModel category)
         {
-            DataAccess.DataAccess.AddCategory(category);
+            return DataAccess.DataAccess.AddCategory(category);
         }
 
-        public static void AddAgencyFeed(AgencyFeedModel agencyFeed)
+        public static int AddAgencyFeed(AgencyFeedModel agencyFeed)
         {
-            DataAccess.DataAccess.AddAgencyFeed(agencyFeed);
+            return DataAccess.DataAccess.AddAgencyFeed(agencyFeed);
         }
 
         public static void DeleteAllNews()

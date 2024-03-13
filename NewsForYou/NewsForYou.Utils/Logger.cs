@@ -10,25 +10,30 @@ namespace NewsForYou.Utils
 {
     public class Logger
     {
-        public static void AddData(Exception e)
+        public static void LogError(Exception e)
         {
-            string filePath = ConfigurationManager.AppSettings["LogFilePath"] + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+            string logFilePath = ConfigurationManager.AppSettings["LogFilePath"];
+            string filePath = Path.Combine(logFilePath, DateTime.Now.ToString("dd-MM-yyyy") + ".txt");
+
+            if (!Directory.Exists(logFilePath))
+            {
+                Directory.CreateDirectory(logFilePath);
+            }
 
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 writer.WriteLine($"[{DateTime.Now}]");
-            }
 
-            Exception currentException = e;
-            while (currentException != null)
-            {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                Exception currentException = e;
+                while (currentException != null)
                 {
                     writer.WriteLine(currentException);
                     writer.WriteLine("--------------------------------------------------");
+                    currentException = currentException.InnerException;
                 }
-                currentException = currentException.InnerException;
             }
+
+           
         }
     }
 }

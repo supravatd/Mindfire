@@ -11,7 +11,7 @@ namespace NewsForYou.Web.Authorize
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var sessionValue = SessionManager.GetSessionModel();
+            var sessionValue = SessionManager.IsAuthenticated;
             if (sessionValue == true)
             {
                 if (filterContext.HttpContext.Session["Redirected"] == null)

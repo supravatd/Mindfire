@@ -3,12 +3,18 @@
     var pageSize = 5;
 
     function loadNewsReport(page) {
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        if (endDate < startDate) {
+            alert("Select Valid End Date");
+            return;
+        }
         $.ajax({
             url: '/Report/ClickCountReport',
             type: 'POST',
             data: {
-                startDate: $('#startDate').val(),
-                endDate: $('#endDate').val(),
+                startDate: startDate,
+                endDate: endDate,
                 page: page,
                 pageSize: pageSize
             },
@@ -66,17 +72,13 @@
         loadNewsReport(currentPage);
     });
 
-    $(".sort-link").click(function (e) {
-        e.preventDefault();
-        var column = $(this).data("sortby");
-        sortOrder = (sortOrder === "asc") ? "desc" : "asc";
-        sortBy = column;
-        loadNewsReport(currentPage);
-    });
-
     $('#bttnGeneratePdf').on('click', function () {
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
+        if (endDate < startDate) {
+            alert("Select Valid End Date");
+            return;
+        }
         $.ajax({
             url: '/Report/GeneratePdf',
             type: 'GET',

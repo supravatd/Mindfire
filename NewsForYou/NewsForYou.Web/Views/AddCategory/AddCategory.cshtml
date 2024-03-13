@@ -4,65 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agency Management</title>
+    <style>
+        .nav-link.active {
+            background-color: #007bff !important; 
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <h4>Add Agency</h4>
-                <form>
-                    <div class="mb-3">
-                        <label for="txtAgencyName" class="form-label">Agency Name</label>
-                        <input type="text" class="form-control" id="txtAgencyName" placeholder="Enter agency name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtAgencyLogo" class="form-label">Agency Logo Path</label>
-                        <input type="text" class="form-control" id="txtAgencyLogo" placeholder="Enter logo path">
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="bttnAddAgency">Add</button>
-                </form>
+                <div class="nav flex-column nav-tabs nav-tabs-vertical">
+                    <a class="nav-link" data-toggle="pill" href="#v-pills-addAgency">Add Agency</a>
+                    <a class="nav-link" data-toggle="pill" href="#v-pills-addCategory">Add Category</a>
+                    <a class="nav-link" data-toggle="pill" href="#v-pills-addFeedUrl">Add Agency Feed URL</a>
+                    <a class="nav-link" data-toggle="pill" href="#v-pills-deleteNews">Delete All Data</a>
+                </div>
             </div>
-
-            <div class="col-md-3">
-                <h4>Add Category</h4>
-                <form>
-                    <div class="mb-3">
-                        <label for="txtCategoryName" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="txtCategoryName" placeholder="Enter category name">
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show" id="v-pills-addAgency" role="tabpanel">
+                        <form>
+                            <div class="mb-3">
+                                <label for="txtAgencyName" class="form-label">Agency Name</label>
+                                <input type="text" class="form-control" id="txtAgencyName" placeholder="Enter agency name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtAgencyLogo" class="form-label">Agency Logo Path</label>
+                                <input type="text" class="form-control" id="txtAgencyLogo" placeholder="Enter logo path">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="bttnAddAgency">Add</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="bttnAddCategory">Add</button>
-                </form>
-            </div>
-
-            <div class="col-md-3">
-                <h4>Add Agency Feed URL</h4>
-                <form>
-                    <div class="mb-3">
-                        <label for="ddlAgency" class="form-label">Select Agency</label>
-                        <select class="form-select" id="ddlAgency">
-                        </select>
+                    <div class="tab-pane fade" id="v-pills-addCategory" role="tabpanel">
+                        <form>
+                            <div class="mb-3">
+                                <label for="ddlCategory" class="form-label">Available Categories</label>
+                                <select class="form-select ddlCategory">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtCategoryName" class="form-label">New Category Name</label>
+                                <input type="text" class="form-control" id="txtCategoryName" placeholder="Enter category name">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="bttnAddCategory">Add</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="ddlCategory" class="form-label">Select Category</label>
-                        <select class="form-select" id="ddlCategory">
-                        </select>
+                    <div class="tab-pane fade" id="v-pills-addFeedUrl" role="tabpanel">
+                        <form>
+                            <div class="mb-3">
+                                <label for="ddlAgency" class="form-label">Select Agency</label>
+                                <select class="form-select" id="ddlAgency">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ddlCategory" class="form-label">Select Category</label>
+                                <select class="form-select ddlCategory">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtFeedUrl" class="form-label">Feed URL</label>
+                                <input type="text" class="form-control" id="txtFeedUrl" placeholder="Enter feed URL">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="bttnAddFeedUrl">Submit</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="txtFeedUrl" class="form-label">Feed URL</label>
-                        <input type="text" class="form-control" id="txtFeedUrl" placeholder="Enter feed URL">
+                    <div class="tab-pane fade" id="v-pills-deleteNews" role="tabpanel">
+                        <button type="button" class="btn btn-danger" id="bttnDeleteNews">Delete All News</button>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="bttnAddFeedUrl">Submit</button>
-                </form>
-            </div>
-
-            <div class="col-md-3">
-                <h4>Delete All Data</h4>
-                <button type="button" class="btn btn-danger" id="bttnDeleteNews">Delete All News</button>
+                </div>
             </div>
         </div>
     </div>
+    @section scripts {
+        @Scripts.Render("~/Scripts/AddCategory.js")
+    }
 </body>
 </html>
-@section scripts {
-    @Scripts.Render("~/Scripts/AddCategory.js")
-}

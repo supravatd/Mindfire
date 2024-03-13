@@ -12,7 +12,7 @@ namespace NewsForYou.Web.Controllers
         // GET: SignOut
         public ActionResult SignOut()
         {
-            SessionManager.SetSessionModel(false);
+            SessionManager.IsAuthenticated = false;
             return RedirectToAction("SignIn", "SignIn");
         }
     }

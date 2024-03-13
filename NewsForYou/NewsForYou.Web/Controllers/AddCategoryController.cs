@@ -27,12 +27,12 @@ namespace NewsForYou.Web.Controllers
                     AgencyLogoPath = agencyFeedUrl
                 };
 
-                Business.Business.AddAgency(agency);
-                return Json(new { success = true });
+                int agencyId = Business.Business.AddAgency(agency);
+                return Json(new { success = true, agencyId = agencyId });
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
                 return Json(new { success = false, error = ex.Message });
             }
         }
@@ -46,12 +46,12 @@ namespace NewsForYou.Web.Controllers
                     CategoryTitle = categoryTitle,
                 };
 
-                Business.Business.AddCategory(category);
-                return Json(new { success = true });
+                int categoryId = Business.Business.AddCategory(category);
+                return Json(new { success = true, categoryId = categoryId });
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
                 return Json(new { success = false, error = ex.Message });
             }
         }
@@ -67,12 +67,12 @@ namespace NewsForYou.Web.Controllers
                     CategoryId = categoryId
                 };
 
-                Business.Business.AddAgencyFeed(agencyFeed);
-                return Json(new { success = true });
+                int agencyFeedId = Business.Business.AddAgencyFeed(agencyFeed);
+                return Json(new { success = true, agencyFeedId = agencyFeedId });
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
                 return Json(new { success = false, error = ex.Message });
             }
         }
@@ -86,7 +86,7 @@ namespace NewsForYou.Web.Controllers
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
                 return Json(new { success = false, error = ex.Message });
             }
         }

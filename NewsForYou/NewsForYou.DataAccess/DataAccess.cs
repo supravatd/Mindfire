@@ -19,7 +19,7 @@ namespace NewsForYou.DataAccess
             {
                 using (var context = new NewsForYouEntities())
                 {
-                    if ((email != "") && password != "")
+                    if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                     {
                         var user = context.Users.Single(x => x.Email == email);
                         if (user.Password == password)
@@ -31,72 +31,108 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
             }
             return userId;
         }
 
-        public static void AddAgency(AgencyModel agency)
+        public static int AddAgency(AgencyModel agency)
         {
+            int agencyId = 0;
             try
             {
                 using (var context = new NewsForYouEntities())
                 {
-                    Agency newAgency = new Agency
+                    if (!string.IsNullOrEmpty(agency.AgencyName))
                     {
-                        AgencyName = agency.AgencyName,
-                        AgencyLogoPath = agency.AgencyLogoPath
-                    };
-                    context.Agencies.Add(newAgency);
-                    context.SaveChanges();
+                        var existingAgency = context.Agencies.FirstOrDefault(a => a.AgencyName == agency.AgencyName);
+                        if (existingAgency != null)
+                        {
+                            return agencyId;
+                        }
+                        Agency newAgency = new Agency
+                        {
+                            AgencyName = agency.AgencyName,
+                            AgencyLogoPath = agency.AgencyLogoPath
+                        };
+                        context.Agencies.Add(newAgency);
+                        context.SaveChanges();
+                        agencyId = newAgency.AgencyId;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
             }
+            return agencyId;
         }
 
-        public static void AddCategory(CategoryModel category)
+        public static int AddCategory(CategoryModel category)
         {
+            int categoryId = 0;
             try
             {
                 using (var context = new NewsForYouEntities())
                 {
-                    Category newCategory = new Category
+                    if (!string.IsNullOrEmpty(category.CategoryTitle))
                     {
-                        CategoryTitle = category.CategoryTitle
-                    };
-                    context.Categories.Add(newCategory);
-                    context.SaveChanges();
+                        var existingCategory = context.Categories.FirstOrDefault(c => c.CategoryTitle == category.CategoryTitle);
+                        if (existingCategory != null)
+                        {
+                            return categoryId;
+                        }
+                        Category newCategory = new Category
+                        {
+                            CategoryTitle = category.CategoryTitle
+                        };
+                        context.Categories.Add(newCategory);
+                        context.SaveChanges();
+                        categoryId = newCategory.CategoryId;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
             }
+            return categoryId;
         }
 
-        public static void AddAgencyFeed(AgencyFeedModel agencyFeed)
+        public static int AddAgencyFeed(AgencyFeedModel agencyFeed)
         {
+            int agencyFeedId = 0;
             try
             {
                 using (var context = new NewsForYouEntities())
                 {
-                    AgencyFeed newAgencyFeed = new AgencyFeed
+                    if (!string.IsNullOrEmpty(agencyFeed.AgencyFeedUrl) && agencyFeed.AgencyId != 0 && agencyFeed.CategoryId != 0)
                     {
-                        AgencyFeedUrl = agencyFeed.AgencyFeedUrl,
-                        AgencyId = agencyFeed.AgencyId,
-                        CategoryId = agencyFeed.CategoryId
-                    };
-                    context.AgencyFeeds.Add(newAgencyFeed);
-                    context.SaveChanges();
+                        var existingFeed = context.AgencyFeeds.FirstOrDefault
+                                       (af => af.AgencyId == agencyFeed.AgencyId &&
+                                        af.CategoryId == agencyFeed.CategoryId);
+
+                        if (existingFeed != null)
+                        {
+                            return agencyFeedId;
+                        }
+                        AgencyFeed newAgencyFeed = new AgencyFeed
+                        {
+                            AgencyFeedUrl = agencyFeed.AgencyFeedUrl,
+                            AgencyId = agencyFeed.AgencyId,
+                            CategoryId = agencyFeed.CategoryId
+                        };
+                        context.AgencyFeeds.Add(newAgencyFeed);
+                        context.SaveChanges();
+                        agencyFeedId = newAgencyFeed.AgencyFeedId;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
             }
+            return agencyFeedId;
         }
 
         public static void DeleteAllNews()
@@ -111,7 +147,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -127,7 +163,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception e)
             {
-                Logger.AddData(e);
+                Logger.LogError(e);
             }
             return agencyList;
         }
@@ -144,7 +180,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception e)
             {
-                Logger.AddData(e);
+                Logger.LogError(e);
             }
             return categoryList;
         }
@@ -168,7 +204,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception e)
             {
-                Logger.AddData(e);
+                Logger.LogError(e);
             }
             return categoryList;
         }
@@ -189,7 +225,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception e)
             {
-                Logger.AddData(e);
+                Logger.LogError(e);
             }
 
             return agencyFeedUrl;
@@ -226,7 +262,7 @@ namespace NewsForYou.DataAccess
             }
             catch (Exception e)
             {
-                Logger.AddData(e);
+                Logger.LogError(e);
             }
 
             return newsAdded;
@@ -298,7 +334,7 @@ namespace NewsForYou.DataAccess
         {
             using (var context = new NewsForYouEntities())
             {
-                return context.News.Count(n => n.NewsPublishDateTime >= startDate && n.NewsPublishDateTime <= endDate);
+                return context.News.Count(n => n.NewsPublishDateTime >= startDate.Date && n.NewsPublishDateTime <= endDate.Date);
             }
         }
 
@@ -308,7 +344,7 @@ namespace NewsForYou.DataAccess
             {
                 var query = context.News.AsQueryable();
 
-                var paginatedData = query.Where(n => n.NewsPublishDateTime >= startDate && n.NewsPublishDateTime <= endDate)
+                var paginatedData = query.Where(n => n.NewsPublishDateTime >= startDate.Date && n.NewsPublishDateTime <= endDate.Date)
                                         .OrderByDescending(n => n.ClickCount)
                                         .Skip((page - 1) * pageSize)
                                         .Take(pageSize)
@@ -330,7 +366,7 @@ namespace NewsForYou.DataAccess
             using (var context = new NewsForYouEntities())
             {
                 var allNews = context.News
-                    .Where(n => n.NewsPublishDateTime >= startDate && n.NewsPublishDateTime <= endDate)
+                    .Where(n => n.NewsPublishDateTime >= startDate.Date && n.NewsPublishDateTime <= endDate.Date)
                     .OrderByDescending(news => news.ClickCount)
                     .Select(news => new ClickCountReportModel
                     {

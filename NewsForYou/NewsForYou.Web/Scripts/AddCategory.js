@@ -16,16 +16,16 @@
             alert(response.d);
         }
     });
-    
+
     $.ajax({
         type: "POST",
         url: "/AddCategory/GetCategory",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            var ddlCategory = $('#ddlCategory');
+            var ddlCategory = $('.ddlCategory');
             ddlCategory.empty();
-            ddlCategory.append($('<option></option>').val('').text('Select Category'));
+            ddlCategory.append($('<option></option>').val('').text('Categories'));
             $.each(response.d, function (key, value) {
                 ddlCategory.append($("<option></option>").val(value.CategoryId).text(value.CategoryTitle));
             });
@@ -38,13 +38,13 @@
 
 $(document).ready(function () {
     populateDropdowns();
-    
+
     $('#bttnAddAgency').click(function (e) {
         e.preventDefault();
         var agencyName = $('#txtAgencyName').val();
         var agencyLogoPath = $('#txtAgencyLogo').val();
         $.ajax({
-            url: '/AddCategory/AddAgency', 
+            url: '/AddCategory/AddAgency',
             type: 'POST',
             data: {
                 agencyName: agencyName,
@@ -52,9 +52,15 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.success) {
-                    alert('Agency added successfully');
-                    $('#txtAgencyName').val('');
-                    $('#txtAgencyLogo').val('');
+                    if (response.agencyId > 0) {
+                        alert('Agency added successfully');
+                        $('#txtAgencyName').val('');
+                        $('#txtAgencyLogo').val('');
+                        populateDropdowns();
+                    }
+                    else {
+                        alert('Agency Not Added');
+                    }
                 } else {
                     alert('Error adding agency:', response.error);
                 }
@@ -64,17 +70,28 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $('#bttnAddCategory').click(function (e) {
         e.preventDefault();
         var categoryTitle = $('#txtCategoryName').val();
         $.ajax({
             url: '/AddCategory/AddNewCategory',
             type: 'POST',
-            data: { categoryTitle: categoryTitle }, 
+            data: { categoryTitle: categoryTitle },
             success: function (response) {
-                alert("Category Added.");
-                $('#txtCategoryName').val('');
+                if (response.success) {
+                    if (response.categoryId > 0) {
+                        alert("Category Added.");
+                        $('#txtCategoryName').val('');
+                        populateDropdowns();
+                    }
+                    else {
+                        alert('Category Not Added');
+                    }
+                }
+                else {
+                    alert('Error adding category:', response.error);
+                }
             },
             error: function (xhr, status, error) {
                 console.error('Error adding category:', error);
@@ -86,9 +103,9 @@ $(document).ready(function () {
         var feedUrl = $('#txtFeedUrl').val();
         var agencyId = $('#ddlAgency').val();
         var categoryId = $('#ddlCategory').val();
-        
+
         $.ajax({
-            url: '/AddCategory/AddAgencyFeedUrl', 
+            url: '/AddCategory/AddAgencyFeedUrl',
             type: 'POST',
             data: {
                 feedUrl: feedUrl,
@@ -97,28 +114,37 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.success) {
-                    alert('Feed URL added successfully');
-                    $('#txtFeedUrl').val('');
+                    if (response.agencyFeedId > 0) {
+                        alert('Feed URL added successfully');
+                        $('#txtFeedUrl').val('');
+                    }
+                    else {
+                        alert('Feed URL Not Saved');
+                    }
+
                 } else {
                     alert('Error adding feed URL:', response.error);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Error adding feed URL:', error);
+                alert('Error adding feed URL:', error);
             }
         });
     });
-    
+
     $('#bttnDeleteNews').click(function () {
-        $.ajax({
-            url: '/AddCategory/DeleteAllNews', 
-            type: 'POST',
-            success: function (response) {
-                alert("All News Deleted.");
-            },
-            error: function (xhr, status, error) {
-                console.error('Error deleting news:', error);
-            }
-        });
+        var confirmDelete = confirm("Are you sure you want to delete all news?");
+        if (confirmDelete) {
+            $.ajax({
+                url: '/AddCategory/DeleteAllNews',
+                type: 'POST',
+                success: function (response) {
+                    alert("All News Deleted.");
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting news:', error);
+                }
+            });
+        }
     });
 });

@@ -126,13 +126,27 @@
     }
 
     function setCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        var data = {
+            name: name,
+            value: value,
+            days: days
+        };
+
+        $.ajax({
+            url: '/Feed/SetSelectedCategories',
+            type: 'POST',
+            data: data,
+            success: function (response) {
+                if (response.success) {
+                    console.log('Cookie set successfully');
+                } else {
+                    console.log('Failed to set cookie');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('Error setting cookie:', textStatus, errorThrown);
+            }
+        });
     }
 
     function getCookie(name) {

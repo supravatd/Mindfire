@@ -25,7 +25,7 @@ namespace NewsForYou.Web.Controllers
                 int userId = Business.Business.IsUser(model.Email, model.Password);
                 if (userId > 0)
                 {
-                    SessionManager.SetSessionModel(true);
+                    SessionManager.IsAuthenticated = true;
                     return RedirectToAction("Agency", "AgencyList");
                 }
                 else
@@ -35,7 +35,7 @@ namespace NewsForYou.Web.Controllers
             }
             catch (Exception ex)
             {
-                Logger.AddData(ex);
+                Logger.LogError(ex);
                 ModelState.AddModelError("", "An error occurred. Please try again.");
             }
             return View(model);

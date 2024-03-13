@@ -11,21 +11,24 @@ namespace NewsForYou.Utils
     {
         public class SessionManager
         {
-            public static bool GetSessionModel()
+            public static bool IsAuthenticated
             {
-                bool sessionValue = false;
-                if (HttpContext.Current.Session["IsAuthenticated"] != null)
+                get
                 {
-                    sessionValue = (bool)HttpContext.Current.Session["IsAuthenticated"];
+                    if (HttpContext.Current.Session["IsAuthenticated"] != null)
+                    {
+                        return (bool)HttpContext.Current.Session["IsAuthenticated"];
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                return sessionValue;
+                set
+                {
+                    HttpContext.Current.Session["IsAuthenticated"] = value;
+                }
             }
-
-            public static void SetSessionModel(bool session)
-            {
-                HttpContext.Current.Session["IsAuthenticated"] = session;
-            }
-
         }
     }
 }

@@ -1,0 +1,50 @@
+[13-03-2024 17:42:59]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:43:28]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:43:46]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:44:00]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:45:39]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:50:20]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:51:39]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:57:38]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 17:59:53]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------
+[13-03-2024 18:07:33]
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NewsForYou.Utils.Utils.SessionManager.set_IsAuthenticated(Boolean value) in D:\Mindfire\NewsForYou\NewsForYou.Utils\Utils.cs:line 29
+   at NewsForYou.Web.Controllers.SignInController.SignIn(SignInModel model) in D:\Mindfire\NewsForYou\NewsForYou.Web\Controllers\SignInController.cs:line 28
+--------------------------------------------------

@@ -16,8 +16,7 @@ namespace NewsForYou.Web.Controllers
             var allNews = Business.Business.GetAllNews(agencyId);
             if (Request.IsAjaxRequest())
             {
-                // Return JSON response for AJAX request
-                return Json(new { NewsData = allNews}, JsonRequestBehavior.AllowGet);
+                return Json(new { NewsData = allNews }, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -55,6 +54,22 @@ namespace NewsForYou.Web.Controllers
         public ActionResult IncrementClickCount(int newsId)
         {
             Business.Business.IncrementNewsClickCount(newsId);
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult SetSelectedCategories(string name, string value, int days)
+        {
+            HttpCookie cookie = new HttpCookie(name);
+            cookie.Value = value;
+
+            cookie.HttpOnly = true;
+            if (days > 0)
+            {
+                cookie.Expires = DateTime.Now.AddDays(days);
+            }
+            cookie.Path = "/";
+            Response.Cookies.Add(cookie);
             return Json(new { success = true });
         }
     }
