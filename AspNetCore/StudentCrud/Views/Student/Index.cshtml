@@ -1,0 +1,161 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="insertfirstname" class="sr-only">First Name</label>
+        <input type="text" class="form-control" id="insertfirstname" placeholder="Name">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="insertlastname" class="sr-only">First Name</label>
+        <input type="text" class="form-control" id="insertlastname" placeholder="Name">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="insertemail" class="sr-only">Email</label>
+        <input type="email" class="form-control" id="insertemail" placeholder="Email">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="insertsalary" class="sr-only">Salary</label>
+        <input type="text" class="form-control" id="insertsalary" placeholder="Salary">
+    </div>
+    <button class="btn btn-primary mb-2" id="insert" onclick="addData()">Add </button>
+</div>
+
+<div class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="updateid" class="sr-only">Name</label>
+        <input type="text" class="form-control" id="updateid" placeholder="ID">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="updatefirstname" class="sr-only">Name</label>
+        <input type="text" class="form-control" id="updatefirstname" placeholder="Name">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="updatelastname" class="sr-only">Name</label>
+        <input type="text" class="form-control" id="updatelastname" placeholder="Name">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="updateemail" class="sr-only">Email</label>
+        <input type="email" class="form-control" id="updateemail" placeholder="Email">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="updatesalary" class="sr-only">Salary</label>
+        <input type="text" class="form-control" id="updatesalary" placeholder="Salary">
+    </div>
+    <button class="btn btn-success mb-2" id="update" onclick="updateData()">Update </button>
+</div>
+
+<div class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="deleteid" class="sr-only">Name</label>
+        <input type="text" class="form-control" id="deleteid" placeholder="ID">
+    </div>
+    <button class="btn btn-danger mb-2" id="delete" onclick="deleteData()">Delete </button>
+</div>
+
+<button class="btn btn-success mb-2" id="Display" onclick="fetchAllData()">Diplay All</button>
+<div class="table table-striped" id="alldata">
+</div>
+
+<script>
+    function fetchAllData() {
+        $('#alldata').empty();
+        $.ajax({
+            url: '/Student/FetchAllData',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var header = '<tr>' +
+                    '<th>' + "ID" + '</th>' +
+                    '<th>' + "First Name" + '</th>' +
+                    '<th>' + "Last Name" + '</th>' +
+                    '<th>' + "Email" + '</th>' +
+                    '<th>' + "Salary" + '</th>' +
+                    '</tr>';
+                var table = $('<table>').addClass('table');
+                $('#alldata').append(table);
+                table.append($('<thead>').append(header));
+                var tbody = $('<tbody>');
+                table.append(tbody);
+
+                $.each(data, function (index, item) {
+                    var newRow = '<tr>' +
+                        '<td>' + item.studentId + '</td>' +
+                        '<td>' + item.firstName + '</td>' +
+                        '<td>' + item.lastName + '</td>' +
+                        '<td>' + item.email + '</td>' +
+                        '<td>' + item.salary + '</td>' +
+                        '</tr>';
+                    tbody.append(newRow);
+                });
+
+            },
+            error: function (error) {
+                console.log('Error fetching data: ', error);
+            }
+        });
+    }
+
+    function addData() {
+        var fname = document.getElementById("insertfirstname").value;
+        var lname = document.getElementById("insertlastname").value;
+        var email = document.getElementById("insertemail").value;
+        var salary = parseInt(document.getElementById("insertsalary").value);
+        $.ajax({
+            url: '/Student/AddData',
+            type: 'GET',
+            data: { FirstName: fname, LastName: lname, Email: email, Salary: salary },
+            dataType: 'json',
+            success: function (data) {
+                alert("Added successfully");
+
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    }
+
+    function updateData() {
+        var id = document.getElementById("updateid").value;
+        var fname = document.getElementById("updatefirstname").value;
+        var lname = document.getElementById("updatelastname").value;
+        var email = document.getElementById("updateemail").value;
+        var salary = parseInt(document.getElementById("updatesalary").value);
+        $.ajax({
+            url: '/Student/UpdateData',
+            type: 'GET',
+            data: { StudentId: id, FirstName: fname, LastName: lname, Email: email, Salary: salary },
+            dataType: 'json',
+            success: function (data) {
+                alert("Update successfully");
+
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    }
+
+    function deleteData() {
+        var deleteid = document.getElementById("deleteid").value;
+        $.ajax({
+            url: '/Student/DeleteData',
+            type: 'GET',
+            data: { id: deleteid },
+            dataType: 'json',
+            success: function (data) {
+                alert("Delete successfully");
+
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    }
+
+</script>
